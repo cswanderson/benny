@@ -34,7 +34,7 @@ function setup(x1,y1,x2,y2,sw){
 	}
 	//MAX_PARAMETERS = config.get("MAX_PARAMETERS");
 	//beats_per_bar = Math.floor(2 + 9*parameter_value_buffer.peek(1, MAX_PARAMETERS*block + 10));
-	width = x2-x1-1-(width<300);
+	width = x2-x1-(width<300);
 	height = y2-y1;
 	x_pos = x1;
 	y_pos = y1;
@@ -44,7 +44,7 @@ function setup(x1,y1,x2,y2,sw){
 function draw(){
 	headpos = 0;
 	ohp = 0;
-	outlet(1,"paintrect",x_pos,y_pos,x_pos+width,y_pos+height,menudarkest);
+	outlet(1,"paintrect",x_pos,y_pos,x_pos+width,y_pos+height,0,0,0);//menudarkest);
 }
 function times(value,voice){
 	if(headpos>63) draw();
@@ -116,12 +116,13 @@ function mouse(x,y,l,s,a,c,scr){
 }
 
 function check_mute_state(){
-	muted=0;
-	if(blocks.contains("blocks["+block+"]::mute")){
-		if(blocks.get("blocks["+block+"]::mute")==1) muted =1;
+	if(block>=0){
+		muted=0;
+		if(blocks.contains("blocks["+block+"]::mute")){
+			if(blocks.get("blocks["+block+"]::mute")==1) muted =1;
+		}
+		outlet(2,1-muted);
 	}
-
-	outlet(2,1-muted);
 }
 
 function voice_is(v){

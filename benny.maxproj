@@ -2,7 +2,7 @@
 	"name" : "benny",
 	"version" : 1,
 	"creationdate" : 3738749649,
-	"modificationdate" : 3800452788,
+	"modificationdate" : 3826457226,
 	"viewrect" : [ 36.0, 65.0, 244.0, 611.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 1,
@@ -791,6 +791,11 @@
 				"local" : 1
 			}
 ,
+			"voiceheader_noparams.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
 			"mix.bus.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
@@ -1117,6 +1122,21 @@
 				"toplevel" : 1
 			}
 ,
+			"blank.driver.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"driver_wrap.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"global_transport_and_click.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
 			"core.input.control.auto.ui.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1,
@@ -1267,7 +1287,88 @@
 			}
 ,
 			"output_reverb.maxpat" : 			{
-				"kind" : "patcher"
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"rme_totalmix.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"alyseum_matrix.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"seq.piano.roll.ui.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/note_blocks",
+					"projectrelativepath" : "./note_blocks"
+				}
+
+			}
+,
+			"utility.env.four.stage.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"utility.env.four.stage.ui.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"encapsulator.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"ui_settings_editor.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/patchers",
+					"projectrelativepath" : "./patchers"
+				}
+
+			}
+,
+			"utility.gate.ui.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"midi_clock_out.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/patchers",
+					"projectrelativepath" : "./patchers"
+				}
+
 			}
 
 		}
@@ -1376,16 +1477,6 @@
 				"local" : 1
 			}
 ,
-			"seq.note.tracker.2.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
-			"seq.note.tracker.o.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
 			"seq.note.tracker.old.js" : 			{
 				"kind" : "javascript",
 				"local" : 1
@@ -1452,11 +1543,6 @@
 			}
 ,
 			"source.wave.scan.ui.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
-			"source.wave.traverse.ui.js" : 			{
 				"kind" : "javascript",
 				"local" : 1
 			}
@@ -1576,6 +1662,56 @@
 				"local" : 1
 			}
 ,
+			"seq.piano.roll.ui.js" : 			{
+				"kind" : "javascript",
+				"local" : 1
+			}
+,
+			"utility.env.four.stage.gendsp" : 			{
+				"kind" : "gendsp",
+				"local" : 1
+			}
+,
+			"utility.env.four.stage.ui.js" : 			{
+				"kind" : "javascript",
+				"local" : 1
+			}
+,
+			"benny_ui_settings_editor.js" : 			{
+				"kind" : "javascript",
+				"local" : 1
+			}
+,
+			"seq.note.tracker.2.js" : 			{
+				"kind" : "javascript",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"seq.note.tracker.o.js" : 			{
+				"kind" : "javascript",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"source.wave.traverse.ui.js" : 			{
+				"kind" : "javascript",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
 			"core.input.control.ui.js" : 			{
 				"kind" : "javascript",
 				"local" : 1,
@@ -1692,6 +1828,16 @@
 			}
 ,
 			"utility.eq.peak.gendsp" : 			{
+				"kind" : "gendsp",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"ks6.gendsp" : 			{
 				"kind" : "gendsp",
 				"local" : 1,
 				"singleton" : 				{
@@ -2236,17 +2382,32 @@
 ,
 			"mix.bus.json" : 			{
 				"kind" : "json",
-				"local" : 1
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/note_blocks",
+					"projectrelativepath" : "./note_blocks"
+				}
+
 			}
 ,
 			"mix.channel.json" : 			{
 				"kind" : "json",
-				"local" : 1
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/note_blocks",
+					"projectrelativepath" : "./note_blocks"
+				}
+
 			}
 ,
 			"mix.stereo.channel.json" : 			{
 				"kind" : "json",
-				"local" : 1
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/note_blocks",
+					"projectrelativepath" : "./note_blocks"
+				}
+
 			}
 ,
 			"seq.sample.tracker.old.json" : 			{
@@ -2486,12 +2647,7 @@
 ,
 			"vst.DPiano-E.json" : 			{
 				"kind" : "json",
-				"local" : 1,
-				"singleton" : 				{
-					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
-					"projectrelativepath" : "./audio_blocks"
-				}
-
+				"local" : 1
 			}
 ,
 			"vst.Elation64.json" : 			{
@@ -2576,22 +2732,12 @@
 ,
 			"vst.RatshackReverb2.json" : 			{
 				"kind" : "json",
-				"local" : 1,
-				"singleton" : 				{
-					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
-					"projectrelativepath" : "./audio_blocks"
-				}
-
+				"local" : 1
 			}
 ,
 			"vst.TAL-Chorus-LX-64.json" : 			{
 				"kind" : "json",
-				"local" : 1,
-				"singleton" : 				{
-					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
-					"projectrelativepath" : "./audio_blocks"
-				}
-
+				"local" : 1
 			}
 ,
 			"vst.ToTape664.json" : 			{
@@ -2889,11 +3035,23 @@
 			}
 ,
 			"output_reverb.json" : 			{
-				"kind" : "json"
+				"kind" : "json",
+				"local" : 1
 			}
 ,
 			"keymap.json" : 			{
-				"kind" : "json"
+				"kind" : "json",
+				"local" : 1
+			}
+,
+			"utility.env.four.stage.json" : 			{
+				"kind" : "json",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
+					"projectrelativepath" : "./audio_blocks"
+				}
+
 			}
 
 		}
@@ -2927,6 +3085,16 @@
 				"singleton" : 				{
 					"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
 					"projectrelativepath" : "./audio_blocks"
+				}
+
+			}
+,
+			"ks_functions.genexpr" : 			{
+				"kind" : "genexpr",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/benny/code",
+					"projectrelativepath" : "./code"
 				}
 
 			}

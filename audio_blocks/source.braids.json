@@ -1,0 +1,118 @@
+{
+	"source.braids" : {
+		"patcher" : "source.braids",
+		"type" : "audio",
+		"block_ui_patcher" : "blank.ui",
+		"help_text" : "A wrapper for Volker Böhm's port of Émilie Gillet's Braids module. 48 different oscillator models! ££I've adapted it to work with benny's global tuning system. I've also added velocity mod controls, if the vel->vca != 0 it introduces a tiny 3ms delay on notes and triggers to avoid clicks. The scale quantise in the module isn't implemented as it wouldn't work with benny's global tuning, and we have scale quantisers already in benny.",
+		"max_polyphony" : 0,
+		"upsample" : 1,
+		"connections" : {
+			"in" : { 
+				"audio" : [ "in1", "in2" ],
+				"midi" : [ "notes", "strum" ]
+			},
+			"out" : {
+				"audio" : [ "out" ],
+				"midi" : [ "through" ]
+			}
+		},
+		"groups" : [
+			{ 
+				"contains" : [0],
+				"colour" : [22,156,144],
+				"height" : 0
+			},
+			{
+				"contains" : [1,2],
+				"colour" : [161,28,114],
+				"height" : 3
+			},
+			{
+				"contains" : [3,3,4,4,5,6],
+				"colour" : [255,255,255],
+				"height" : 0
+			},
+			{
+				"contains" : [7,8,9],
+				"header" : "velocity modulation",
+				"colour" : [190,190,190],
+				"height" : 0
+			}
+		],
+		"panel" : {
+			"parameters" : [1, 2]
+		},
+		"parameters" : [
+			{
+				"name" : "model",
+				"type" : "menu_i",
+				"values" : [ "csaw", "morph", "saw_square", "sine_triangle", "buzz", "square_sub", "saw_sub", "square_sync", "saw_sync", "triple_saw", "triple_square", "triple_triangle", "triple_sine", "triple_ring_mod", "saw_swarm", "saw_comb", "toy", "digi_filter_lp", "digi_filter_peak", "digi_filter_band", "digi_filter_hp", "vosim", "vowel", "vowel_fof", "harmonics", "fm", "feedback_fm", "chaotic_feedback_fm", "plucked", "bowed", "blown", "fluted", "struck_bell", "struck_drum", "kick", "cymbal", "snare", "wavetables", "wavemap", "waveline", "wave_paraphonic", "filtered_noise", "twin_peaks_noise", "clocked_noise", "granular_cloud", "particle_noise", "digital_modulation", "question_mark"],
+				"wrap" : 1,
+				"default" : 0,
+				"error_scale" : 0
+			},
+			{
+				"name" : "timbre",
+				"type" : "float",
+				"values" : ["uni", 0, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "colour",
+				"type" : "float",
+				"values" : ["uni", 0, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0
+			},
+			{
+				"name" : "in1 target",
+				"type" : "menu_i",
+				"values" : ["frequency", "timbre", "colour", "model", "trigger" ],
+				"wrap" : 1,
+				"default" : 0.1
+			},
+			{
+				"name" : "in2 target",
+				"type" : "menu_i",
+				"values" : ["frequency", "timbre", "colour", "model", "trigger" ],
+				"wrap" : 1,
+				"default" : 0.1
+			},
+			{
+				"name" : "notes ->_trigger",
+				"type" : "menu_i",
+				"values" : ["off", "on"],
+				"wrap" : 1,
+				"default" : 0.75
+			},
+			{
+				"name" : "drift",
+				"type" : "float",
+				"values" : ["uni", 0, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0
+			},{
+				"name" : "-> vca",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0.5			
+			},
+			{
+				"name" : "-> timbre",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "-> colour",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			}
+		]
+	}
+}

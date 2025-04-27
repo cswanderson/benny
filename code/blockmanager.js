@@ -19,7 +19,6 @@ var MAX_USED_AUDIO_INPUTS = 0;
 var MAX_USED_AUDIO_OUTPUTS = 0;
 var NO_IO_PER_BLOCK = 2;
 var MAX_BEZIER_SEGMENTS = 16;//24; //must be a multiple of 4
-var MIN_BEZIER_SEGMENTS = 4;
 var MAX_PARAMETERS = 256;
 var MAX_DATA = 16384;
 var MAX_MOD_IDS = 1024;
@@ -47,10 +46,20 @@ var BLOCKS_GRID = [100, 0.01];
 var BLOCK_MENU_CLICK_ACTION = "click";
 var CTRL_VOICE_SEL_MOMENTARY = 1;
 var SHOW_STATES_ON_PANELS = 1;
+var TARGET_FPS = [30, 5];
+var SELECTED_BLOCK_Z_MOVE = 2;
+var SELECTED_BLOCK_DEPENDENTS_Z_MOVE = 0.5;
+var METER_TINT = 0.3;
 var SONGS_FOLDER = "songs"; //current songs folder, actually gets read in from config file. every song file in the root of this folder is preloaded (it doesn't look in subfolders),
 //  and all the wavs referenced in them are also loaded. this makes loading bits of a live set faster, but it means if your folder is full of junk the app will use a lot of memory.
 var waves_preloading = 1;
-var TEMPLATES_FOLDER = "templates";
+var MUTEDWIRE = [0.16,0.16,0.14, 1];
+var SOUNDCARD_HAS_MATRIX = 0;
+var EXTERNAL_MATRIX_PRESENT = 0;
+var pattern_recall_timing_quantise = "1n";
+
+var quantised_event_list = [];
+
 
 var panelslider_index;
 var panelslider_visible = new Array(MAX_BLOCKS);
@@ -60,9 +69,11 @@ var folder_target = "";//when you pop open a folder select box, where is the res
 
 var mainwindow_width = 320;
 var mainwindow_height = 240;
+
 var scale_2d = 1;
 
 var displaymode = "loading";
+var last_displaymode = "blocks"; //where you back out to if you hit esc from a ui page.
 var custom_block = -1; //block no for custom screen pages
 var playing = 0;
 var recording = 0;
@@ -79,6 +90,8 @@ var debug = 0;
 
 var output_used = new Array(MAX_AUDIO_OUTPUTS+2);
 var input_used = new Array(MAX_AUDIO_INPUTS+2);
+
+var audioiolists;
 
 var state_fade = {
 	start : [],
@@ -102,22 +115,61 @@ var end_of_frame_fn = null;
 var whole_state_xfade_create_task = new Task(create_whole_state_xfade_slider, this);
 var keyrepeat_task = new Task(keydown,this,0);
 
-var output_blocks_poly = this.patcher.getnamed("output_blocks_poly");
-var voicealloc_poly = this.patcher.getnamed("voicealloc_poly");
-var ui_poly = this.patcher.getnamed("ui_poly");
-var note_poly = this.patcher.getnamed("note_poly");
-var audio_poly = this.patcher.getnamed("audio_poly");
-var audio_to_data_poly = this.patcher.getnamed("audio_to_data_poly");
-var sigouts = this.patcher.getnamed("sigouts");
-var matrix = this.patcher.getnamed("matrix");
-var deferred_matrix = [];
-var world = this.patcher.getnamed("world");
-var lcd_main = this.patcher.getnamed("lcd_main");
+var output_blocks_poly;
+var voicealloc_poly;
+var ui_poly;
+var note_poly;
+var audio_poly;
+var audio_to_data_poly;
+var sigouts;
+var matrix;
+var deferred_matrix=[];
+var world;
+var lcd_main;
 
-var lcd_block_textures = this.patcher.getnamed("lcd_block_textures");
-var textureset_blocks = this.patcher.getnamed("textureset_blocks");
+var lcd_block_textures;
+var textureset_blocks;
 
-var glpicker = new JitterObject("jit.gl.picker","benny");
+var topbar = {
+	lcd: null,
+	videoplane: null,
+	used_length:0
+}
+
+var statesbar = {
+	lcd: null,
+	videoplane: null,
+	used_height:0,
+	colours : [],
+	y_pos : []
+}
+
+var statesfadebar = {
+	videoplane: null,
+	shown: 0,
+}
+
+function thispatcherstuff(){
+	output_blocks_poly = this.patcher.getnamed("output_blocks_poly");
+	voicealloc_poly = this.patcher.getnamed("voicealloc_poly");
+	ui_poly = this.patcher.getnamed("ui_poly");
+	note_poly = this.patcher.getnamed("note_poly");
+	audio_poly = this.patcher.getnamed("audio_poly");
+	audio_to_data_poly = this.patcher.getnamed("audio_to_data_poly");
+	sigouts = this.patcher.getnamed("sigouts");
+	matrix = this.patcher.getnamed("matrix");
+	world = this.patcher.getnamed("world");
+	lcd_main = this.patcher.getnamed("lcd_main");
+	lcd_block_textures = this.patcher.getnamed("lcd_block_textures");
+	textureset_blocks = this.patcher.getnamed("textureset_blocks");
+	topbar.videoplane = this.patcher.getnamed("topbar_videoplane");
+	sidebar.videoplane = this.patcher.getnamed("sidebar_videoplane");
+	statesbar.videoplane = this.patcher.getnamed("statesbar_videoplane");
+	statesfadebar.videoplane = this.patcher.getnamed("statesfadebar_videoplane");
+	bottombar.videoplane = this.patcher.getnamed("bottombar_videoplane");
+}
+
+var phys_picker_id;
 
 var scope_buffer = new Buffer("scope_buffer");
 var midi_meters_buffer = new Buffer("midi_meters_buffer");
@@ -151,22 +203,40 @@ var polybuffer_samplerates = [];
 var polybuffer_channels = [];
 var polybuffer_lengths = [];
 
-var preload_task = new Task(preload_all_waves, this);
-var preload_task2 = new Task(preload_some_wires, this);
-var preload_wires_counter = 0;
+var preload_task;// = new Task(preload_all_waves, this);
 var waves_buffer = [];
 
+var midi_indicators = {
+	list : [],
+	status : [],
+	flag : 0
+}
+
 var draw_wave = [];
+var draw_wave_z = [];
 var waves_slices_buffer = new Buffer("waves_slices");
 var waves = {
 	selected : -1,
 	zoom_start : 0,
 	zoom_end : 1,
+	width : 640, //of the ui, for the mouse
 	remapping : [],
 	age : [],
 	seq_no : 0,
-	scroll_position: 0
+	scroll_position: 0,
+	show_in_bottom_panel: 0,
+	playheadlist : [], //list of voices to check for playhead movement.
+	v_helper : [], //colour of each voice's playhead, defined when you get the message about a playhead existing.
+	v_label : [],
+	v_jump : [], //[block,voice] for jumping to that one in the sidebar.
+	visible : [], //0 or 1 for if it's onscreen.
+	w_helper : [], // for each wave its x1,y1,height, width, range min max, colour,chans so the playhead has everything in one place
+	ph_ox : [], //old playhead x, by voice.
+	q_playing : 0,
+	q_player : null
 }
+//var playheads = []; //index by voice, holds position, replaces the buffer method which crashed max
+var waves_playheads_buffer = new Buffer("waves_playheads"); //ch1=playhead,ch2=wave
 
 var quantpool = new Buffer("QUANTPOOL");
 var indexpool = new Buffer("INDEXPOOL");
@@ -185,15 +255,12 @@ var click_i = new Int16Array(9900000); //more than 4k.
 var click_b_s = 2; //click buffer is scaled, >> click_b_s, so 
 var click_b_w = 11 >> click_b_s; //width of the screen log2 (ie so 2^this > actual width)
 
-var connections_sketch = new JitterObject("jit.gl.sketch","benny");
-
-//these hold all the opengl objects (labels, blocks separate for the main one, in one for the menu one.)
-//var blocks_label = []; //called label-blockno-0
 var blocks_cube = [];  //called block-blockno-voiceno
 var blocks_cube_texture = [];
 var blocks_tex_sent= []; //each element is mutestate+label
 var blocks_menu_texture = [];
 var blocks_menu = []; //called menulabel-type or menublock-type
+var blocks_per_voice_colour_overrides = []; //eg if block 6 has this on some voices it'd be .._overides[6] = [0, [126,16,16], 0, etc]
 var menu = {
 	length : 10,  //endstop for the menu scroll
 	search : "",
@@ -206,22 +273,24 @@ var menu = {
 	show_all_types : 0 //to override swap type filtering
 }; 
 
-
-var wires = []; // called wires-connectionno-segmentno
+var wires_position = []; // called wires-connectionno-segmentno
+var wires_rotatexyz = [];
+var wires_scale = [];
+var wires_colour = [];
+var wires_startindex = [];//indexed by wireno like the above, contains the first matrix index of a wire piece.
+var wires_lookup = [];//reverse lookup indexed by matrix/multiple index, contains wire number
+//legacy?
 var wires_colours = [];
 var wires_enable = []; //whether wire enable flag is set
 
 var view_changed = true; //whether you're redrawing click buffers or not
 
-var wires_enable_animate = []; // list of [wireno,target enable value,current seg,direction,length];
-
-var wires_show_all = 1;
 var last_connection_made = -1;
 var wires_potential_connection = -1; //if illustrating a potential connection you set this
 //to the (unused) conn no you use for drawing the wire, then set back to -1 when you freepeer it
 
 var bulgingwire=-1;
-var bulgeamount;
+var bulgeamount=0;
 
 var recursions = 0; // just because i had an anxiety dream about getting stuck in an infinite loop
 
@@ -230,11 +299,47 @@ var preload_list=[]; // this is for waves
 var preload_note_voice_list = [];
 var preload_audio_voice_list = [];
 
+var matrix_wire_index = [];
+var matrix_block_index = [];
+var matrix_block_lookup = [];
+var matrix_voice_index = [];
+var matrix_voice_lookup = [];
+var matrix_meter_index = [];
+
+var matrix_menu_index = [];
+var matrix_menu_lookup = [];
+
+var matrix_wire_position;
+var matrix_wire_scale;
+var matrix_wire_rotatexyz;
+var matrix_wire_colour;
+
+var matrix_voice_position;
+var matrix_voice_scale;
+var matrix_voice_colour;
+
+var matrix_block_position;
+var matrix_block_scale;
+var matrix_block_colour;
+var matrix_block_texture;
+
+var matrix_menu_position;
+var matrix_menu_scale;
+var matrix_menu_colour;
+var matrix_menu_texture;
+
+var matrix_meter_position;
+var matrix_meter_scale;
+var matrix_meter_colour;
+
+var voice_cubes;
+var meter_cubes;
+var block_cubes;
 
 var connection_blobs = []; // connection handles. maybe not even blobs one day.
-var background_cube;
+//var background_cube;
+//var menu_background_cube;
 var selection_cube;
-var menu_background_cube;
 var flock_cube;
 var flocklist=[];
 var flockblocklist=[];
@@ -265,12 +370,19 @@ var wire_ends = [];
 
 var wire_dia = 0.03;
 
-var cur_font_size = 0;
-
 var param_defaults = [];
+
+var ext_sync = {
+	active : 0,
+	state : 0,
+	waiting : 0, //if the main transport is waiting for a bar on the sync transport in order to start.
+	link_available : 0,
+	link_enabled : 0
+};
 
 var automap = {
 	available_c : -1,
+	voice_c : -1,
 	available_k : -1,
 	available_k_block : -1,
 	already_k : 0, //if the keyboard is already connected to the current block don't auto
@@ -281,13 +393,17 @@ var automap = {
 	count : 0,
 	inputno_k : 0,
 	offset_c : 0,
-	offset_range_c : 0,
+	offset_range_c : 0, 
 	c_cols : 4,
 	c_rows : 4,
+	mouse_follow : 0,
+	groups : [], //index is group, content is controller row (ie before offset applied)
+	sidebar_row_ys : [], //gets populated if mouse_follow on to speed up the hover check, index is group, content is starting (top) y
 	q_gain : 0.125, //default gain for cue auto connections
 	available_q : -1, //for cue (listen) automapping - holds the audio out(s) cue should go to
 	mapped_q : -1, //if it's mapped this is the block it's mapped to
 	mapped_q_channels : [],
+	mapped_q_output : 0,
 	lock_c : 0,
 	lock_k : 0,
 	lock_q : 0,
@@ -306,12 +422,11 @@ var automap = {
 		dark : [],
 		colour : []
 	},
+	scroll_accumulator : 0, //used in automap direct to core mode (eg for scroll file menu/block menu)
 	assignmode : 0 //actually covers all controllers, if it's in move-to-pick mode this is 1.
 }
 
 var qwertym = {
-	octave : 4,
-	octf : 4,
 	vel : 100
 }
 
@@ -319,8 +434,11 @@ var wirecolour = [1,1,1,1];
 
 var meter_positions = [[],[]];
 
-var panels_custom = [];
-var panels_order = [];
+var panels = {
+	custom : [],
+	order : [],
+	editting : -1
+};
 
 var blocks_page = {
 	new_block_click_pos : [0,0],
@@ -330,12 +448,8 @@ var blocks_page = {
 	lowest: 0
 }	
 
-var touch_click=0;
-var stored_click = [];
-
-var menucolour;
-var menudark;
-var menudarkest;
+var menucolour, menudark, menudarkest;
+var greycolour, greydark, greydarkest;
 var bg_dark_ratio = 0.2;
 var fontheight,fontsmall;
 var fo1;
@@ -347,13 +461,11 @@ var backgroundcolour_waves;
 var backgroundcolour_sidebar;
 var backgroundcolour_current;
 
-//this is what a listener looks like
-//var mylistener = new JitterListener(mywindow.getregisteredname(), thecallback);
-//var picker_listener = new JitterListener(picker.getregisteredname(), picker_callback);
-
 var mouse_click_actions = [];
 var mouse_click_parameters = [];
 var mouse_click_values = [];
+
+var um_task;
 
 var usermouse = {
 	last : {
@@ -361,7 +473,10 @@ var usermouse = {
 		shift: 0,
 		alt: 0,
 		got_i : 0,
-		got_t : 0
+		got_t : 0,
+		x : 0,
+		y : 0,
+		scroll : -1 //holds index of last scrolled parameter, just used so as not to store too many undos
 	},
 	queue : [],
 	qlb : 0,
@@ -381,10 +496,15 @@ var usermouse = {
 	caps : 0,
 	x : 0,
 	y : 0,
+	scroll : 0,
 	timer : 0,
 	scroll_accumulator : 0,
 	sidebar_scrolling: null,
 	long_press_function : null,
+	wiretouch : {
+		x : -1,
+		y : -1
+	},
 	drag : {
 		starting_x : 0,
 		starting_y : 0,
@@ -401,7 +521,18 @@ var usermouse = {
 	}
 }
 
+var bottombar = {
+	videoplane: null,
+	height: 200,
+	block: -1,
+	right: -1,
+	requested_widths: [],
+	available_blocks : []
+}
+
 var sidebar = {
+	videoplane: null,
+	used_height: 0,
 	mode : "none",
 	lastmode : "none",
 	selected : -1,
@@ -413,16 +544,13 @@ var sidebar = {
 	scrollbar_width : 9,
 	meters : {
 		startx : 490,
-		spread : 2
+		spread : 2,
+		endx : 999
 	},
 	scroll : {
 		position : 0,
 		max : 0
 	},
-	editbtn : 0,
-	editbtn_x: 0,
-	editcolour : [255,255,255],
-	editdark : [64,64,64],
 	scopes : {
 		zoom : 0,
 		voice : -1,    //this is eg voice 34 of the poly
@@ -431,8 +559,9 @@ var sidebar = {
 		starty : 0,
 		endy: 0,
 		voicelist : [-1, -1],
-		midivoicelist : [],
-		midioutlist : [],
+		midivoicelist : [], //list of voices to show (overlaid)
+		midioutlist : [], //list of outputs to show (separate scopes for each)
+		midiouttypes : [], //0 = notes, 1 = thin notes, 2 = values
 		midi : -1, //this is the target id for midi notes that you're watching
 		midinames : 1,
 		fg: [255,255,255],
@@ -452,6 +581,8 @@ var sidebar = {
 		show_to_inputs : 0,
 		default_out_applied : 0, //ie on a new connection
 		default_in_applied : 0,
+		auto_pick_controller : 1,
+		selected : -1,
 		defaults : {
 			offset : 0.5,
 			offset2 : 0.5,
@@ -462,34 +593,65 @@ var sidebar = {
 	scrollbar_index : 2,
 	back : [],
 	fwd : [],
-	files_page : "songs"
+	files_page : "songs",
+	notification : "",
+	text_being_edited : "",
+	channelnaming : ["block","channel"], //set when you bring up the edit channel name mode
+	dropdown : null,
+	show_help : 0 //once you add a block to a song this turns on and it always shows help
+}
+
+var patternpage = { // info to help draw pattern page fast
+	enable : 0, //turned on when it loads a block with patterns
+	column_block : [], //block no
+	block_split : [], //if it's split into voices, then the number of voices. checked on switch mode. stored by block not by columnno
+	block_statelist : [], //states that include this block
+	column_type : [], //0 =state,
+					// 1 = pattern ?? (wave scan? etc) if a block has both it gets one of each.
+	usedstates : 0, //how many states are used
+	max_rows : 0, //maximum of usedstates and number of patterns. actually it will display more than that, as one column could be up and one down? maybe?
+	patternbeingnamed : -1, //just a place to hold the number of this to save 
+	cursor_index : [], //by column, pointer index or list of indexes
+	cursor_last : [],
+	cursor_divisor : [], // 1/length;
+	column_ends_x : [], //list of ends (start, end of voice 1, .. ,end of last voice) - so v+1 entries.
+	held_state_fires : [],
+	held_pattern_fires: [] //to indicate when a pattern etc is held via shift key..
 }
 
 var y_offset;
 
 var mutemap = new Buffer("mutemap");
-
 var mix_block_has_mutes = 0; //if a mixer channel is muted the unmute all button lights in the topbar
 
 var redraw_flag = {
 	flag : 0,
 	deferred : 0,
+	matrices : 0,
 	targets: [],
 	paneltargets: [],
 	targetcount: 0,
 	selective : 0
 }
+
+var am_foreground = 1; //other windows will message to say they want keyboard not to go to benny, this flags that.
+
 var paramslider_details = []; //indexed by param number
 //x1,y1,x2,y2,r,g,b,mouse_index,block,curp,flags,namearr,namelabely,p_type,wrap,block_name,h_slider,gets-overwritten-with-y-coord-returned(bottom),click_to_set
 var camera_position = [-2, 0, 23];
-
-var text_being_editted="";
 
 var config = new Dict;
 config.name = "config";
 var userconfig = new Dict;
 userconfig.name = "userconfig";
 userconfig.filechanged = function(){};
+
+var hardwareconfig = new Dict;
+hardwareconfig.name = "hardwareconfig";
+
+var userpresets = new Dict;
+userpresets.name = "userpresets";
+userpresets.filechanged = function(){};
 
 var keymap = new Dict;
 keymap.name = "keymap";
@@ -501,11 +663,22 @@ var pasteoffset = [0,0]; //add to this before every paste, reset it on new copy
 var undo = new Dict;
 undo.name = "undo";
 
+var undo_stack = new Dict;
+undo_stack.name = "undo_stack";
+var redo_stack = new Dict;
+redo_stack.name = "redo_stack";
+
+var undoing = 0; //flag 1 while you do undo actions to avoid writing those actions 
+				// to the undo stack, 2 for while redoing
+
 var flock_presets = new Dict;
 flock_presets.name = "flock_presets";
 
 var blocktypes = new Dict;
 blocktypes.name = "blocktypes";
+
+var aliases = new Dict;
+aliases.name = "aliases";
 
 var blocks = new Dict;
 blocks.name = "blocks";
@@ -553,6 +726,12 @@ mod_param.name = "mod_param";
 var waves_dict = new Dict;
 waves_dict.name = "waves";
 
+var proll = new Dict;
+proll.name = "seq-piano-roll";
+
+var notepad_dict = new Dict; // for song notes
+notepad_dict.name = "notepad"; 
+
 var audio_patcherlist = new Array(MAX_AUDIO_VOICES);
 var audio_upsamplelist = new Array(MAX_AUDIO_VOICES);
 var note_patcherlist = new Array(MAX_NOTE_VOICES);
@@ -563,7 +742,7 @@ var loaded_note_patcherlist = new Array(MAX_NOTE_VOICES);
 var loaded_ui_patcherlist = new Array(MAX_BLOCKS);
 var vst_list = new Array(MAX_AUDIO_VOICES);
 
-var songlist = [[],[]]; //two pages - songs, templates
+var songlist = [];
 var currentsong = -1;
 
 var fullscreen = 0;
@@ -586,7 +765,6 @@ var param_error_lockup = new Array(MAX_AUDIO_VOICES+MAX_NOTE_VOICES+MAX_HARDWARE
 //both indexed by voice / param num. populated when you make a new block or voice?
 
 var still_checking_polys = 0;
-var upgrade_wires = 0;
 var globals_requested = 0;
 
 var deferred_diag = [];
@@ -608,19 +786,26 @@ var ext_matrix = {
 var loading = {
 	progress : 0,
 	songname : "",
+	songpath : "",
 	mute_loaded : 0,
 	xoffset : 0,
 	ready_for_next_action : 0,
 	bundling : 1, //set to 1 for a slow load with a rest between each thing loaded, higher loads things in chunks, loads faster overall.
 	wait : 1, //how many frame to wait between stages of loading
 	mapping : [],
+	incoming_max_waves: 16,
 	conncount : 0, //how many connections
 	merge : 0,
 	mutelist : [], //each entry is [blockno,mute], you resend the message once everything should've loaded
 	purgelist : [], //list of blocks to be deleted, and everything solely connected to them too. (for merge purge)
 	wave_paramlist : [], //list of [blockno,paramno] that are wave parameters that have been remapped - it uses this list to apply the remapping to preset states too
 	recent_substitutions : 0, //this is made into a dict where we keep a record of user substitutions during load, so we don't have to ask twice.
-	lockout : 0 //to prevent hotkey triggering save twice
+	lockout : 0, //to prevent hotkey triggering save twice
+	hardware_substitutions_occured : 0, //this is set to 1 to put the warning on the save page
+	save_waitlist : [], //blocks we are waiting for them to say they've completed a 'store' command.
+	save_wait_count : 0,
+	save_type : "selected", //selected, named, save
+	temporandomise : 0
 }
 
 var cpu_meter = {
@@ -652,7 +837,7 @@ function diagnostics(){
 	post("\nnblock selected",selected.block);
 	if(voicemap.contains(selected.block.indexOf(1))) post("- its voices: ",voicemap.get(selected.block.indexOf(1)));
 	post("\nwire selected",selected.wire);
-	post("\npanels list: ",panels_order);
+	post("\npanels list: ",panels.order);
 	post("\nnote patcherlist: \n",note_patcherlist,"\n loaded note patcherlist: \n",loaded_note_patcherlist,"\n audio patcherlist: \n",audio_patcherlist,"\n loaded audio patcherlist: \n",loaded_audio_patcherlist,"\n upsampling list: \n",audio_upsamplelist,"\n ui patcherlist: \n",ui_patcherlist,"\n loaded ui patcherlist: \n",loaded_ui_patcherlist,"\n vst list:\n",vst_list,"\n\n");
 	post("\nNumber of items in the waves polybuffer:", waves_polybuffer.count); 
 	post("\nMemory used in the waves polybuffer:", waves_polybuffer.size/1048576, " megabytes"); 
@@ -663,6 +848,12 @@ function diagnostics(){
 
 function request_globals(){
 	globals_requested = 1;
+}
+
+function messagerate(rate){
+	cpu_meter.midi_message_rate = rate;
+	if(rate>1200) post("\nMESSAGE RATE WARNING:",rate," messages per second - looks like it might be feedback watch out");
+	if(rate>9000) mute_last_connection();
 }
 
 function cpu(avg,peak,fps){
@@ -679,6 +870,21 @@ function cpu(avg,peak,fps){
 			cpu_meter.lastdrawn++; 
 		}
 	} 
+}
+
+function other_window_active(a){
+	if(!Array.isArray(TARGET_FPS)){
+		am_foreground = 1;
+		return 0;
+	}
+	if(world == null) return 0;
+	if(a == 1){
+		am_foreground = 0;
+		world.message("fps", TARGET_FPS[1]);
+	}else{
+		am_foreground = 1;
+		world.message("fps", TARGET_FPS[0]);
+	}
 }
 
 function outputfx(type, number, value){

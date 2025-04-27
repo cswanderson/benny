@@ -2,43 +2,103 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 1,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 274.0, 124.0, 853.0, 616.0 ],
-		"bglocked" : 0,
+		"rect" : [ 100.0, 100.0, 609.0, 616.0 ],
 		"openinpresentation" : 1,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
 		"toolbars_unpinned_last_save" : 7,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-108",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 269.0, 529.0, 149.0, 22.0 ],
+					"text" : "prepend special_controller"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-105",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 269.0, 497.0, 109.0, 22.0 ],
+					"text" : "r special_controller"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-104",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 225.0, 69.0, 54.0, 22.0 ],
+					"text" : "deferlow"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-494",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 264.0, 465.0, 151.0, 22.0 ],
+					"text" : "prepend matrix_soundcard"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-495",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 264.0, 433.0, 111.0, 22.0 ],
+					"text" : "r matrix_soundcard"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-493",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 264.0, 400.0, 111.0, 22.0 ],
+					"text" : "prepend matrix_ext"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-492",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 264.0, 368.0, 71.0, 22.0 ],
+					"text" : "r matrix_ext"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-109",
 					"maxclass" : "button",
@@ -118,15 +178,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-101",
-					"linecount" : 29,
+					"linecount" : 27,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 606.0, 42.0, 171.0, 407.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 23,
-					"presentation_rect" : [ 604.0, 130.0, 220.0, 324.0 ],
-					"text" : "in order to use the self-tuner midi to cv block we need to measure the LOOPBACK LATENCY - the time for a signal to go out and back in to the computer. this is rarely accurately reported by sound drivers so we measure it instead. once your setup is complete, from the list above choose a piece of hardware that can be set to pass audio as close to unmodified as possible - a wide open filter, or a delay set to dry only, or if you have nothing suitable, a wire from your soundcard's output to its input.\n\nthen just click the round button until the time value measured stabilises. as an example, my RME digiface/expert sleepers modules measure 590 here.\n\nfinally click save or save as at the top and this value will be stored in the json file along with your hardware setup."
+					"patching_rect" : [ 606.0, 42.0, 193.0, 379.0 ],
+					"text" : "in order to use the self-tuner midi to cv block we need to measure the LOOPBACK LATENCY - the time for a signal to go out and back in to the computer. this is rarely accurately reported by sound drivers so we measure it instead. once your setup is complete, from the list above choose a piece of hardware that can be set to pass audio as close to unmodified as possible - a wide open filter, or a delay set to dry only, or if you have nothing suitable, a wire from your soundcard's output to its input.\n\nthen just click the round button until the time value measured stabilises. as an example, my RME digiface/expert sleepers modules measure 590 here.\n\nfinally click save or save as at the top and this value will be stored in the json file along with your hardware setup.",
+					"varname" : "latency_test_text"
 				}
 
 			}
@@ -258,42 +316,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 1,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-840",
@@ -449,17 +481,11 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-11742"
 					}
 ,
 					"patching_rect" : [ 774.0, 133.0, 124.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p writelatencytoconfig"
 				}
 
@@ -474,42 +500,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 1,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-562",
@@ -609,17 +609,11 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-11744"
 					}
 ,
 					"patching_rect" : [ 509.0, 53.0, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p trigger_timing"
 				}
 
@@ -633,8 +627,7 @@
 					"outlettype" : [ "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 509.0, 19.0, 24.0, 24.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 604.0, 104.0, 24.0, 24.0 ]
+					"varname" : "latency_test_button"
 				}
 
 			}
@@ -666,9 +659,8 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 737.0, 96.0, 56.0, 22.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 760.5, 105.0, 56.0, 22.0 ],
-					"sig" : 0.0
+					"sig" : 0.0,
+					"varname" : "latency_test_time"
 				}
 
 			}
@@ -753,42 +745,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 1,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-85",
@@ -997,17 +963,11 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-11748"
 					}
 ,
 					"patching_rect" : [ 623.0, 119.0, 116.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p get_test_channels"
 				}
 
@@ -1039,16 +999,14 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-1094",
-					"items" : [ "select", "to", "test" ],
+					"items" : [ "hardware.out.1+2", ",", "hardware.in.1+2" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 573.5, 77.0, 100.0, 22.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 604.0, 81.0, 212.0, 22.0 ],
-					"varname" : "testlist"
+					"varname" : "latency_test_list"
 				}
 
 			}
@@ -1318,7 +1276,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 468.5, 161.0, 53.0, 22.0 ],
+					"patching_rect" : [ 481.600000000000023, 134.0, 53.0, 22.0 ],
 					"text" : "deleteall"
 				}
 
@@ -1746,7 +1704,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 370.200000000000045, 37.0, 53.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 313.0, 11.0, 53.0, 22.0 ],
+					"presentation_rect" : [ 407.0, 11.0, 53.0, 22.0 ],
 					"text" : "save_as"
 				}
 
@@ -1820,7 +1778,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 328.0, 37.0, 34.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 271.0, 11.0, 34.0, 22.0 ],
+					"presentation_rect" : [ 367.0, 11.0, 34.0, 22.0 ],
 					"text" : "save"
 				}
 
@@ -1834,7 +1792,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 283.0, 37.0, 35.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 226.0, 11.0, 35.0, 22.0 ],
+					"presentation_rect" : [ 326.0, 11.0, 35.0, 22.0 ],
 					"text" : "open"
 				}
 
@@ -2050,7 +2008,7 @@
 					"fontname" : "Consolas Bold",
 					"fontsize" : 12.0,
 					"id" : "obj-52",
-					"items" : [ "live_rig.json", ",", "live_rig_no_cue.json", ",", "live_rig_no_cue_novation.json", ",", "luke ES8_3_6.json", ",", "luke studio.json", ",", "midi_drum_machine_example.json", ",", "mini_synth.json", ",", "mini_synth_unlabelled.json", ",", "no_hardware.json", ",", "wedge case cue no click.json", ",", "wedge case.json" ],
+					"items" : [ "jh alyseum matrix case.json", ",", "luke studio.json", ",", "midi_drum_machine_example.json", ",", "no_hardware.json", ",", "wedge case click.json", ",", "wedge case cue no click.json" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2059,7 +2017,7 @@
 					"patching_rect" : [ 20.5, 106.0, 330.0, 23.0 ],
 					"prefix" : "~/Documents/GitHub/benny/hardware_configs/",
 					"presentation" : 1,
-					"presentation_rect" : [ 10.0, 10.5, 213.0, 23.0 ],
+					"presentation_rect" : [ 10.0, 10.5, 310.0, 23.0 ],
 					"types" : ".json",
 					"varname" : "hw_list"
 				}
@@ -2091,6 +2049,18 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 302.0, 729.0, 32.0, 22.0 ],
 					"text" : "start"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-312",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "signal" ],
+					"patching_rect" : [ 10.0, 100.0, 100.0, 22.0 ],
+					"text" : "adc~"
 				}
 
 			}
@@ -2139,6 +2109,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-34", 0 ],
+					"source" : [ "obj-104", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-108", 0 ],
+					"source" : [ "obj-105", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-107", 1 ],
 					"source" : [ "obj-106", 0 ]
 				}
@@ -2148,6 +2132,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-31", 0 ],
 					"source" : [ "obj-107", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-108", 0 ]
 				}
 
 			}
@@ -2348,7 +2339,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-103", 0 ],
+					"order" : 1,
+					"source" : [ "obj-27", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
+					"order" : 0,
 					"source" : [ "obj-27", 0 ]
 				}
 
@@ -2384,6 +2384,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-49", 0 ],
+					"order" : 1,
+					"source" : [ "obj-29", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-88", 0 ],
+					"order" : 0,
 					"source" : [ "obj-29", 1 ]
 				}
 
@@ -2510,6 +2519,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-44", 0 ],
+					"order" : 1,
+					"source" : [ "obj-43", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-88", 0 ],
+					"order" : 0,
 					"source" : [ "obj-43", 0 ]
 				}
 
@@ -2546,7 +2564,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-34", 0 ],
+					"destination" : [ "obj-104", 0 ],
 					"source" : [ "obj-47", 0 ]
 				}
 
@@ -2562,6 +2580,34 @@
 				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
 					"source" : [ "obj-49", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-493", 0 ],
+					"source" : [ "obj-492", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-493", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-494", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-494", 0 ],
+					"source" : [ "obj-495", 0 ]
 				}
 
 			}
@@ -3057,6 +3103,7 @@
 
 			}
  ],
+		"originid" : "pat-11740",
 		"dependency_cache" : [ 			{
 				"name" : "hardware_config_editor.js",
 				"bootpath" : "~/Documents/GitHub/benny/code",

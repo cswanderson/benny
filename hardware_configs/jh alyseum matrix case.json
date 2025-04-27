@@ -1,0 +1,406 @@
+{
+	"io" : 	{
+		"keyboards" : [ "Xkey37", "Xkey25" ],
+		"controllers" : 		{
+			"Midi Fighter Twister" : 			{
+				"name" : "Midi Fighter Twister",
+				"outputs" : 16,
+				"type" : "encoder",
+				"channel" : 1,
+				"first" : 0,
+				"columns" : 4,
+				"rows" : 4,
+				"colour" : 				{
+					"type" : "midifighter",
+					"channel" : 2,
+					"first" : 0
+				}
+,
+				"brightness" : 				{
+					"type" : "midifighter",
+					"channel" : 3,
+					"first" : 0,
+					"dim" : 19,
+					"bright" : 48
+				}
+,
+				"value" : 				{
+					"type" : "cc",
+					"channel" : 1,
+					"first" : 0
+				}
+,
+				"resets" : 				{
+					"type" : "cc",
+					"channel" : 2,
+					"first" : 0
+				}
+,
+				"buttons" : 				{
+					"first" : 8,
+					"type" : "cc",
+					"channel" : 4,
+					"count" : 6,
+					"globals" : 					{
+						"automap_toggle" : 0,
+						"automap_page" : 1,
+						"lock_automap_control" : 2
+					}
+
+				}
+
+			}
+,
+			"LPD8 mk2" : 			{
+				"name" : [ "LPD8 mk2" ],
+				"substitute" : [  ],
+				"outputs" : 8,
+				"type" : "potentiometer",
+				"channel" : 1,
+				"first" : 1,
+				"scaling" : 0.125,
+				"columns" : 4,
+				"rows" : 2,
+				"buttons" : 				{
+					"first" : 36,
+					"type" : "note",
+					"channel" : 1,
+					"count" : 8
+				}
+
+			}
+
+		}
+,
+		"matrix" : 		{
+			"external" : "/Users/James/Documents/GitHub/benny/hardware_configs/drivers/external_matrix/alyseum_matrix.maxpat",
+			"soundcard" : "/Users/James/Documents/GitHub/benny/hardware_configs/drivers/soundcard_mixer/rme_totalmix.maxpat",
+			"external_midi_out" : "USB MS1x1 MIDI Interface"
+		}
+,
+		"special_controller" : "/Users/james/Documents/GitHub/benny/hardware_configs/drivers/special_controller/jh_single_jogwheel.maxpat",
+		"controller_defaults" : 		{
+			"mixer_bus" : "LPD8 mk2"
+		}
+,
+		"sync" : 		{
+			"midi_clock_out" : 			{
+
+			}
+,
+			"audio_clock_out" : 			{
+				"enable" : 0,
+				"channel" : 3,
+				"ppqn" : 24
+			}
+,
+			"midi_clock_in" : 			{
+				"selected" : "none"
+			}
+
+		}
+
+	}
+,
+	"hardware" : 	{
+		"hardware.out.1+2" : 		{
+			"type" : "hardware",
+			"max_polyphony" : 2,
+			"help_text" : "pc speakers",
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "out" ],
+					"hardware_channels" : [ 1, 2 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.coiler.vcf" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "coiler filter",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "cv" ],
+					"hardware_channels" : [ 7, 8 ],
+					"matrix_channels" : [ 5, 6 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "hp out", "bp out", "lp out" ],
+					"hardware_channels" : [ 3, 4, 5 ],
+					"matrix_channels" : [ 3, 4, 5 ],
+					"input_gate" : [ 1, 1, 1 ],
+					"dc_block" : [ 1, 1, 1 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.maths.1" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "maths left side",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "rate" ],
+					"hardware_channels" : [ 9, 21 ],
+					"matrix_channels" : [ 7 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out" ],
+					"hardware_channels" : [ 6 ],
+					"matrix_channels" : [ 6 ],
+					"dc_block" : [ 0 ],
+					"input_gate" : [ 1 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.maths.2" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "maths right side",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "rate" ],
+					"hardware_channels" : [ 10, 22 ],
+					"matrix_channels" : [ 8 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out" ],
+					"hardware_channels" : [ 7 ],
+					"matrix_channels" : [ 7 ],
+					"dc_block" : [ 0 ],
+					"input_gate" : [ 1 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.arp.filter" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "gforce arp",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "cv" ],
+					"hardware_channels" : [ 13, 14 ],
+					"matrix_channels" : [ 11, 12 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out" ],
+					"hardware_channels" : [ 10 ],
+					"matrix_channels" : [ 10 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.sem" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "doepfer sem",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "cv" ],
+					"hardware_channels" : [ 15, 16 ],
+					"matrix_channels" : [ 13, 14 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "lp/hp out", "bp out" ],
+					"hardware_channels" : [ 11, 12 ],
+					"matrix_channels" : [ 11, 12 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.qmmg" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "channels 3 and 4 of the qmmg",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "audio 3", "audio 4", "cv 3", "cv 4" ],
+					"hardware_channels" : [ 24, 18, 12, 23 ],
+					"matrix_channels" : [ 0, 16, 10 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out 3", "out 4" ],
+					"hardware_channels" : [ 15, 14 ],
+					"matrix_channels" : [ 15, 14 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.drive.+qmmg" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "drive+qmmg",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in1", "in2" ],
+					"hardware_channels" : [ 17, 11 ],
+					"matrix_channels" : [ 15, 9 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out1", "out2" ],
+					"hardware_channels" : [ 13, 8 ],
+					"matrix_channels" : [ 9, 8 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.fx.boy" : 		{
+			"type" : "hardware",
+			"substitute" : 47,
+			"max_polyphony" : 1,
+			"help_text" : "fx boy!",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "cvX", "cvY", "mix" ],
+					"hardware_channels" : [ 3, 4, 6, 19 ],
+					"matrix_channels" : [ 1, 2, 4 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out" ],
+					"hardware_channels" : [ 1 ],
+					"matrix_channels" : [ 1 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.lifeforms.delay" : 		{
+			"type" : "hardware",
+			"substitute" : 54,
+			"max_polyphony" : 1,
+			"help_text" : "pittsburgh lifeforms delay",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "in", "time" ],
+					"hardware_channels" : [ 5, 20 ],
+					"matrix_channels" : [ 3, 0, 0 ]
+				}
+,
+				"out" : 				{
+					"hardware" : [ "out" ],
+					"hardware_channels" : [ 2 ],
+					"matrix_channels" : [ 2 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.ribbon" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "position and pressure from the doepfer ribbon",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 0,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+
+				}
+,
+				"out" : 				{
+					"hardware" : [ "position", "pressure (via maths2)" ],
+					"hardware_channels" : [ 16, 7 ],
+					"dc_block" : [ 0, 0 ]
+				}
+
+			}
+
+		}
+,
+		"hardware.rme.headphones" : 		{
+			"type" : "hardware",
+			"substitute" : [  ],
+			"max_polyphony" : 1,
+			"help_text" : "output to the headphones",
+			"exclusive" : 0,
+			"click_out" : 0,
+			"cue_out" : 1,
+			"talk_in" : 0,
+			"connections" : 			{
+				"in" : 				{
+					"hardware" : [ "new", "new" ],
+					"hardware_channels" : [ 33, 34 ]
+				}
+
+			}
+
+		}
+
+	}
+,
+	"measured_latency" : 592
+}

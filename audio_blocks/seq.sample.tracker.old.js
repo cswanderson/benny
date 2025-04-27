@@ -52,6 +52,7 @@ var fx_descs = ["chiptune style arpeggio, the values are [note1][note2][rate] or
 "1 = reverse playback, 0=forward",
 "use timestretch to play the sample slower (see also hurry)",
 ".",".","."];
+var mainfont;
 var cursors = new Array(128); //holds last drawn position of playheads (per row)
 //data format: for each voice the buffer holds:
 // 0 - start (*128)
@@ -63,6 +64,8 @@ function setup(x1,y1,x2,y2,sw){ //has screen width too so it can plot a little f
 	menucolour = config.get("palette::menu");
 	MAX_DATA = config.get("MAX_DATA");
 	MAX_PARAMETERS = config.get("MAX_PARAMETERS");
+	MAX_WAVES = config.get("MAX_WAVES");
+	mainfont = config.get("mainfont");
 	width = x2-x1;
 	height = y2-y1;
 	x_pos = x1;
@@ -109,7 +112,7 @@ function draw(){
 		maxl = Math.floor((height-sy)/rh);
 		if(!mini){
 			outlet(1,"paintrect",9+x_pos,9+y_pos,sx-9+x_pos,sy-9+y_pos,menucolour[0]*0.1,menucolour[1]*0.1,menucolour[2]*0.1);
-			outlet(0,"setfontsize",rh*0.8);
+			outlet(1,"font",mainfont,rh*0.8);
 			outlet(1,"frgb",menucolour);
 			outlet(1,"moveto",12+x_pos,rh*1.0+y_pos);
 			outlet(1,"write","o",baseoct);
@@ -513,13 +516,20 @@ function quer(){
 	post("vlist is",v_list);
 }
 function store(){
+	messnamed("to_blockmanager","store_wait_for_me",block);
 	var r;
 	var transf_arr = new Array(MAX_DATA);
 	for(r=0;r<v_list.length;r++){
 		transf_arr = voice_data_buffer.peek(1, MAX_DATA*v_list[r], MAX_DATA);
 		blocks.replace("blocks["+block+"]::voice_data::"+r, transf_arr);
 	}
+	messnamed("to_blockmanager","store_ok_done",block);
 }
+
+function remapping_sizechange(froom,too){
+	post("\nwavetable size change, not implemented",froom,too);
+}
+
 function remapping(froom,too){
 	post("\nremapping_list "+froom +" -> "+too+" .. ");
 	var cx,cy,cv,ct=0;

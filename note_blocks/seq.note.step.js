@@ -42,9 +42,11 @@ var rcol = []; //row colour. calc'd for the selected voice (grouping stretches o
 var sel_sx,sel_sx2,sel_sy,sel_ex=-1,sel_ex2,sel_ey=-1;
 //var discont_x,discont_x2,bh;
 var view_x=0,view_x2=16,view_w=16,view_y=48,view_y2=72,view_h=24;
+var oldview=[];
 var graph_y,graph_y2,graph_h;
 var colnames=["note","vel","len","del","skip","group"];
 var scr_accum_x=0,scr_accum_y=0;
+var mainfont;
 //data format: for each voice the buffer holds:
 // 0 - playhead position (updated by player voice)
 // 1-16383 data values, split over a flexible number of columns (6) and patterns (16)
@@ -62,6 +64,8 @@ function setup(x1,y1,x2,y2,sw){
 	max_rows = Math.floor((MAX_DATA-1)/(UNIVERSAL_COLUMNS*UNIVERSAL_PATTERNS));
 	pattsize = max_rows*UNIVERSAL_COLUMNS;
 	MAX_PARAMETERS = config.get("MAX_PARAMETERS");
+	mainfont = config.get("mainfont");
+
 	mini=0;
 	width = x2-x1;
 	height = y2-y1;
@@ -71,18 +75,23 @@ function setup(x1,y1,x2,y2,sw){
 	if(width<sw*0.6){ 
 		mini=1;
 		if(block>=0) generate_extended_v_list();
-		var m=1;
-		for(i=0;i<v_list.length;i++){
-			m  = Math.max(m, Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[i]+1,1)) + Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[i]+2,1)));
-		}
-		view_x2=m;
+		set_zoom_show_all();
 		sx=x_pos; 
 		sy=y_pos;
 	}else{
 		sy = y_pos + 1.7*unit*(mini==0);
 		sx = x_pos + 1.2*unit*(mini==0);
 		if(block>=0) generate_extended_v_list();
-		view_x2=16; view_x=0; view_w=16;
+		if(oldview.length>0){
+			view_x = oldview[0];
+			view_x2 = oldview[1];
+			view_y = oldview[2];
+			view_y2 = oldview[3];
+			view_w = oldview[4];
+			view_h = oldview[5];
+		}else{
+			set_zoom_show_all();
+		}
 	}
 	selected_voice=0;
 	selected_graph=1;
@@ -91,12 +100,39 @@ function setup(x1,y1,x2,y2,sw){
 	graph_y = y2 - graph_h;
 	calcscaling();
 	currentvel=100;
-	for(i=0;i<128;i++){
+	for(var i=0;i<128;i++){
 		note_names[i] = namelist[i%12]+(Math.floor(i/12)-2);
 	}
 	draw();
 }
+function set_zoom_show_all(){
+	oldview=[view_x,view_x2,view_y,view_y2,view_w,view_h];
+	var m=1, l=99,h=0, vss=99;
+	for(var c=0;c<v_list.length;c++){
+		start[c]  = Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c],1));
+		lstart[c] = Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+1,1));
+		end[c]  = lstart[c] + Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+2,1));
+		pattern_offs[c] = pattsize * Math.floor(UNIVERSAL_PATTERNS*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+9,1));
 
+		m = Math.max(m, end[c]);
+		vss= Math.min(vss,start[c]);
+		for(var ii=start[c];ii<end[c];ii++){
+			var ty = voice_data_buffer.peek(1, MAX_DATA*v_list[c] + 1 + pattern_offs[c] + UNIVERSAL_COLUMNS*ii);
+			if(ty){
+				h=Math.max(ty+1,h);
+				l=Math.min(ty-1,l);
+			}
+		}
+	}
+	if((h==0)||(m==vss)){
+		view_x=0,view_x2=16,view_w=16,view_y=48,view_y2=72,view_h=24;
+	}else{
+		view_x2 = m;
+		view_x = vss;
+		view_y = l;
+		view_y2 = h;
+	}
+}
 function calcscaling() {
 	if(view_x<0){
 		view_x2-=view_x;
@@ -132,7 +168,7 @@ function draw(){
 		outlet(1,"paintrect",x_pos,y_pos,width+x_pos,height+y_pos,blockcolour[0]*0.1,blockcolour[1]*0.1,blockcolour[2]*0.1);
 		if(!mini){
 			outlet(0,"custom_ui_element","mouse_passthrough",x_pos,y_pos,width+x_pos,height+y_pos,0,0,0,block,0);
-			outlet(0,"setfontsize",Math.min(unit*0.4,uy*0.8));//draw side note list scrollbar
+			outlet(1,"font",mainfont,Math.min(unit*0.4,uy*0.8));//draw side note list scrollbar
 			for(var y=view_y;y<view_y2;y++){
 				var shade = (3 + brightlist[y%12]) * 0.10;
 				outlet(1,"paintrect",x_pos,sy+(view_y2-y-1)*uy,sx-unit*0.1,sy+(view_y2-y)*uy,blockcolour[0]*shade,blockcolour[1]*shade,blockcolour[2]*shade);
@@ -140,7 +176,7 @@ function draw(){
 				outlet(1,"frgb",blockcolour);
 				outlet(1,"write",note_names[y]);
 			}
-			outlet(0,"setfontsize",unit*0.4);
+			outlet(1,"font",mainfont,unit*0.4);
 			for(var g=1;g<UNIVERSAL_COLUMNS-1;g++){ // draw graph select buttons
 				var se = 0.1 + 0.6*(selected_graph==g);
 				outlet(1,"paintrect",x_pos,graph_y+graph_h*(g-1)/(UNIVERSAL_COLUMNS-2),sx-unit*0.1,graph_y+graph_h*g/(UNIVERSAL_COLUMNS-2),blockcolour[0]*se,blockcolour[1]*se,blockcolour[2]*se);
@@ -185,13 +221,13 @@ function draw(){
 				}
 			}
 		}
-		outlet(0,"setfontsize",unit*0.4);
+		outlet(1,"font",mainfont,unit*0.4);
 		for(c=0;c<v_list.length;c++){
-			cursors[c] = Math.floor(voice_data_buffer.peek(1, MAX_DATA*v_list[c]));
 			start[c]  = Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c],1));
 			lstart[c] = Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+1,1));
 			end[c]  = lstart[c] + Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+2,1));
 			lon[c] = Math.floor(2*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+3,1));
+			cursors[c] = Math.floor(end[c]*voice_data_buffer.peek(1, MAX_DATA*v_list[c]));
 			pattern_offs[c] = pattsize * Math.floor(UNIVERSAL_PATTERNS*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+9,1));
 			divs[c] =  Math.floor(2 + 14*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+5,1));
 			for(r=view_x;r<view_x2;r++) drawcell(c,r);
@@ -233,10 +269,10 @@ function update(){
 		return 0;
 	}
 	for(c=0;c<v_list.length;c++){
-		ph = Math.floor(voice_data_buffer.peek(1, MAX_DATA*v_list[c]));
 		t_start  = Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c],1));
 		t_lstart = Math.floor(512*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+1,1));
 		t_end  = t_lstart + 1 + Math.floor(511*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+2,1));
+		ph = Math.floor(t_end*voice_data_buffer.peek(1, MAX_DATA*v_list[c]));
 		t_lon =  Math.floor(2*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+3,1));
 		t_p_offs =  pattsize * Math.floor(UNIVERSAL_PATTERNS*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+9,1));
 		t_divs =  Math.floor(2 + 14*voice_parameter_buffer.peek(1, MAX_PARAMETERS*v_list[c]+5,1));
@@ -451,6 +487,40 @@ function mouse(x,y,lb,sh,al,ct,scr){
 				}
 			}
 			drawflag = 1;
+		}else if(scr){
+			if(!sh){
+				scr_accum_y+=scr*5;
+				if(Math.abs(scr_accum_y)>1){
+					scr = (scr>0)?1:-1;
+					scr_accum_y=0;
+					if(ct){
+						view_y+=scr;
+						view_y2-=scr;
+						calcscaling();
+					}else{
+						view_y+=scr;
+						view_y2+=scr;
+						calcscaling();
+					}
+					drawflag = 1;
+				}
+			}else{
+				scr_accum_x+=scr*5;
+				if(Math.abs(scr_accum_x)>1){
+					scr = (scr>0)?1:-1;
+					scr_accum_x=0;
+					if(ct){
+						view_x+=scr;
+						view_x2-=scr;
+						calcscaling();
+					}else{
+						view_x+=scr;
+						view_x2+=scr;
+						calcscaling();
+					}
+					drawflag = 1;
+				}
+			}
 		}
 	}else{ //graph bit
 		var clickx = Math.floor(view_x + view_w * (x-sx)/(width-sx));
@@ -486,6 +556,7 @@ function mouse(x,y,lb,sh,al,ct,scr){
 		}
 		
 	}
+	oldview=[view_x,view_x2,view_y,view_y2,view_w,view_h];
 }
 
 function request_sidebar_sel(){
@@ -949,6 +1020,7 @@ function loadbang(){
 
 
 function store(){
+	messnamed("to_blockmanager","store_wait_for_me",block);
 	var r;
 	var transf_arr = []; //this isn't the shortest it possibly could be but i think we can handle it.
 	for(r=0;r<v_list.length;r++){
@@ -960,6 +1032,7 @@ function store(){
 		transf_arr.push(d);
 		blocks.replace("blocks["+block+"]::voice_data::"+r, transf_arr);
 	}
+	messnamed("to_blockmanager","store_ok_done",block);
 }
 
 function reset_round_robins(){

@@ -1,0 +1,217 @@
+block json file reference
+-------------------------
+
+json doesn't support comments, so i've listed the keys and interspersed explanations. copy them
+out into your own json files, removing all my comments.
+
+use an editor that will check the syntax of json for you, it'll save you time. vscode is free and does the job.
+
+the whole thing is in {}, and contains one key, which is named as the block name, 
+and the json file has to be saved as the same name too. eg this example is based on utility.delay.json
+
+{
+	"utility.delay" : { //the block name. '.' and '+' make newlines in the block labels
+        //if you want your own prefix (eg my friend luke starts the name of all his blocks with abb.)
+        //benny will automatically add a new section to the end of the blocks page. you can reorder
+        //the sections editing userconfig.json
+		"patcher" : "utility.delay",   //the name of the max patch for a voice of your block
+		"type" : "audio",  //audio, or note. in the hw config file "hardware" is a possibility.
+		"block_ui_patcher" : "blank.ui", //write "blank.ui" unless it has a separate ui drawing max patch
+        //in which case write the name here. 
+        //OR if you write "self" then benny lets you pop open the voice's max patch so you can
+        // build your block a UI in a separate max window rather than inside benny if you prefer.
+		//ui keys:
+        "ui_in_sidebar_height" : 1, //if this key is present it draws the ui in the sidebar above the parameters, using this many rows of space. your ui can adjust to proportions if you want it to...
+        "ui_in_sidebar_expands" : 1,
+        "ui_to_bottom_panel" : 1, //let this be sent to the bottom panel. the 5th setup param (x,y,x,y,M) is called with a '2' so you know to render a long thin view. very much only for a particular kind of block - like mix bus, pattern sequencer, etc.
+        "no_ui_in_panel" : 1,//this key prevents it displaying the ui in the panels page of benny
+		"no_edit" : 1,//this key prevents the ui being popped open from the sidebar/panels - it can't be made the main focus of the window ever.
+		"help_text" : "the help text is displayed under 'help' and in the blocks menu",
+		"synonyms" : "bbd", //other words that you want it to show up under when people type to search - 
+        // eg, my fx.delay.buckets i think of as a bbd even though that's not in the name so i want it to come up if i type bbd..
+		"max_polyphony" : 0, //0=unlimited polyphony, 1-... = sets a hard limit on how many voices are allowed
+		"upsample" : 1, //[OPTIONAL, AUDIO BLOCKS ONLY]does it default to upsampling, if so how many x 
+        
+		    //the subvoices keys work like this: normal blocks 1 voice is 1 channel, with a mod input
+            //and a second output. some blocks though, a voice has (eg) pairs of ins and outs, like for
+            //example a stereo vst.
+            //this influences default ways it considers wiring the blocks up, as well as the display.
+            //some rare blocks have one kind of ins and one kind of outs. you can set those - see the examples
+            //underneath, but you have to still set subvoices = 2. an example of this is a mono input-ed stereo
+            //panner block
+            //
+        "subvoices" : 2, //[OPTIONAL, AUDIO BLOCKS ONLY]
+            "from_subvoices": 2,
+            "to_subvoices" : 1, //<ie the input is 2 inputs, the output is 1 output in stereo
+		"exclusive" : 1, //[OPTIONAL] only allow one of this block per song
+        "connections" : {
+            //depending on block type.. all blocks can input + output midi and output parameters (1d values like an lfo)
+            //block can output several kinds of thing if it wants to. or not.
+			"in" : { 
+                //"audio" : [ "in" , "one or two audio ins"], //[AUDIO BLOCKS ONLY]
+                "midi" : ["notes in", "aux trigger", "transpose in"],
+                "default" : 0, //optional, tell it the default input that connections go to
+				"automap_to" : 1, //optional, tell it the default target for midi keyboard automap
+                "automap_poly" : 0 //optional, if set 0 it automaps to the first voice instead of to the block polyallocator
+                     //useful for blocks where the individual voices work with polyphonic midi input - for example
+                     //fx.pitch.retune - its midi input is 'allowed notes' so with this setting when you select it
+                     //the keyboard controls the notes allowed (without this setting the keyboard could only pick one note at a time)
+            },
+            "out" : {
+                    "audio" : [ "out", "one or two audio outs" ],
+                    //or "parameters" [ "value", "value2", "etc" ]
+                    //or "midi" : ["notes out 1", "other notes out", "filtered notes", "delayed notes", "etc" ]
+                    "dontdefaultall" : 1,//normally connections from a block with many voices assume
+                    //you're connecting from all. some blocks it's always going to be an individual voice
+                    //which is what this key is for. saves a click..
+                    "midi" : [ "clock",  "play" ],
+                    "parameters" : [ "bar count" ],
+                    "descriptions" : { //optional help text for the connections menu
+                        "midi" : [ "notes at the rate selected", "status of the play control"],
+                        "parameters" : [ "bar counter" ],
+                        "audio" : ["main output", "this out has a very special set of functions described here"]
+                    },
+                    "midi_watched" : [1,1,1], //if it is something possibly high density that gets turned on and off by the core remotely (ie you need to listen for a message and have gates, see env.asr)
+                    "midi_scopes_types" : [ 0,0,0,1,3] //array, one per midi, parameter out, type and size of midi scope. 0 = notes, 1 = thin notes, 2 = values,3=thin values
+                }
+            },
+        "default_polymode" : { //optional, defines default polyphony allocator behaviour for the block
+            "stack_mode" : "1x",
+            "choose_mode" : "cycle free",
+            "steal_mode" : "oldest",
+            "return_mode" : 1,
+            "latching" : 0
+        },
+        // if you want parameters, you need a groups key. each group is a row of parameters
+		"groups" : [
+			{ 
+                //every group needs the "contains" key, with a list of parameter numbers
+				"contains" : [0,1,1,3] //if you repeat a parameter number it makes that slider (or whatever)
+                //twice as wide. etc. [0,0,0,0,0,0,1,1,1,3] is allowed..
+			},
+            {
+                "contains" : [2,2,5], //must have a contains key!
+                "header" : "text for a narrow label above the row",
+                "colour" : -10, // the prefered way is to do it like this, a single number, a jump
+                //relative to the block colour in the rainbow palette defined in 'config.json'.
+                //eg something like -10,-5,0,5,10 is a nice spread of colours for the rows 
+                //the idea being it supports user palettes if people have a preferred rainbow eg
+                //for accessibility?? BUT
+                //if you absolutely must specifiy an absolute RGB then you can like this [255, 20, 20]
+                "height" : 1 //height of the sliders. if >=1 then you get sliders with label text below
+                //if 0 you get sliders of height 1 with superimposed label text
+                //if between 0 < x < 1 you get a thin row. good for rows of buttons?
+            },
+            {
+                "contains" : [4],
+                "onepervoice" : 1 //normally a block acts like there is one slider for all the voices
+                //but by holding ctrl (or ctrl-alt-shift? i forget the tilt key combo rn TODO) you can
+                //adjust individual voices as an offset from the block-level value. BUT, for example for
+                //mixer channel blocks, where you expect a row of polyphonic voices as the channels of a 
+                //mixer, the user wants to default to controlling the individual voice values. the overall
+                //block level value is kind of obscured, but is set by the 'default' key under the parameter
+            }
+		],
+        "presets" : { //optional 'factory presets' in addition to any the user saves
+            "preset name" : {
+				"values" :[ 0, 0, 0, 0, "array of parameter values" ]
+            }
+        },
+		"parameters" : [
+			{
+				"name" : "delay_samples", //must have a name
+				"type" : "float", // a floating-point number (gets written to 2sf iirce TODO check)
+                // or "float4", //a floating-point number with more digits of precision displayed
+                // or "int", // an integer
+				"values" : ["uni", 0, 1000, "lin"], //this is what values for these types looks like - "uni" or "bi", min, max, then the shape
+                //possible shapes: "lin", 
+                //  "exp" is a pow(2,x) curve
+                //  "exp10", "exp100", "exp1000" are progressively more squashed
+                //  "log" is the opposite, with "log10", "log100", "log1000"
+                // the voiceheader subpatch you put in every block outputs parameters with range and curve
+                // applied ready for you to use in your patcher.
+				"wrap" : 0, // modulation, controllers with encoders, etc, will wrap around
+				"default" : 0.12 // NOTE this is in the 0-1 range used internally for params,
+                     // not in the range/curve you specified. at the moment trial and error or
+                     // setting, then saving, then looking at the savefile (at the end, 'current' state) is the best way to find these values
+                     // NEVER set default to 1 (think of the range as 0-1 not including 1)
+			},
+			{
+                "name" : "delay_signal_vectors",
+				"type" : "int",
+				"values" : ["bi", 0, 32, "lin", 0.25], //<<if it's set to "lin" AND you add a 5th value, that's the scrollwheel step
+				"wrap" : 0,
+				"error_scale" : 0, //under settings for every block there's a facility to add random
+                //deviations to the parameter values of each voice - like a wonky old polysynth.
+                //the 'error_scale' parameter, if present, multiplies those deviations - so you can 
+                //disable it entirely per-parameter, or accentuate the effect in places where it works
+				"default" : 0
+			},
+			{
+                "name" : "delay_in_calendar_units",
+                "type" : "menu_i",
+                // a series of menu choices with no inbetween states
+                // or "menu_f", // a series of menu choices with smooth fades between them (eg osc state)
+                // or "menu_b", // a button that toggles or cycles
+                //     works in conjunction with onepervoice and polyphony
+                // or "menu_l", // a row or grid or column of buttons
+                // _b and _l are really just fancy ways to draw menu_i, so in some circumstances it falls back to drawing the _i version at the moment
+                // or "button", // this is different to the menu button, it just sends a 'button pressed' message to the voice or all the voices or etc
+                "force_label" : 1, // forces it to show the name label for the param
+                "values" : ["day", "week", "month", "year"], // just list the menu entries
+				"wrap" : 0, // as with other types, does it wrap (with modulation, or controllers with encoders, or scrollwheel or dragging on the slider)
+				"error_scale" : 0,
+				"default" : 0.49 //this is the second entry, "week" (think of 0-1 divided into 4 slices)
+			},
+			{
+				"name" : "repeat",
+				"type" : "menu_b", 
+				"values" : ["on", "off"],
+                "colours" : [ [255,0,0], [0,255,0]], //optional: per-state colours for the buttons
+				"wrap" : 1, //<<WRAP MUST BE ON FOR menu_b buttons to work right
+                "force_map" : 1, //by default buttons, menu_b and menu_l aren't mapped to knobs on a controller. include this key to override that.
+				"default" : 0.25 // << this is important, set the default in the middle of the range for the value you want. 
+                //so if it has 2 values 0 to 0.5 is the first one, so default to 0.25. this is due to a bug i can't quite work out in benny, sorry.
+			},
+			{
+				"name" : "action!",
+				"type" : "button",
+				"default" : 0,
+				"error_scale" : 0,
+				"wrap" : 0,
+				"values" : ["firstvoice","8",8] // a list, in groups of 3 as follows:
+                //"firstvoice","voices" - all voices,"block" - to the ui patcher,"core" - run a fn in the core js.. (advanced..)
+                //"8" < this is the label on the button
+                //8 <- this can be a number or a "string like this" and it gets sent to the max patcher you specified (in1 - it'll come out the last output of the voiceheader subpatcher) 
+            },
+			{
+				"name" : "chip_size",
+				"type" : "menu_l",
+				"values" : ["64","128","256","512","1024","2048","4096","8192", "16384", "32768", "65536"],
+				"error_scale" : 0,
+				"columns" : 4, // note here how specifying a number of columns makes it divide the list into chunks that make the ui make sense
+                // this key taken from fx.delay.buckets  
+				"wrap" : 0,
+                "nomap" : 1, // the nomap key makes it impossible to make a connection to modulate this parameter
+				"default" : 0.61
+			},
+			{
+				"name" : "delay_beats",
+				"type" : "float",
+                "nopervoice" : 1, //this disables separate per-voice values for this param 
+				"error_scale" : 0,
+				"values" : ["uni", 0, 8000, "exp10"],
+				"wrap" : 0,
+				"default" : 0
+			}
+
+		],
+        "panel_parameters" : [0,1,1,2], //default parameters for the panels page view of this block
+         //optional key, if not present (and there's no ui to display on a panel) it doesn't default
+         //to including a panel for the block (the user can turn it on by selecting some params for it though)
+        "voice_data" : { // whole key is optional
+            "defaults" : [ 0,0,0,0,0,0,0,0,0 ] //up to 16000 values that are loaded into the 'voice data' buffer as a default
+             // (voice data is a load of fast data storage allocated for each voice to use. eg my sequencers often use this to store patterns)
+        }
+	}
+}

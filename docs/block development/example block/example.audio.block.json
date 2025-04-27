@@ -2,21 +2,26 @@
 	"example.audio.block" : {
 		"patcher" : "example.audio.block",
 		"type" : "note",
-		"block_ui_patcher" : "blank.ui",
+		"block_ui_patcher" : "example.ui",
+		"show_states_on_custom_view": 1,
 		"help_text" : "example_audio_block ££use currency symbol of defunct imperial hellhole 'britain' for newlines in this help text. note there are a few audio-specific options, like upsampling. if your block functions as a stereo channel in one voice add the tag 'subvoices' : 2",
 		"max_polyphony" : 0,
+		"ui_in_sidebar_height" : 4,
+		"ui_in_sidebar_expands" : 1,
 		"upsample" : 1,
 		"connections" : {
 			"in" : {
 				"midi" : [ "as many", "midi ins", "as you like", "(within reason)", "up to 128" ],
 				"default" : 1,
 				"automap_to" : 0,
-				"audio" : ["in1", "in2"]
+				"audio" : ["in1", "in2"],
+				"audio_watched" : [0,1]
 			},
 			"out" : {
 				"audio" : [ "main out", "other out"],
 				"midi" : [ "likewise", "as many", "midi outs" ],
-				"parameters" : [ "but", "1 dimensional" , "'parameter' out", "like a midi cc", "is often more useful"]
+				"parameters" : [ "but", "1 dimensional" , "'parameter' out", "like a midi cc", "is often more useful"],
+				"midi_watched" : [0,1,1, "OPTIONAL a list, as long as the list of midi + param outs. a 1 means that when this output is connected or disconnected a message is sent to the voice to tell it to enable or disable the out. useful for outputs that put out a lot of midi data. see utility.env.asr for usage."]
 			}
 		},
 		"groups" : [
@@ -42,6 +47,7 @@
 				"name" : "a toggle",
 				"type" : "menu_b",
 				"values" : ["0", "1"],
+				"force_map" : 1, 
 				"wrap" : 1,
 				"default" : 0
 			},
@@ -123,5 +129,8 @@
 				"values" : ["firstvoice", "one", 1]
 			}
 		]
+	},
+	"presets" : {
+		"the best way" : "to add developer presets is to save them in benny, they'll go to the file userpresets.json, just copy the whole presets key for your block into your own block definition file"
 	}
 }

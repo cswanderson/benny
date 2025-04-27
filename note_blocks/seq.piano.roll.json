@@ -1,0 +1,117 @@
+{
+	"seq.piano.roll" : {
+		"patcher" : "seq.piano.roll",
+		"type" : "note",
+		"block_ui_patcher" : "seq.piano.roll.ui",
+		"help_text" : "Classic piano roll sequencer. £Unlike many other benny sequencers this one has an internal clock linked to the global clock and doesn't need a clock in. (It does follow timing drift from the kuramoto section of the clock if that's enabled.)££ctrl-click to create events, ctrl drag to create many events (in a values lane). scroll adjusts velocity or cc levels, drag or arrow keys to move events, ctrl+scroll, drag or arrow keys to adjust lengths. ££scroll or shift+scroll on the time ruler for zoom/pan. or drag on the ruler, or shift-drag on the background. £alt+drag copies selected events.££press 3 to put the ruler into triplet divisions of beats when zoomed in.££press q to time quantise the selected notes or events to the current grid.££l makes the selected notes legato.££At the moment only scroll over the loop start / length etc numbers works to adjust those, and longer sequences than 256 beats can't yet be created in the ui here. More soon.",
+		"max_polyphony" : 1,
+		"ui_in_sidebar_height" : 4,
+		"default_polymode" : 	{
+				"stack_mode" : "unison all",
+				"choose_mode" : "blind cycle",
+				"steal_mode" : "cyclic",
+				"return_mode" : 1
+		},
+		"connections" : {
+			"in" : {
+				"midi" : [ "record notes in", "trigger in", "jump forwards", "jump backwards", "reset", "modifiers in" ],
+				"parameters" : [ "record cc in 1", "record cc in 2", "record cc in 3", "record cc in 4", "record cc in 5", "record cc in 6", "record cc in 7", "record cc in 8"],
+				"descriptions" : {
+					"midi" : [ "", "clock input not yet implemented", "jump not yet implmented", "jump not yet implemented", "", "vel maps to the 2nd parameter if present, note selects (C=skip,C#=vel rand,D=cc rand,D#=divide,E=oct up,F=oct down,F#,G,G# chromatic transpose,A output select)"]
+				}
+			},
+			"out" : {
+				"midi" : [ "notes out", "notes out B", "notes out C", "loop reached" ],
+				"parameters" : [ "cc out 1", "cc out 2", "cc out 3", "cc out 4", "cc out 5", "cc out 6", "cc out 7", "cc out 8", "playhead_position" ],
+				"dontdefaultall" : 1,
+				"descriptions" : {
+					"midi" : [ "", "you can insert a meta-note that sends notes to these outputs instead of the main one","","sends a note when the loop end is reached"]
+				}
+			}
+		},
+		"groups" : [
+			{ 
+				"contains" : [],
+				"patterncontrols" : 1
+			},
+			{ 
+				"contains" : [ 1, 2, 3, 4],
+				"colour" : 0
+			},
+			{
+				"contains" : [5,6,7],
+				"height" : 0,
+				"colour" : -10
+			}
+		],
+		"patterns" : {
+			"parameter" : 0,
+			"pattern_storage" : "dict",
+			"playhead_offset" : 1
+		},
+		"parameters" : [
+			{
+				"name" : "pattern",
+				"type" : "int",
+				"values" : ["uni", 0, 15, "lin"],
+				"wrap" : 1,
+				"default" : 0.03125
+			},
+			{
+				"name" : "start_offset",
+				"type" : "int",
+				"values" : ["bi", -256, 256, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "loop_start_offset",
+				"type" : "int",
+				"values" : ["bi", -256, 256, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "loop_length_offset",
+				"type" : "int",
+				"values" : ["bi", -256, 256, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "playhead_offset",
+				"type" : "int",
+				"values" : ["bi", -256, 256, "lin"],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "midi in mode",
+				"type" : "menu_l",
+				"values" : ["midi through", "overdub record" ],
+				"colours" : [ 20, [190,40,40]],
+				"wrap" : 0,
+				"default" : 0.16,
+				"nopervoice" : 1
+			},
+			{
+				"name" : "<_back",
+				"type" : "button",
+				"default" : 0,
+				"error_scale" : 0,
+				"wrap" : 0,
+				"values" : ["voices","<_back",-1],
+				"nopervoice" : 1
+			},
+			{
+				"name" : ">_fwd",
+				"type" : "button",
+				"default" : 0,
+				"error_scale" : 0,
+				"wrap" : 0,
+				"values" : ["voices",">_fwd", 1],
+				"nopervoice" : 1
+			}
+		]
+	}
+}

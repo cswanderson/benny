@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 6,
-			"revision" : 2,
+			"revision" : 4,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 134.0, 134.0, 1061.0, 595.0 ],
+		"rect" : [ 34.0, 76.0, 1061.0, 595.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,57 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-59",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 668.0, 616.0, 219.0, 36.0 ],
+					"presentation_linecount" : 2,
+					"text" : ";\r\nto_blockmanager store_ok_done $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-38",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 668.0, 571.0, 219.0, 36.0 ],
+					"text" : ";\r\nto_blockmanager store_wait_for_me $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-31",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 267.0, 69.0, 206.0, 48.0 ],
+					"text" : "(optional) but if you include it then when you're editting your patch benny won't receive keypresses."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-6",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 225.0, 69.0, 40.0, 22.0 ],
+					"text" : "active"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-39",
 					"linecount" : 7,
@@ -451,12 +502,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-45",
-					"linecount" : 17,
+					"linecount" : 16,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 482.0, 400.0, 188.0, 241.0 ],
-					"text" : "every voice has 16384 bytes of data storage preallocated to it. use to communicate between voices, to hold patterns, to communicate with a ui patcher.\n\nblocks with a ui patcher - the ui patcher is sent a 'store' message when a song is saved, which is a good time to write the data you want saving into the blocks dictionary (see below). if your block has no ui patcher you can also manage reading and writing from your own keys in the blocks dictionary yourself. see below left."
+					"patching_rect" : [ 482.0, 400.0, 188.0, 227.0 ],
+					"text" : "every voice has 16384 bytes of data storage preallocated to it. use to communicate between voices, to hold patterns, to communicate with a ui patcher.\n\nall patchers are sent a 'store' message when a song is saved, which is a good time to write the data you want saving into the blocks dictionary (see below).\n\nuse the following two messages to make benny wait for your store routine to complete: (the number is the block number)"
 				}
 
 			}
@@ -472,7 +523,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 2,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -687,10 +738,11 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-15",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 271.0, 70.0, 176.0, 20.0 ],
+					"patching_rect" : [ 21.0, 70.0, 94.0, 34.0 ],
 					"text" : "NOTE BLOCK ESSENTIALS",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -715,7 +767,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 332.0, 113.0, 24.0, 24.0 ]
+					"patching_rect" : [ 305.0, 122.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -747,10 +799,10 @@
 				"box" : 				{
 					"id" : "obj-103",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 4,
 					"numoutlets" : 11,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 160.0, 110.0, 125.0, 22.0 ],
+					"patching_rect" : [ 119.0, 110.0, 125.0, 22.0 ],
 					"text" : "voiceheader"
 				}
 
@@ -911,7 +963,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 2,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1310,7 +1362,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 160.0, 69.0, 28.0, 22.0 ],
+					"patching_rect" : [ 119.0, 69.0, 28.0, 22.0 ],
 					"text" : "in 1"
 				}
 
@@ -1586,6 +1638,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-70", 0 ],
 					"source" : [ "obj-57", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-103", 3 ],
+					"source" : [ "obj-6", 0 ]
 				}
 
 			}

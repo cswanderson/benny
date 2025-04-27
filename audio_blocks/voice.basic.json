@@ -3,7 +3,7 @@
 		"patcher" : "voice.basic",
 		"type" : "audio",
 		"block_ui_patcher" : "blank.ui",
-		"help_text" : "Basic single oscillator through a VCA driven by an ASR envelope. Shape fades from sine through triangle saw rectangle square triangle and back to sine. Accepts MIDI and CV, works in LFO and audio ranges. The rectangle portion of this oscillator uses code from Yofiel.com. ",
+		"help_text" : "a single oscillator with an ASR envelope on its amplitude. the shape control fades from sine through triangle saw rectangle square triangle and back to sine. accepts MIDI and CV, works in LFO and audio ranges and over fairly long timescales. ££the envelope can loop, including decay bouncing ball type loops, and features 'accumulation' - when retriggered before the envelope has decayed to silence the remaining level is added to the new target level, so fast sections can be set to build up by themselves, or down. ££if you're playing near the top of the keyboard range (above C7) turn on oversampling in settings for a clearer tone, particularly on the saw.  ££the rectangle portion of this oscillator uses EPTR code from yofiel.com, the saw/tri is made by integrating this. sine was invented by 2nd century BC egyptian people.",
 		"max_polyphony" : 0,
 		"upsample" : 1,
 		"latching_enable" : 1,
@@ -20,20 +20,27 @@
 		"groups" : [
 			{ 
 				"contains" : [0,1,4],
-				"colour" : 10
+				"colour" : 4
+			},
+			{
+				"contains" : [2,3,13,5],
+				"height" : 0,
+				"colour" : -2
 			},
 			{ 
 				"header" : "envelope",
 				"contains" : [6,7,8],
-				"colour" : 5
+				"colour" : -8
 			},
 			{
-				"contains" : [2,3,13,5],
-				"height" : 0
+				"contains" : [9,10,12,14],
+				"height" : 0,
+				"colour" : -12
 			},
 			{
-				"contains" : [9,10,11,12,14],
-				"height" : 0
+				"contains" : [21,11, 15,16,17,18,19,20],
+				"height" : 0,
+				"colour" : -20
 			}
 		],
 		"panel" : {
@@ -79,9 +86,11 @@
 			{
 				"name" : "fm mode",
 				"type" : "menu_l",
-				"values" : ["fm" , "sync" , "sync&fm"],
+				"values" : ["lin fm" , "exp fm", "sync" , "sync&fm"],
 				"error_scale" : 0,
-				"wrap" : 1
+				"nopervoice" : 1,
+ 				"wrap" : 1,
+				"default" : 0.3
 			},
 			{
 				"name" : "attack",
@@ -119,7 +128,7 @@
 				"default" : 0
 			},
 			{
-				"name" : "vel->level",
+				"name" : "vel ->_level",
 				"type" : "float",
 				"values" : ["bi", -1, 1, "lin" ],
 				"wrap" : 0,
@@ -145,7 +154,58 @@
 				"values" : ["bi", -2, 2, "lin" ],
 				"wrap" : 0,
 				"default" : 0.75				
-			}			
+			},
+			{
+				"name" : "vel ->_shape",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin" ],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "vel ->_range",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin" ],
+				"wrap" : 0,
+				"default" : 0.5
+			},	
+			{
+				"name" : "vel ->_attack",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin" ],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "vel ->_release",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin" ],
+				"wrap" : 0,
+				"default" : 0.5
+			},
+			{
+				"name" : "env ->_shape",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin" ],
+				"wrap" : 0,
+				"default" : 0.5
+			},	
+			{
+				"name" : "env ->_pitch",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin" ],
+				"wrap" : 0,
+				"default" : 0.5
+			},	
+			{
+				"name" : "attack_shape",
+				"type" : "menu_b",
+				"nopervoice" : 1,
+				"forcelabel" : 1,
+				"values" : ["attack_shape_regular", "attack_shape_mirror" ],
+				"wrap" : 1,
+				"default" : 0.3
+			}
 		]
 	}
 }

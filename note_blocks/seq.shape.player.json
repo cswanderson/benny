@@ -3,29 +3,37 @@
 		"patcher" : "seq.shape.player",
 		"type" : "note",
 		"block_ui_patcher" : "blank.ui",
-		"help_text" : "Plays the shape stored in a notepool. The trigger note input both triggers and sets the in-scale offset (eg midi-note 2 offsets the pattern by 2 notes). In the clocked modes a trigger note starts the whole sequence playing by itself on a regular clock. The ornaments sliders control the chance of various types of ornamentation being applied to the pattern. On the second midi input C = reset, C# on triggers one of the ornament types.",
+		"help_text" : "The core.scales.shapes block stores the 'shape' of a pattern played into it as well as the scale. This block plays back these shapes. ££You can transpose them in-scale, rotate in time or apply several other types of ornamentation and variation using this block. You can also play a shape using a different scale to the one it was entered in.££The ornaments sliders control how often the various types of ornamentation occur. ££On the second midi input C = reset, notes from C# upwards trigger one of the ornament types directly.",
 		"max_polyphony" : 0,
 		"connections" : {
 			"in" : {
 				"midi" : [ "trigger in", "reset+ornament in" ]
 			},
 			"out" : {
-				"midi" : [ "notes out", "ornament notifier" ]
+				"midi" : [ "notes out", "ornament notifier" ],
+				"midi_scopes_types" : [ 0,1 ]
 			}
 		},
 		"groups" : [
-			{ 
-				"contains" : [0, 0,17, 1, 2, 3]
+			{
+				"header" : "scale",
+				"contains" : [0,0,0,0,0,0,0,17],
+				"height" : 0
 			},
 			{ 
-				"contains" : [4, 4, 15,16],
-				"height" : 1,
-				"colour" : [255,255,255]
+				"contains" : [3, 1],
+				"height" : 0,
+				"colour": -5
+			},
+			{ 
+				"contains" : [4,4,4,15,16,2],
+				"height" : 0,
+				"colour" : -10
 			},
 			{ 
 				"contains" : [5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 				"height" : 0,
-				"colour" : [255,255,255]
+				"colour" : -15
 			}						
 		],
 		"panel" : {
@@ -33,23 +41,25 @@
 		},
 		"parameters" : [
 			{
-				"name" : "pool",
-				"type" : "int",
-				"values" : ["uni", 1, 8, "lin"],
+				"name" : "scale",
+				"type" : "menu_l",
+				"values" : ["1", "2", "3", "4", "5", "6", "7", "8"],
 				"wrap" : 0,
+				"columns" : 8,
 				"error_scale" : 0,
 				"default" : 0
 			},
 			{
-				"name" : "mode",
-				"type" : "menu_i",
-				"values" : ["trigger->clock", "trigger->start-1", "trigger->start-loop"],
+				"name" : "shape",
+				"type" : "menu_d",
+				"values" : ["same as scale", "1", "2", "3", "4", "5", "6", "7", "8"],
 				"error_scale" : 0,
+				"force_label" : 1,
 				"wrap" : 0,
 				"default" : 0
 			},
 			{
-				"name" : "clock rate",
+				"name" : "arp rate",
 				"type" : "menu_i",
 				"values" : ["64n", "32nt", "32n", "16nt", "16n", "8nt", "8n", "4nt", "4n", "2nt", "2n", "1n", "2b", "3b", "4b", "5b", "6b","7b","8b"],
 				"error_scale" : 0,
@@ -57,7 +67,7 @@
 				"default" : 0.46
 			},
 			{
-				"name" : "offset",
+				"name" : "note_offset",
 				"type" : "int",
 				"values" : ["uni", 0, 127, "lin"],
 				"error_scale" : 0.3,
