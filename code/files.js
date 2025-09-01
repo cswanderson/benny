@@ -1,11 +1,13 @@
 function read_songs_folder(folder_name_or_path){ //also loads all song json files, and constructs the wave preload list.
 	//clears, builds the list for this specific folder, and updates the songs dict
-
+	var getpreloadlists=0;
 	if(folder_name_or_path=="songs"){
 		var f = new Folder(SONGS_FOLDER);
 		var df = 0;
 		post("\nreading songs from folder: ",SONGS_FOLDER);
 	}else if(folder_name_or_path=="templates"){
+		if(preload_note_voice_list == []) getpreloadlists=1;
+		preload_audio_voice_list = [];
 		var f = new Folder(projectpath+"templates");
 		var df = 1;
 		post("\nreading songs from folder: ",projectpath+"templates");
@@ -99,34 +101,36 @@ function read_songs_folder(folder_name_or_path){ //also loads all song json file
 				}
 			}
 			songs_info[i]=[bc,vc_n,vc_a,vc_h];
-			var td = blocktypes_count_this.get("note");
-			if(td!=null){
-				var tdk = td.getkeys();
-				for(var t=0;t<tdk.length;t++){
-					var c = td.get(tdk[t]);
-					var e = 0;
-					if(blocktypes_count_cumulative.contains("note::"+tdk[t]))e = blocktypes_count_cumulative.get("note::"+tdk[t]);
-					if(c>e){
-						blocktypes_count_cumulative.replace("note::"+tdk[t],c);
-						for(tt=e;tt<c;tt++) preload_note_voice_list.push(tdk[t]);
+			if(getpreloadlists){
+				var td = blocktypes_count_this.get("note");
+				if(td!=null){
+					var tdk = td.getkeys();
+					for(var t=0;t<tdk.length;t++){
+						var c = td.get(tdk[t]);
+						var e = 0;
+						if(blocktypes_count_cumulative.contains("note::"+tdk[t]))e = blocktypes_count_cumulative.get("note::"+tdk[t]);
+						if(c>e){
+							blocktypes_count_cumulative.replace("note::"+tdk[t],c);
+							for(tt=e;tt<c;tt++) preload_note_voice_list.push(tdk[t]);
+						}
 					}
 				}
-			}
-			var td = blocktypes_count_this.get("audio");
-			if(td!=null){
-				var tdk = td.getkeys();
-				for(var t=0;t<tdk.length;t++){
-					var c = td.get(tdk[t]);
-					var e = 0;
-					if(blocktypes_count_cumulative.contains("audio::"+tdk[t]))e = blocktypes_count_cumulative.get("audio::"+tdk[t]);
-					if(c>e){
-						blocktypes_count_cumulative.replace("audio::"+tdk[t],c);
-						for(tt=e;tt<c;tt++) preload_audio_voice_list.push(tdk[t]);
+				var td = blocktypes_count_this.get("audio");
+				if(td!=null){
+					var tdk = td.getkeys();
+					for(var t=0;t<tdk.length;t++){
+						var c = td.get(tdk[t]);
+						var e = 0;
+						if(blocktypes_count_cumulative.contains("audio::"+tdk[t]))e = blocktypes_count_cumulative.get("audio::"+tdk[t]);
+						if(c>e){
+							blocktypes_count_cumulative.replace("audio::"+tdk[t],c);
+							for(tt=e;tt<c;tt++) preload_audio_voice_list.push(tdk[t]);
+						}
 					}
 				}
 			}
 		}
-		post("\npreload lists prepared: ",preload_note_voice_list.length,"note blocks and",preload_audio_voice_list.length,"audio blocks.");
+		if(getpreloadlists) post("\npreload lists prepared: ",preload_note_voice_list.length,"note blocks and",preload_audio_voice_list.length,"audio blocks.");
 		//note_patcherlist = preload_note_voice_list.slice(0,MAX_NOTE_VOICES);
 		//audio_patcherlist = preload_audio_voice_list.slice(0,MAX_AUDIO_VOICES);
 		//still_checking_polys |= 3;
@@ -574,6 +578,7 @@ function import_song(){
 		if(current_x_max>-999){
 			loading.xoffset = current_x_max + 4 - new_x_min;
 		}
+		sidebar.notification = null;
 		if(songs.contains(loading.songname+"::notepad")){ 
 			sidebar.notification = songs.get(loading.songname+"::notepad");
 			set_sidebar_mode("notification");
@@ -618,113 +623,117 @@ function import_song(){
 				notepools_dict.replace("notepools", songs.get(loading.songname+"::notepools"));
 			}
 		}
-		for(b=loading.progress;b<MAX_BLOCKS;b++){
+		for(b=loading.progress;b<Math.min(MAX_BLOCKS,songs.getsize(loading.songname+"::blocks"));b++){
 			//post("\ntrying block",b,"loading.songname is",loading.songname);
-			thisblock = songs.get(loading.songname+"::blocks["+b+"]");
-			//post("\n",b,"type",typeof thisblock, thisblock.toString());
-			if(thisblock.contains("name")){
-				block_name = thisblock.get("name");
-				var oname = block_name;
-				if(loading.wait>1) post("\nloading block "+b+" : "+block_name);
-				if(!blocktypes.contains(block_name+"::type")){//this block doesn't exist in this installation/hardware config!
-					if(aliases.contains(block_name)){
-						block_name = aliases.get(block_name);
-						var ty = blocktypes.get(block_name+"::type");
-						thisblock.replace("name",block_name);
-						thisblock.replace("type",ty);
-					}else if(thisblock.contains("substitute")&&blocktypes.contains(thisblock.get("substitute"))){
-						//use that then
-						block_name = thisblock.get("substitute");
-						post("\n",oname,"is not available in this hardware configuration. substituting:",block_name);
-						var oty = thisblock.get("type");
-						var ty = blocktypes.get(block_name+"::type");
-						thisblock.replace("name",block_name);
-						thisblock.replace("type",ty);
-						loading.hardware_substitutions_occured = 1;
-						swap_block_check_connections(b,oname,oty,block_name,ty);
-					}else if(loading.recent_substitutions.contains(block_name)){
-						loading.hardware_substitutions_occured = 1;
-						block_name = loading.recent_substitutions.get(block_name);
-						post("\n",oname," is not available in this hardware configuration but you already picked ",block_name," as a replacement");
-						var oty = thisblock.get("type");
-						var ty = blocktypes.get(block_name+"::type");
-						thisblock.replace("name",block_name);
-						thisblock.replace("type",ty);
-						swap_block_check_connections(b,oname,oty,block_name,ty);
-					}else if(menu.swap_block_target == -1){
-						post("\n",block_name,"was not found and no automatic substitution is known. please choose a substitue");
-						loading.hardware_substitutions_occured = 1;
-						menu.swap_block_target = block_name; //this isn't how it's used for swap, remember to set back to -1 when done.
-						loading.progress = b;
-						menu.camera_scroll=0;
-						menu.mode = 3;
-						initialise_block_menu(1);
-						//set_display_mode("block_menu"); //clicking a block on this page (the only option!) will send it back here with the answer, somehow
-						menu.search="";
-						displaymode="block_menu";
-						camera();
-						return -1;
-					}else{
-						post("loading selected susbstitute",menu.swap_block_target);
-						loading.hardware_substitutions_occured = 1;
-						block_name = menu.swap_block_target;
-						menu.swap_block_target = -1;
-						var oty = thisblock.get("type");
-						var ty = blocktypes.get(block_name+"::type");
-						thisblock.replace("name",block_name);
-						thisblock.replace("type",ty);
-						swap_block_check_connections(b,oname,oty,block_name,ty);
-					}
-					if((loading.hardware_substitutions_occured)&&(thisblock.contains("panel::parameters"))){
-						post("\nclearing panel parameter selection because of substitution");
-						thisblock.remove("panel::parameters");
-					}
-				}
-				t=0;
-				var excl = blocktypes.contains(block_name+"::exclusive");
-				//var type = blocktypes.get(block_name+"::type");
-				if(excl){
-					if(loading.wait>1) post("\nblock flagged as exclusive: searching for existing copy of ",block_name);
-					for(i=0;i<MAX_BLOCKS;i++){
-						if(blocks.get("blocks["+i+"]::name") == block_name){
-							post("found:",i)
-							t= 1;
-							loading.mapping[b] = i; //this next line stops orphaned bits of clock being left behind
-							if(thisblock.get("poly::voices")<blocks.get("blocks["+i+"]::poly::voices")) thisblock.replace("poly::voices",blocks.get("blocks["+i+"]::poly::voices"));
-							i=MAX_BLOCKS;
+			if(songs.contains(loading.songname+"::blocks["+b+"]::name")){
+				thisblock = songs.get(loading.songname+"::blocks["+b+"]");
+				if((thisblock != null) && (typeof thisblock == "object") && thisblock.contains("name")){
+					block_name = thisblock.get("name");
+					var oname = block_name;
+					if(loading.wait>1) post("\nloading block "+b+" : "+block_name);
+					if(!blocktypes.contains(block_name+"::type")){//this block doesn't exist in this installation/hardware config!
+						if(aliases.contains(block_name)){
+							block_name = aliases.get(block_name);
+							var ty = blocktypes.get(block_name+"::type");
+							thisblock.replace("name",block_name);
+							thisblock.replace("type",ty);
+						}else if(thisblock.contains("substitute")&&blocktypes.contains(thisblock.get("substitute"))){
+							//use that then
+							block_name = thisblock.get("substitute");
+							post("\n",oname,"is not available in this hardware configuration. substituting:",block_name);
+							var oty = thisblock.get("type");
+							var ty = blocktypes.get(block_name+"::type");
+							thisblock.replace("name",block_name);
+							thisblock.replace("type",ty);
+							loading.hardware_substitutions_occured = 1;
+							swap_block_check_connections(b,oname,oty,block_name,ty);
+						}else if(loading.recent_substitutions.contains(block_name)){
+							loading.hardware_substitutions_occured = 1;
+							block_name = loading.recent_substitutions.get(block_name);
+							post("\n",oname," is not available in this hardware configuration but you already picked ",block_name," as a replacement");
+							var oty = thisblock.get("type");
+							var ty = blocktypes.get(block_name+"::type");
+							thisblock.replace("name",block_name);
+							thisblock.replace("type",ty);
+							swap_block_check_connections(b,oname,oty,block_name,ty);
+						}else if(menu.swap_block_target == -1){
+							post("\n",block_name,"was not found and no automatic substitution is known. please choose a substitue");
+							loading.hardware_substitutions_occured = 1;
+							menu.swap_block_target = block_name; //this isn't how it's used for swap, remember to set back to -1 when done.
+							loading.progress = b;
+							menu.camera_scroll=0;
+							menu.mode = 3;
+							initialise_block_menu(1);
+							sidebar.mode="none";
+							//set_display_mode("block_menu"); //clicking a block on this page (the only option!) will send it back here with the answer, somehow
+							menu.search="";
+							displaymode="block_menu";
+							camera();
+							draw_menu_hint();
+							return -1;
+						}else{
+							post("loading selected susbstitute",menu.swap_block_target);
+							loading.hardware_substitutions_occured = 1;
+							block_name = menu.swap_block_target;
+							menu.swap_block_target = -1;
+							var oty = thisblock.get("type");
+							var ty = blocktypes.get(block_name+"::type");
+							thisblock.replace("name",block_name);
+							thisblock.replace("type",ty);
+							swap_block_check_connections(b,oname,oty,block_name,ty);
+						}
+						if((loading.hardware_substitutions_occured)&&(thisblock.contains("panel::parameters"))){
+							post("\nclearing panel parameter selection because of substitution");
+							thisblock.remove("panel::parameters");
 						}
 					}
-				}
-				/*var ui = blocktypes.get(block_name+"::block_ui_patcher");
-				if((t == 0) && (ui != "blank.ui") && (ui != "self")){
-					for(i=0;i<MAX_BLOCKS;i++){
-						if((loaded_ui_patcherlist[i] == ui) && (ui_patcherlist[i] == "recycling")){
-							post("\nrecycling ui and block number:",i,ui);
-							t= 1;
-							loading.mapping[b] = i;
-							//ui_patcherlist[i] = ui; //something muteouts 0? - if there's a mechanism to disable ui patchers then here you should enable..
-							i=MAX_BLOCKS;
+					t=0;
+					var excl = blocktypes.contains(block_name+"::exclusive");
+					//var type = blocktypes.get(block_name+"::type");
+					if(excl){
+						if(loading.wait>1) post("\nblock flagged as exclusive: searching for existing copy of ",block_name);
+						for(i=0;i<MAX_BLOCKS;i++){
+							if(blocks.get("blocks["+i+"]::name") == block_name){
+								post("found:",i)
+								t= 1;
+								loading.mapping[b] = i; //this next line stops orphaned bits of clock being left behind
+								if(thisblock.get("poly::voices")<blocks.get("blocks["+i+"]::poly::voices")) thisblock.replace("poly::voices",blocks.get("blocks["+i+"]::poly::voices"));
+								i=MAX_BLOCKS;
+							}
 						}
 					}
-				}*/
-				if(t==0){
-					loading.mapping[b] = next_free_block(block_name);
+					/*var ui = blocktypes.get(block_name+"::block_ui_patcher");
+					if((t == 0) && (ui != "blank.ui") && (ui != "self")){
+						for(i=0;i<MAX_BLOCKS;i++){
+							if((loaded_ui_patcherlist[i] == ui) && (ui_patcherlist[i] == "recycling")){
+								post("\nrecycling ui and block number:",i,ui);
+								t= 1;
+								loading.mapping[b] = i;
+								//ui_patcherlist[i] = ui; //something muteouts 0? - if there's a mechanism to disable ui patchers then here you should enable..
+								i=MAX_BLOCKS;
+							}
+						}
+					}*/
+					if(t==0){
+						loading.mapping[b] = next_free_block(block_name);
+					}
+					if(!excl){
+						song_select.current_blocks.push(loading.mapping[b]);
+						// exclusive blocks aren't added to the 'select merged song' button
+					}
+					blocks.replace("blocks["+loading.mapping[b]+"]",thisblock);
+					tx = blocks.get("blocks["+loading.mapping[b]+"]::space::x");
+					blocks.replace("blocks["+loading.mapping[b]+"]::space::x",tx+loading.xoffset);
+					if(!blocks.contains("blocks["+loading.mapping[b]+"]::label")) blocks.replace("blocks["+loading.mapping[b]+"]::label", block_name);
+					load_block(block_name,loading.mapping[b],songs.get(loading.songname+"::states::current::"+b)||[],excl);
 				}
-				if(!excl){
-					song_select.current_blocks.push(loading.mapping[b]);
-					// exclusive blocks aren't added to the 'select merged song' button
-				}
-				blocks.replace("blocks["+loading.mapping[b]+"]",thisblock);
-				tx = blocks.get("blocks["+loading.mapping[b]+"]::space::x");
-				blocks.replace("blocks["+loading.mapping[b]+"]::space::x",tx+loading.xoffset);
-				if(!blocks.contains("blocks["+loading.mapping[b]+"]::label")) blocks.replace("blocks["+loading.mapping[b]+"]::label", block_name);
-				load_block(block_name,loading.mapping[b],songs.get(loading.songname+"::states::current::"+b)||[],excl);
 			}
 		}
 		loading.progress=MAX_BLOCKS;
 		meters_updatelist.hardware = [];
 		meters_updatelist.meters = [];
 		meters_enable = 0;
+		if(sidebar.notification != null) set_sidebar_mode("notification");
 		center_view(1);
 		loading.ready_for_next_action=loading.wait;
 	}else if(loading.progress<MAX_BLOCKS+loading.mapping.length){
@@ -750,7 +759,7 @@ function import_song(){
 		do{ 
 			b=loading.progress-MAX_BLOCKS-loading.mapping.length;
 			if(loading.wait>1) post("\nloading connection number",b);
-			if(songs.contains(loading.songname+"::connections["+b+"]::from")){
+			if(songs.contains(loading.songname+"::connections["+b+"]::from::number")&&songs.contains(loading.songname+"::connections["+b+"]::conversion::mute")){
 				new_connection = songs.get(loading.songname+"::connections["+b+"]");
 				new_connection.replace("from::number", loading.mapping[new_connection.get("from::number")]);
 				new_connection.replace("to::number", loading.mapping[new_connection.get("to::number")]);
@@ -862,7 +871,7 @@ function import_song(){
 		if(displaymode=="blocks") blocks_enable(1);
 		redraw_flag.flag|=12;
 		rebuild_action_list=1;
-		messnamed("output_queue_pointer_reset","bang");
+		// messnamed("output_queue_pointer_reset","bang");
 		changed_queue_pointer = 0;
 		if(preload_list.length>0) try{preload_task.schedule(5000);}catch(err){post("\nerror rescheduling preload task");} //if you interupted preloading waves, just restart it in 5secs
 	}
@@ -1129,11 +1138,14 @@ function load_block(block_name,block_index,paramvalues,was_exclusive){
 			
 			if(i+1<paramvalues.length){
 				parameter_value_buffer.poke(1, MAX_PARAMETERS*block_index +i,paramvalues[i+1]);
+				voice_parameter_buffer.poke(1, MAX_PARAMETERS*new_voice +i,paramvalues[i+1]);
 				param_defaults[block_index][i] = paramvalues[i+1]; //p_default; << new blocks the default is the default, when you load a song the default is the startup value of that param in the song instead.
 			}else{ // in the rare case that you've added some paramters to a block it should still load saves without errors.
 				parameter_value_buffer.poke(1, MAX_PARAMETERS*block_index +i,p_default);
+				voice_parameter_buffer.poke(1, MAX_PARAMETERS*new_voice +i,p_default);
 				param_defaults[block_index][i] = p_default;
 			}
+			changed_flags.poke(1,new_voice,1);
 			write_parameter_info_buffer(p_values,p_type,MAX_PARAMETERS*block_index+i);
 		}		
 	}
@@ -1325,7 +1337,7 @@ function save_song(selectedonly, saveas){ //saveas == 1 -> prompt for name
 	}
 //copy blocks and connections and states and properties into one dict
 	loading.save_wait_count = 0;
-	if(loading.songpath==undefined) loading.songpath="";
+	if(loading.songpath==undefined) loading.songpath=SONGS_FOLDER;
 	if(selectedonly){
 		//post("\nsaving selection only");
 		loading.save_type = "selected";
@@ -1353,13 +1365,16 @@ function check_its_safe_to_save(){
 		loading.save_waitlist=[];
 	}
 	if(loading.save_waitlist.length == 0){
+		if(loading.songpath.slice(-1)!="/")loading.songpath=loading.songpath+"/";
+		post("\nsongpath:",loading.songpath);
+		post("\nsongname:",loading.songname);
 		post("\nall store routines complete, finalising save");
 		if(loading.save_type=="selected"){
-			post(" selected");
+			post("selected");
 			messnamed("trigger_save_selected", "bang");
 			timed_sidebar_notification("saved as "+loading.songname,2000);
 		}else if(loading.save_type=="named"){
-			post(" as:",loading.songpath+loading.songname);
+			post("as:",loading.songpath+loading.songname);
 			messnamed("save_named",loading.songpath+loading.songname);
 			timed_sidebar_notification("saved as "+loading.songname,2000);
 			for(var i =0;i<MAX_BLOCKS;i++) if(record_arm[i]) send_record_arm_messages(i); //update filenames of audio recorders
@@ -1479,10 +1494,19 @@ function write_userconfig(){
 }
 
 function file_written(fname){//called when max reports successfully saving the current song dict so we have the filename
-	loading.object_target = fname;
-	loading.songname = fname.split("/").pop();
-	post("\nsave as set obj target to",loading.object_target);
+	if((fname.indexOf("/")<0)){ // the max dict object reports full filename & path for a save as, but if the file exists it just reports the name.. this is workaround for that 
+		//don't update loading.object_target, it's just a save not a saveas
+		loading.object_target = loading.songpath+fname;
+		// post("\nobj target is still",loading.object_target);
+	}else{
+		loading.object_target = fname;
+		loading.songname = fname.split("/").pop();
+		loading.songpath = fname.split(loading.songname)[0];
+		// post("\nfname returned from max is",fname,"so songname is ",loading.songname,"and path is",loading.songpath);
+	}
+	// post("\nsave as set obj target to",loading.object_target);
 }
+
 function select_recent_folder(name,blank){
 	SONGS_FOLDER = name;
 	var recent_folders=[];
@@ -1645,8 +1669,8 @@ function clear_everything(){
 	messnamed("pause_mod_processing",1);
 	//messnamed("clear_all_buffers","bang"); 
 	//you don't need to do this, everything that gets loaded or created will overwrite these buffers
-	output_queue.poke(1,0,0);
-	messnamed("output_queue_pointer_reset","bang");
+	// output_queue.poke(1,0,0);
+	// messnamed("output_queue_pointer_reset","bang");
 	changed_queue.poke(1,0,0);
 	changed_queue_pointer = 0;
 	redraw_flag.paneltargets = [];
@@ -1700,6 +1724,7 @@ function clear_everything(){
 		record_arm[i]=0;
 	}
 	selected.anysel = 0;
+	patternpage.quantise_and_hold = 0;
 	still_checking_polys = 0;//7;
 	loading.songname = "#reset#";
 	send_note_patcherlist(1);
@@ -1710,7 +1735,10 @@ function clear_everything(){
 	patternpage.column_block = [];
 	undo_stack.parse('{ "history" : [ {}, {} ] }');
 	redo_stack.parse('{ "history" : [ {}, {} ] }');
-
+	var seqdict = new Dict;
+	seqdict.name = "core-keyb-loop-xfer";
+	seqdict.parse('{}');
+	
 	draw_wave = [];
 	for(i=0;i<128;i++){
 		quantpool.poke(1, i, i);
@@ -1757,7 +1785,7 @@ function clear_everything(){
 	//messnamed("update_midi_routemap","bang");
 	messnamed("MAX_NOTE_VOICES",MAX_NOTE_VOICES);
 
-	sigouts.message("setvalue", 0,0); // clear sigs
+	messnamed("clear_mtoa","bang");
 	song_select.previous_name="";
 	song_select.previous_blocks=[];
 	song_select.current_blocks=[];
@@ -1778,7 +1806,7 @@ function clear_everything(){
 function write_blockipedia(){
 	var k = blocktypes.getkeys();
 	var type_order = config.get("type_order");
-	var blocki = new File("C:/Users/jhold/Documents/GitHub/BennyDocs/docs/blockipedia.md", "write"); 
+	var blocki = new File("C:/Users/jhold/Documents/GitHub/benny_manual/docs/blockipedia.md", "write"); 
 	blocki.open();
 	blocki.writeline("# Blockipedia");
 	blocki.writeline("");

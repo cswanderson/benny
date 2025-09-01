@@ -59,7 +59,7 @@ var cursors = new Array(128); //holds last drawn position of playheads (per row)
 // 1 - length (*128+1)
 // 2 - playhead position (updated by player voice)
 // 3-131? data values
-function setup(x1,y1,x2,y2,sw){ //has screen width too so it can plot a little fx/waveform hint window bottom right
+function setup(x1,y1,x2,y2,sw,mode){ //has screen width too so it can plot a little fx/waveform hint window bottom right
 //	post("drawing sequencers");
 	menucolour = config.get("palette::menu");
 	MAX_DATA = config.get("MAX_DATA");
@@ -71,12 +71,7 @@ function setup(x1,y1,x2,y2,sw){ //has screen width too so it can plot a little f
 	x_pos = x1;
 	y_pos = y1;
 	showcols=Math.floor(2*width/height);
-	if(width<500){ 
-		post("width",width);
-		mini=1;
-	}else{
-		mini=0;
-	}
+	mini=(mode=="mini")|0;
 	unit = height / 18;
 	display_row_offset = 0;
 	display_col_offset = 0;
@@ -381,8 +376,8 @@ function keydown(key){
 			}
 			draw();
 			break;
-		case -8:
-			//insert
+		case -8: //insert
+		case 361: //ctrl-i
 			for(i=128;i>cursory;i--){
 				var rowvalues = voice_data_buffer.peek(1, MAX_DATA*v_list[cursorx]+3+6*(i-1),6);
 				voice_data_buffer.poke(1, MAX_DATA*v_list[cursorx]+3+6*i,rowvalues);

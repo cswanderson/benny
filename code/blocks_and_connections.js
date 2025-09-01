@@ -359,7 +359,7 @@ function write_parameter_info_buffer(p_values, p_type, index) {
 	var p_max = p_values[2];
 	var p_curve = p_values[3];
 	var p_steps = 0;
-	if ((p_type == "menu_i") || (p_type == "menu_b") || (p_type == "menu_l") || (p_type == "menu_d")) {
+	if ((p_type == "menu_i") || (p_type == "menu_b") || (p_type == "menu_l") || (p_type == "menu_d") || (p_type == "scale")) {
 		p_min = 0;
 		p_steps = p_values.length; //details.getsize("parameters["+i+"]::values");
 		p_max = p_steps - 1;
@@ -581,8 +581,10 @@ function poly_loaded(type,number){
 	var t = still_checking_polys>0;
 	//post("poly loaded voice successfully",type,number,"\n");
 	if(type=="audio"){
+		changed_flags.poke(1,number+MAX_NOTE_VOICES,1);
 		if(still_checking_polys&2){ send_audio_patcherlist(); }
 	}else if(type=="note"){
+		changed_flags.poke(1,number,1);
 		if(still_checking_polys&1){ send_note_patcherlist(); }
 		//	send_note_patcherlist();
 	}else if(type=="ui"){
@@ -1405,7 +1407,8 @@ function remove_connection(connection_number){
 						mod_buffer.poke(1, tmod_id, 0);
 						remove_from_mod_routemap(tvv,tmod_id); 
 						remove_routing(connection_number);
-						sigouts.message("setvalue", tvv+1,0);
+						// sigouts.message("setvalue", tvv+1,0);
+						mtoa_buffer.poke(1,tvv,0);
 					}else if((t_type == "midi") || (t_type == "block")){
 						//this is a midi-midi connection for a single voice
 						remove_routing(connection_number);
@@ -1478,7 +1481,8 @@ function remove_connection(connection_number){
 						mod_buffer.poke(1, tmod_id, 0);
 						remove_from_mod_routemap(tvv,tmod_id); 
 						remove_routing(connection_number);
-						sigouts.message("setvalue", tvv+1,0);
+						// sigouts.message("setvalue", tvv+1,0);
+						mtoa_buffer.poke(1,tvv,0);
 					}else if((t_type == "midi") || (t_type == "block")){
 						//this is a midi-midi connection for a single voice
 						remove_routing(connection_number);
@@ -1733,7 +1737,7 @@ function make_connection(cno,existing){
 		max_poly = blocktypes.get(f_name+"::max_polyphony");
 		varr = blocktypes.get(f_name+"::connections::out::hardware_channels");
 		//post("\navailable hw voice out channels:", varr, "max poly", max_poly, "f_voice_list",f_voice_list);
-		hw_mute = blocks.get("blocks["+f_block+"]::mute");
+		hw_mute |= blocks.get("blocks["+f_block+"]::mute");
 		if(!Array.isArray(varr)) varr = [varr];
 		if(max_poly>1){
 			if(f_voice_list == "all"){
@@ -1811,6 +1815,7 @@ function make_connection(cno,existing){
 	}else if(t_type == "hardware"){ // work out which polyvoices/matrix slots correspond
 		max_poly = blocktypes.get(blocks.get("blocks["+t_block+"]::name")+"::max_polyphony");
 		varr = blocktypes.get(blocks.get("blocks["+t_block+"]::name")+"::connections::in::hardware_channels");
+		hw_mute |= blocks.get("blocks["+t_block+"]::mute");
 		if(!Array.isArray(varr)) varr = [varr];
 		if(max_poly>1){
 			if(t_voice_list == "all"){
@@ -2133,7 +2138,6 @@ function make_connection(cno,existing){
 								var offv = offs[1];
 							}
 							var vect = conversion.get("vector");
-							vvv += MAX_MOD_IDS * m_index;
 							set_routing(f_voice,f_o_no,enab,3,6,tmod_id,t_i_no,scale*Math.sin(Math.PI*vect*2),scale*Math.cos(Math.PI*vect*2),offn*256-128,offv*256-128,cno,v);
 						}else if(t_type == "midi"){
 							//this is a midi-midi connection for a single voice
@@ -2277,7 +2281,6 @@ function make_connection(cno,existing){
 							}
 							var vect = conversion.get("vector");
 							*/
-							vvv += MAX_MOD_IDS * m_index;
 							set_routing(f_voice,f_o_no,enab,1,6,tmod_id,t_i_no,0,scale,0,0,cno,v);
 						}else if(t_type == "midi"){
 							//this is a param-midi connection for a single voice
@@ -2424,7 +2427,7 @@ function build_new_connection_menu(from, to, fromv,tov){
 	
 	sidebar.connection.default_out_applied = 0;
 	sidebar.connection.default_in_applied = 0;
-	var spreadwide = 0;
+	var defaultSpread = 0;
 	var is_explicitly_not_notes = 0;
 	var d = new Dict;
 	d = blocktypes.get(fromname);
@@ -2491,15 +2494,14 @@ function build_new_connection_menu(from, to, fromv,tov){
 		}else{
 			new_connection.replace("from::voice", "all" );
 			if(tov==-1){
-				if(fpoly*f_subvoices==tpoly*t_subvoices) spreadwide = 1;
-				//post("\nspreadW",spreadwide);
+				if(fpoly==tpoly) defaultSpread = 1;
 			}
 		}
 	}else{
 		new_connection.replace("from::voice", fromv + 1 );
 	}
-	if(spreadwide){
-		if((fpoly==1)||(tpoly==1)) spreadwide = 0;
+	if(defaultSpread){
+		if((fpoly==1)||(tpoly==1)) defaultSpread = 0;
 	}
 	sidebar.connection.default_in_applied = 0;
 	d = blocktypes.get(toname);
@@ -2513,7 +2515,7 @@ function build_new_connection_menu(from, to, fromv,tov){
 					new_connection.replace("to::input::number",0);
 				}
 				new_connection.replace("to::input::type","hardware");
-				new_connection.replace("conversion::offset", spreadwide);
+				new_connection.replace("conversion::offset", defaultSpread);
 				new_connection.replace("conversion::offset2", 0.5);
 			}else if(sidebar.connection.default_out_applied==1){
 				new_connection.replace("conversion::offset", 0.5);
@@ -2530,7 +2532,7 @@ function build_new_connection_menu(from, to, fromv,tov){
 					new_connection.replace("to::input::number",0);
 				}
 				new_connection.replace("to::input::type","audio");
-				new_connection.replace("conversion::offset", spreadwide);
+				new_connection.replace("conversion::offset", defaultSpread);
 				new_connection.replace("conversion::offset2", 0.5);
 			}else if(sidebar.connection.default_out_applied==1){
 				new_connection.replace("conversion::offset", 0.5);
@@ -2802,7 +2804,7 @@ function voicecount(block, voices){     // changes the number of voices assigned
 	}
 	if(voices>max_v) {
 		voices=max_v;
-		post("max polyphony = "+max_v+"\n");
+		post("\nmax polyphony = "+max_v+" but "+voices+" were requested. things may go wrong now. sorry.");
 	}
 	//if((details.get("patcher")=="vst.loader") && (max_v>0)) vst=1;
 	if(voices == v) return 1;
@@ -3259,9 +3261,9 @@ function swap_connection_destination(cno,newblock,newblockname,newvoice){
 		post("matching input type not found, next best chosen");
 	}
 	// so what i'm calling i_no and o_no are actually type number, not output number. 
-	var defaultpos=0;
-	var ftt = ((f_type == "hardware") || (f_type == "matrix")) ? "audio" : f_type;
-	var ttt = ((t_type == "hardware") || (t_type == "matrix")) ? "audio" : t_type;
+	// var defaultpos=0;
+	// var ftt = ((f_type == "hardware") || (f_type == "matrix")) ? "audio" : f_type;
+	// var ttt = ((t_type == "hardware") || (t_type == "matrix")) ? "audio" : t_type;
 	//if((ftt != intypes[i_no])&&(outtypes[o_no]==ttt))defaultpos = 1;
 	//if((ftt == intypes[i_no])&&(outtypes[o_no]!=ttt))defaultpos = 2;
 	new_connection.parse('{}');
@@ -3468,7 +3470,6 @@ function insert_block_in_connection(newblockname,newblock){
 	new_connection.clear();
 	//click_clear(0,0);
 	//outlet(8,"bang");
-	set_display_mode("blocks");
 	var usz=undo_stack.getsize("history")|0;
 	undo_stack.append("history",'{}');
 	undo_stack.setparse("history["+usz+"]", '{ "connections" : { } }');
@@ -3476,6 +3477,7 @@ function insert_block_in_connection(newblockname,newblock){
 	undo_stack.replace("history["+usz+"]::connections::"+menu.connection_number,connections.get("connections["+menu.connection_number+"]"));
 	remove_connection(menu.connection_number);
 	selected.block[newblock]=1;
+	set_display_mode("blocks");
 	redraw_flag.flag |= 4;	
 }
 
@@ -3798,10 +3800,10 @@ function build_mod_sum_action_list(){
 	mod_sum_action_list.poke(3,list_pointer,-1);
 	mod_sum_action_list.poke(4,list_pointer,-1);
 	list_pointer++;	
-	output_queue.poke(1,0,0);
+	// output_queue.poke(1,0,0);
 	//ttt = new Date().getTime() - ttt;
 	//post("\nMSA LIST MADE IN ",ttt);
-	messnamed("output_queue_pointer_reset","bang");
+	// messnamed("output_queue_pointer_reset","bang");
 	changed_queue.poke(1,0,0);
 	changed_queue_pointer = 0; 
 	messnamed("modulation_processor", "pause", 0); //this message gets deferred (in the max patch) otherwise the gen doesn't get a frame to realise that pause has changed to 1 and back
@@ -3826,9 +3828,12 @@ function spawn_player(keyblock,auto){
 	//   work out which lanes relevant
 	//   copy over to new block
 	//stop n wipe
+	// new layer of complication, the controller / grid / etc blocks will also call this fn.
+	var type = "control";
+	if(blocks.get("blocks["+keyblock+"]::name")=="core.input.keyboard") type = "keyboard";
 	var xfer = new Dict;
 	xfer.name = "core-keyb-loop-xfer";
-	post("\nwas"+((auto==0)? "n't":"")+" automapped. spawning a player block.");
+	post("\ngrabbing "+type+" loop. was"+((auto==0)? "n't":"")+" automapped.");
 	if(auto==0){
 		clear_blocks_selection();
 		var usedouts = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -3845,7 +3850,7 @@ function spawn_player(keyblock,auto){
 					}
 				}else{
 					var event = seqdict.get(k[i]);
-					seqdict.replace(k[i], [ event[2], 0, 0, event[2] ]);//original pattern length (beats), start,loopstart,loopend
+					seqdict.replace(k[i], [ 256, event[0], event[1], event[2] ]);//original pattern length (beats), start,loopstart,loopend
 				}
 			}
 			post("\nrecorded data is in ",uoc," lanes");
@@ -3854,18 +3859,38 @@ function spawn_player(keyblock,auto){
 					//now, look through connections, find the first connection from this output
 					var conn_count = 0;
 					var playerblock = -1;
-					post("\nlooking for connections on lane ",o);
+					var co = o;
+					if(type == "control") co = automap.targetslist[o-1];
+					post("\nlooking for connections on lane ",co);
 					for(var c = connections.getsize("connections")-1;c>=0;c--){
-						if((connections.contains("connections["+c+"]::from"))&&(connections.get("connections["+c+"]::from::number")==keyblock)&&((connections.get("connections["+c+"]::from::output::number")==o))&&(blocks.get("blocks["+(connections.get("connections["+c+"]::to::number"))+"]::name")!="seq.piano.roll")){
+						if((connections.contains("connections["+c+"]::from"))&&(connections.get("connections["+c+"]::from::number")==keyblock)&&((connections.get("connections["+c+"]::from::output::number")==co))&&(blocks.get("blocks["+(connections.get("connections["+c+"]::to::number"))+"]::name")!="seq.piano.roll")){
 							if(conn_count==0){
 								//insert a player block in it
-								post("\nspawning a player for output ",o,"connection",c);
+								post("\nspawning a player for output ",co,"connection",c);
 								menu.connection_number = c; 
 								var to = (connections.get("connections["+c+"]::to::number"));
 								var tx = blocks.get("blocks["+to+"]::space::x");
 								var ty = blocks.get("blocks["+to+"]::space::y")+0.5;
 								make_space(tx,ty,1.2);
 								var playerblock = new_block("seq.piano.roll",tx,ty);
+								if(!blocks.contains("blocks["+playerblock+"]::patterns::names")){
+									var pn = [];
+									for(var pni=0;pni<16;pni++)pn.push("");
+									blocks.replace("blocks["+playerblock+"]::patterns::names",pn);
+								}
+								var lbl=blocks.get("blocks["+to+"]::label");
+								if(lbl==blocks.get("blocks["+to+"]::name")){
+									lbl = blocks.get("blocks["+to+"]::label").split(".");
+									lbl.splice(0,1);
+									lbl.join(".");
+								}
+								if(type=="control"){
+									blocks.replace("blocks["+playerblock+"]::label", "mod to."+lbl);
+									blocks.replace("blocks["+playerblock+"]::patterns::names[0]", "rec mod");
+								}else{
+									blocks.replace("blocks["+playerblock+"]::label", "keys to."+lbl);
+									blocks.replace("blocks["+playerblock+"]::patterns::names[0]", "rec keys");
+								}
 								//copy the relevant bit of sequence into the new block
 								if(!proll.contains(playerblock)) proll.setparse(playerblock, "{}");
 								if(!proll.contains(playerblock+"::0")) proll.setparse(playerblock+"::0", "{}");
@@ -3878,11 +3903,22 @@ function spawn_player(keyblock,auto){
 										}else if((event[1] == o)){//||((o==0) && (event[1] == 1))){//OR it's 1 and o==0?
 											proll.replace(playerblock+"::0::"+k[i],event);
 										}
-										post(".."+k[i]);
+										// post("\n--"+k[i]);
 									}
 								}							
 								draw_block(playerblock);
-								insert_block_in_connection("seq.piano.roll",playerblock);
+								if(type == "control"){
+									new_connection = connections.get("connections["+c+"]");
+									new_connection.replace("from::number",playerblock);
+									new_connection.replace("from::output::number",0);
+									new_connection.replace("from::voice","all");
+									connections.append("connections",new_connection);
+									make_connection(connections.getsize("connections")-1,0);
+									redraw_flag.flag |= 4;	
+									//insert_block_in_connection("seq.piano.roll",playerblock);
+								}else{
+									insert_block_in_connection("seq.piano.roll",playerblock);
+								}
 								v = voicemap.get(playerblock);
 								if(Array.isArray(v)) v = v[0];
 								post("prompting the new block in voice ",v);
@@ -3909,23 +3945,24 @@ function spawn_player(keyblock,auto){
 					}
 				}
 			}
-			//now delete the sequence from the keyboard block
-			request_set_block_parameter(keyblock,5,0);
+			if(type=="control"){//delete loop from control block
+				//this happens in the looper in the control block
+			}else{
+				//now delete the sequence from the keyboard block
+				request_set_block_parameter(keyblock,5,0);
+			}
 		}
 	}else{
 		//it was automapped: look up where the automap went and make a new connection
-		post("\nautomapped to:",automap.mapped_k,automap.inputno_k);
+		// post("\nautomapped to:",automap.mapped_k,automap.inputno_k);
 		var to = automap.mapped_k;
 		
 		new_connection.parse('{}');
 		new_connection.replace("to::number", +to);
-		new_connection.replace("from::output::number",0);
 		new_connection.replace("from::voice","all");
 		new_connection.replace("to::voice","all");
-		new_connection.replace("from::output::type","midi");
-		new_connection.replace("to::input::number",automap.inputno_k);
-		new_connection.replace("to::input::type","midi");
-		
+		new_connection.replace("from::output::type",(type=="control") ? "parameters" : "midi");
+
 		new_connection.replace("conversion::mute" , 0);
 		new_connection.replace("conversion::scale", 1);
 		new_connection.replace("conversion::vector", 0);	
@@ -3937,7 +3974,26 @@ function spawn_player(keyblock,auto){
 		make_space(tx,ty,1.2);
 		clear_blocks_selection();
 		var playerblock = new_block("seq.piano.roll",tx,ty);
+		if(!blocks.contains("blocks["+playerblock+"]::patterns::names")){
+			var pn = [];
+			for(var pni=0;pni<16;pni++)pn.push("");
+			blocks.replace("blocks["+playerblock+"]::patterns::names",pn);
+		}
+		if(type=="control"){
+			blocks.replace("blocks["+playerblock+"]::label", "mod to."+blocktypes.get(blocks.get("blocks["+to+"]::name")+"::parameters["+(automap.targetslist[0] - MAX_PARAMETERS * to)+"]::name"));
+			blocks.replace("blocks["+playerblock+"]::patterns::names[0]", "rec mod");
+		}else{
+			var lbl=blocks.get("blocks["+to+"]::label");
+			if(lbl==blocks.get("blocks["+to+"]::name")){
+				lbl = blocks.get("blocks["+to+"]::label").split(".");
+				lbl.splice(0,1);
+				lbl.join(".");
+			}
+			blocks.replace("blocks["+playerblock+"]::label", "keys to."+lbl);
+			blocks.replace("blocks["+playerblock+"]::patterns::names[0]", "rec keys");
+		}
 		new_connection.replace("from::number", +playerblock);
+
 		//copy the relevant bit of sequence into the new block
 		if(!proll.contains(playerblock)) proll.setparse(playerblock, "{}");
 		if(!proll.contains(playerblock+"::0")) proll.setparse(playerblock+"::0", "{}");
@@ -3949,17 +4005,33 @@ function spawn_player(keyblock,auto){
 				var event = seqdict.get(k[i]);
 				if(event != null){
 					if(k[i]=="looppoints"){
-						proll.replace(playerblock+"::0::looppoints",[event[2], 0,0, event[2]]);
-					}else if(event[1] == 0){//OR it's 1 and o==0? it's automapk so you know o =0,1
+						proll.replace(playerblock+"::0::looppoints",[256, event[0],event[1], event[2]]);
+					}else{// if(event[1] != 1){//OR it's 1 and o==0? it's automapk so you know o =0,1
 						proll.replace(playerblock+"::0::"+k[i],event);
 					}
-					post(".."+k[i]);
+					// post("\n.."+k[i]+" : "+event);
 				}
 			}							
 		}
+		post("\ncopy complete");
 		draw_block(playerblock);
-		connections.append("connections", new_connection);
-		make_connection(connections.getsize("connections")-1,0);
+
+		if(type=="control"){
+			for(var co=0;co<automap.targetslist.length;co++){
+				new_connection.replace("from::output::number",co);
+				new_connection.replace("to::input::number",automap.targetslist[co] - MAX_PARAMETERS * to);
+				new_connection.replace("to::input::type","parameters");
+				connections.append("connections", new_connection);
+				make_connection(connections.getsize("connections")-1,0);
+			}
+		}else{
+			new_connection.replace("from::output::number",0);
+			new_connection.replace("to::input::number",automap.inputno_k|0);
+			new_connection.replace("to::input::type","midi");
+			connections.append("connections", new_connection);
+			make_connection(connections.getsize("connections")-1,0);
+		}
+		
 		v = voicemap.get(playerblock);
 		if(Array.isArray(v)) v = v[0];
 		post("prompting the new block in voice ",v);
@@ -4370,3 +4442,7 @@ function encapsulate_selection(name){
 	selected.block[new_encapsulated_blockno] = 1;
 	redraw_flag.flag |= 4;
 }
+
+function flag_all_changed(){
+	for(var i=0;i<MAX_AUDIO_VOICES+MAX_NOTE_VOICES;i++) changed_flags.poke(1,i,1);
+} 

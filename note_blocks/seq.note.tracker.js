@@ -52,7 +52,7 @@ var mainfont;
 // - delay (in ms?)
 // - probability (0=blank, 100%, positive = ratchet, negative = probability)
 // - grouping (if 0 step is ungrouped. if negative then this step + that number = the first step of the group, where the current loop counter is stored as a positive number - 1=1st step.)
-function setup(x1,y1,x2,y2,sw){ 
+function setup(x1,y1,x2,y2,sw,mode){ 
 	MAX_DATA = config.get("MAX_DATA");
 	UNIVERSAL_COLUMNS = config.get("UNIVERSAL_COLUMNS");
 	UNIVERSAL_PATTERNS = config.get("UNIVERSAL_PATTERNS");
@@ -66,7 +66,7 @@ function setup(x1,y1,x2,y2,sw){
 	height = y2-y1;
 	x_pos = x1;
 	y_pos = y1;
-	if(width<sw*0.6){ 
+	if(mode=="mini"){ 
 		mini=1;
 		if(block>=0) generate_extended_v_list();
 		showcols = v_list.length;
@@ -940,8 +940,8 @@ function keydown(key){
 			//del (delete does what . does)
 			delete_selection();
 			break;
-		case -8:
-			//insert
+		case -8: //insert
+		case 361: //ctrl-i
 			for(i=max_rows-1;i>cursory;i--){
 				var rowvalues = voice_data_buffer.peek(1, MAX_DATA*v_list[cursorx]+1+pattern_offs[cursorx]+UNIVERSAL_COLUMNS*(i-1),UNIVERSAL_COLUMNS);
 				voice_data_buffer.poke(1, MAX_DATA*v_list[cursorx]+1+UNIVERSAL_COLUMNS*i+pattern_offs[cursorx],rowvalues);
@@ -973,7 +973,7 @@ function keydown(key){
 		case 355: //ctl-c
 			copy_selection();
 			break;
-		case 361: //ctl-I (interpolate)
+		case 370: //ctl-r (interpolate ramp)
 			if((sel_sy!=sel_ey)&&(sel_ey>-1)){
 				var v1 = voice_data_buffer.peek(1, MAX_DATA*v_list[sel_sx]+1+UNIVERSAL_COLUMNS*(sel_sy)+sel_sx2+pattern_offs[sel_sx]);
 				var v2 = voice_data_buffer.peek(1, MAX_DATA*v_list[sel_ex]+1+UNIVERSAL_COLUMNS*(sel_ey)+sel_ex2+pattern_offs[sel_sx]);

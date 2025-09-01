@@ -1,0 +1,71 @@
+{
+	"utility.audio.logic" : {
+		"patcher" : "utility.audio.logic",
+		"type" : "audio",
+		"help_text" : "Logic block, all the classic logic functions! works on audio/cv signals, use midi.logic if you're processing midi. the smoothing control prevents the aliasing you get with on/off signals in digital, and works as a crude octave divider at extreme amounts.",
+		"max_polyphony" : 0,
+		"upsample" : 1,
+		"connections" : {
+			"in" : { 
+				"audio" : [ "in A", "in B" ]
+			},
+			"out" : {
+				"audio" : [ "out" ],
+				"midi" : [ "out", "NOT out" ],
+				"midi_watched" : [ 1 ]
+			}
+		},
+		"groups" : [
+			{ 
+				"contains" : [0,0,1,2,3,4,5,5]
+			}
+		],
+		"parameters" : [
+			{
+				"name" : "mode",
+				"type" : "menu_l",
+				"columns" : 1,
+				"values" : ["AND", "OR", "XOR", "NAND" ],
+				"wrap" : 0,
+				"default" : 0.1
+			},
+			{
+				"name" : "A threshold",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0.5,
+				"error_scale" : 0
+			},
+			{
+				"name" : "B threshold",
+				"type" : "float",
+				"values" : ["bi", -1, 1, "lin"],
+				"wrap" : 0,
+				"default" : 0.5,
+				"error_scale" : 0
+			},
+			{
+				"name" : "input smoothing",
+				"type" : "float",
+				"values" : ["uni", 0, 1, "exp1000"],
+				"wrap" : 0,
+				"default" : 0
+			},
+			{
+				"name" : "output",
+				"type" : "menu_l",
+				"values" : ["uni", "bi" ],
+				"wrap" : 0,
+				"default" : 0.6
+			},
+			{
+				"name" : "smooth",
+				"type" : "float",
+				"values" : ["uni", 1, 0.000001, "exp.001" ],
+				"wrap" : 0,
+				"default" : 0.04
+			}
+		]
+	}
+}

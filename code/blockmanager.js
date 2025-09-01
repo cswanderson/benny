@@ -37,13 +37,12 @@ var LONG_PRESS_TIME = 800;
 var SLIDER_CLICK_SET = 0;
 var SCOPE_DEFAULT_ZOOM = 0.65;
 var SHOW_STATES_ON_PANELS = 1;
+var SHOW_KEYBOARD_AUTOMAP_CONNECT_BUTTON = 0;
 var BLOCK_TEXTURE_SIZE = 128;
 var UPSAMPLING = 1;
 var RECYCLING = 1;
 var MODULATION_IN_PARAMETERS_VIEW = 1;
 var AUTOZOOM_ON_SELECT = 1;
-var BLOCKS_GRID = [100, 0.01];
-var BLOCK_MENU_CLICK_ACTION = "click";
 var CTRL_VOICE_SEL_MOMENTARY = 1;
 var SHOW_STATES_ON_PANELS = 1;
 var TARGET_FPS = [30, 5];
@@ -57,6 +56,7 @@ var MUTEDWIRE = [0.16,0.16,0.14, 1];
 var SOUNDCARD_HAS_MATRIX = 0;
 var EXTERNAL_MATRIX_PRESENT = 0;
 var pattern_recall_timing_quantise = "1n";
+var STATE_FADE_DRAG_THRESHOLD = 20; // number of px of drag before state button converts into a slider
 
 var quantised_event_list = [];
 
@@ -156,7 +156,7 @@ function thispatcherstuff(){
 	note_poly = this.patcher.getnamed("note_poly");
 	audio_poly = this.patcher.getnamed("audio_poly");
 	audio_to_data_poly = this.patcher.getnamed("audio_to_data_poly");
-	sigouts = this.patcher.getnamed("sigouts");
+	sigouts = this.patcher.getnamed("smoothsigouts");
 	matrix = this.patcher.getnamed("matrix");
 	world = this.patcher.getnamed("world");
 	lcd_main = this.patcher.getnamed("lcd_main");
@@ -183,12 +183,13 @@ var mod_buffer = new Buffer("mod_buffer"); //filled according to 'id' which just
 var parameter_static_mod = new Buffer("voice_static_mod_buffer"); //holds per voice tweaks to parameter values
 var mod_sum_action_list = new Buffer("mod_sum_action_list"); //this is a list of things to add up and where they go, for modulation. the list is redone every time it might've changed, eg blocks added, flocks changed, connections added/removed
 var rebuild_action_list = 0;
-var output_queue = new Buffer("output_queue"); //this is a list of things for the js to do that the gen code updates - hw midi out, sigs
+// var output_queue = new Buffer("output_queue"); //this is a list of things for the js to do that the gen code updates - hw midi out, sigs
 var changed_queue = new Buffer("changed_queue"); //params that have changed for ui updates
 //var output_queue_pointer = 0;
 var changed_queue_pointer = 0;
+var changed_flags = new Buffer("changed_flags"); //flags per voice for param changes
 var mtoa_buffer = new Buffer("mtoa_sigs"); //eventually i think this could be only accessed from a gen output queue checker but for now it's in clocked js
-
+var indexpool_buffer = new Buffer("INDEXPOOL"); // for scale lookup
 var parameter_error_spread_buffer = new Buffer("parameter_error_spread_buffer"); //indexed by MAX_PARAMETERS * voice + paramno, this is the random spread values added to each voice's params
 var routing_buffer = new Buffer("routing"); //replaces conversion buffer
 	//index of this is 9 *( index + max_connections_per_output * (outputno + voiceno * max_outputs_per_voice ) )
@@ -380,6 +381,8 @@ var ext_sync = {
 	link_enabled : 0
 };
 
+var scalesblock = -1;
+
 var automap = {
 	available_c : -1,
 	voice_c : -1,
@@ -407,6 +410,8 @@ var automap = {
 	lock_c : 0,
 	lock_k : 0,
 	lock_q : 0,
+	looping_c : 0,
+	looping_k : 0,
 	colours_c : {
 		darkest : [],
 		dark : [],
@@ -517,7 +522,8 @@ var usermouse = {
 		dragging : {
 			connections : [],
 			voices : []
-		}
+		},
+		target_wire_for_insertion: -1
 	}
 }
 
@@ -616,7 +622,14 @@ var patternpage = { // info to help draw pattern page fast
 	cursor_divisor : [], // 1/length;
 	column_ends_x : [], //list of ends (start, end of voice 1, .. ,end of last voice) - so v+1 entries.
 	held_state_fires : [],
-	held_pattern_fires: [] //to indicate when a pattern etc is held via shift key..
+	held_pattern_fires: [], //to indicate when a pattern etc is held via shift key..
+	quantise_and_hold: 0 //or by midi, flagged here.
+}
+
+var capture = {
+	keyboard : 0,
+	controller : 0,
+	target : null //which controller
 }
 
 var y_offset;

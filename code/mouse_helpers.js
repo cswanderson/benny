@@ -88,8 +88,10 @@ function resync_button(){
 
 function panic_button(){
 	messnamed("panic","bang");
+	patternpage.quantise_and_hold = 0;
 	build_mod_sum_action_list();
-	sigouts.message("setvalue", 0,0); //clears midi-audio sig~
+	flag_all_changed();
+	// sigouts.message("setvalue", 0,0); //clears midi-audio sig~
 	//for(var i=0;i<param_error_lockup.length;i++) param_error_lockup[i]=0; //frees any voice panel lockups
 }
 
@@ -390,6 +392,13 @@ function blocks_paste(outside_connections,target){
 								blocks.replace("blocks["+new_block_index+"]::patterns::"+tkeys[t],tdd.get(tkeys[t]));
 							}
 						}
+						if(td.contains(copied_blocks[0]+"::stored_piano_roll")){
+							tdd = td.get(copied_blocks[0]+"::stored_piano_roll");
+							tkeys = tdd.getkeys();
+							for(var t=0;t<tkeys.length;t++){
+								blocks.replace("blocks["+new_block_index+"]::stored_piano_roll::"+tkeys[t],tdd.get(tkeys[t]));
+							}
+						}
 						var vl = voicemap.get(new_block_index);
 						if(!Array.isArray(vl)) vl=[vl];
 						if(target.contains("block_data::"+copied_blocks[b])){
@@ -616,6 +625,11 @@ function copy_selection(target){
 	}
 }
 
+function duplicate_selection() {
+    copy_selection();
+    blocks_paste(0);
+}
+
 function change_upsampling(b,u){ // send block, -1 to just set it for all voices.
 	if(u>-1){
 		blocks.replace("blocks["+b+"]::upsample",u);
@@ -731,9 +745,13 @@ function insert_menu_button(cno){
 	menu.connection_number = cno;
 	var fr=block_position(connections.get("connections["+cno+"]::from::number"));
 	var tt=block_position(connections.get("connections["+cno+"]::to::number"));
-	blocks_page.new_block_click_pos = [0.5*(fr[0]+tt[0]),0.5*(fr[1]+tt[1])];
-	if((fr[1]-tt[1])<2){
-		make_space(blocks_page.new_block_click_pos[0],blocks_page.new_block_click_pos[1],1.5);
+	if((fr[0] == tt[0])&&(fr[1] == tt[1])){
+		blocks_page.new_block_click_pos = [fr[0]+1,fr[1]];
+	}else{
+		blocks_page.new_block_click_pos = [0.5*(fr[0]+tt[0]),0.5*(fr[1]+tt[1])];
+		if((fr[1]-tt[1])<2){
+			make_space(blocks_page.new_block_click_pos[0],blocks_page.new_block_click_pos[1],1.5);
+		}
 	}
 	set_display_mode("block_menu");
 }
@@ -935,7 +953,7 @@ function screentoworld(x,y){
 
 function click_patterns_column_header(parameter,value){
 	if(usermouse.ctrl){
-		if(usermouse.shift){
+		if(usermouse.shift || patternpage.quantise_and_hold){
 			queue_quantised_notification(mute_particular_block, parameter,-1);
 			if(patternpage.column_type[value]==1){
 				patternpage.held_pattern_fires[parameter] = -1;
@@ -975,8 +993,9 @@ function select_block(parameter,value){
 		selected.block_count = 1;
 		selected.wire_count = 0;
 		redraw_flag.flag |= 2;
-		if(displaymode == "blocks") redraw_flag.flag |= 8;
-		if(displaymode == "panels"){
+		if(displaymode == "blocks"){
+			redraw_flag.flag |= 8;
+		}else if(displaymode == "panels"){
 			if(usermouse.ctrl){
 				panels.editting = value;
 				set_sidebar_mode("panel_assign");
@@ -984,6 +1003,9 @@ function select_block(parameter,value){
 				set_sidebar_mode("none");
 				panels.editting = -1;
 			}
+		}else if(displaymode == "panels_edit"){
+			panels.editting = value;
+			set_sidebar_mode("panel_assign");
 		}
 	}
 }
@@ -1205,11 +1227,12 @@ function custom_direct_mouse_passthrough(parameter,value){
 	}
 }
 function custom_direct_mouse_button(parameter,value){
-	//post("\n\ncustom mouse button",parameter,"----",value);
+	// post("\n\ncustom mouse button",parameter,"----",value);
 	if(value[0] == "output"){
 		//post("output block button",parameter-MAX_AUDIO_VOICES-MAX_NOTE_VOICES);
 		output_blocks_poly.message("setvalue", parameter-MAX_AUDIO_VOICES-MAX_NOTE_VOICES,value[2],usermouse.left_button,value[3],value[4]);
 	}else if(value[0] == "note"){
+		// post("\nmessage is:","setvalue", parameter,value[2],usermouse.left_button,value[3],value[4]);
 		note_poly.message("setvalue", parameter,value[2],usermouse.left_button,value[3],value[4]);
 	}else if(value[0] == "audio"){
 		audio_poly.message("setvalue", parameter,value[2],usermouse.left_button,value[3],value[4]);
@@ -1433,11 +1456,32 @@ function request_edit_wave(block){
 
 function jump_to_scales_shapes(){
 	//first see if it has been added
+	if(scalesblock>-1){
+		clear_blocks_selection();
+		var v = 0;
+		if((sidebar.selected>-1)&&blocks.contains("blocks["+sidebar.selected+"]::name")){
+			var params = blocktypes.get(blocks.get("blocks["+sidebar.selected+"]::name")+"::parameters");
+			if(!Array.isArray(params))params = [params];
+			for(var p=0;p<params.length;p++){
+				if(params[p].get("type")=="scale"){
+					var siz=params[p].get("values").length;
+					v = (siz==8) + Math.floor(parameter_value_buffer.peek(1,MAX_PARAMETERS*sidebar.selected+p)*(siz-0.01));
+					post("\nfound scale parameter in current block. scale is:",v,"size is",siz,"param is",p,"sel",sidebar.selected,"peek",parameter_value_buffer.peek(1,MAX_PARAMETERS*scalesblock+p));
+				}
+			}
+		}
+		select_block_and_voice(scalesblock,v-1);
+		return 1;
+	}
 	for(var i =0;i<MAX_BLOCKS;i++){
 		if(blocks.contains("blocks["+i+"]::name")){
 			if(blocks.get("blocks["+i+"]::name")=="core.scales.shapes"){
 				clear_blocks_selection();
-				select_block(i);
+				scalesblock = i;
+				select_block(i,i);
+				redraw_flag.flag |= 4;
+
+				post("\njumping to ",i);
 				return 1;
 			}
 		}
@@ -1493,7 +1537,7 @@ function fire_block_state(state, block){
 		sidebar.selected = state;
 		set_sidebar_mode("edit_state");
 	}else{
-		if(usermouse.shift){
+		if(usermouse.shift || patternpage.quantise_and_hold){
 			if(state=="current") state = -1;//lol
 			queue_quantised_notification(fire_block_state,state,block);
 			patternpage.held_state_fires[block] = state;
@@ -1527,6 +1571,9 @@ function fire_block_state(state, block){
 function fire_whole_state_btn_click(state,value){ //start timer, after a moment a slider appears
 	//post("whole state btn click",state);
 	if(!usermouse.shift){
+		usermouse.drag.starting_x = usermouse.x;
+		usermouse.drag.starting_y = usermouse.y;
+		usermouse.drag.distance = 0;
 		if((state_fade.selected>-2)&&(state_fade.last == -2)) state_fade.last = state_fade.selected;
 		state_fade.selected = state;
 		state_fade.position = -1;
@@ -1652,6 +1699,10 @@ function fade_state(){
 	if(state==-1) state="current";
 	var stat = new Dict();
 	stat = states.get("states::"+state);
+	if(stat==null){
+		error("tried to fade non-existent state");
+		return 0;
+	}
 	var sc_list = stat.getkeys();
 	if(!Array.isArray(sc_list)) sc_list=[+sc_list];
 	//var mf=0;
@@ -2750,6 +2801,7 @@ function mute_particular_block(block,av){ // i=block, av=value, av=-1 means togg
 		}
 	}else if(type == "hardware"){
 		//actually needs to mute or unmute the audio/midi connections for hw blocks
+		// first the signal from the hardware to benny
 		for(var t=0;t<connections.getsize("connections");t++){
 			if(connections.contains("connections["+t+"]::from") && (connections.get("connections["+t+"]::from::number") == block)){
 				// then mute it or unmute it (if the connection itself is not muted)
@@ -2758,6 +2810,19 @@ function mute_particular_block(block,av){ // i=block, av=value, av=-1 means togg
 				}
 			}
 		}
+		// and if the block doesn't have hw->benny, mute the signals the other way
+		if(!blocktypes.contains(blocks.get("blocks["+block+"]::name")+"::connections::out::hardware")){
+			// post("\nthis block is just an output, right?");
+			for(var t=0;t<connections.getsize("connections");t++){
+				if(connections.contains("connections["+t+"]::to") && (connections.get("connections["+t+"]::to::number") == block)){
+					// then mute it or unmute it (if the connection itself is not muted)
+					if((connections.get("connections["+t+"]::conversion::mute")==0) && (connections.get("connections["+t+"]::to::input::type") == "hardware")){
+						make_connection(t,1);
+					}
+				}
+			}
+		}
+
 		//and also if the block has a generic midi handler (or whatever) loaded in a note slot, send that a mute message
 		list = voicemap.get(block);
 		if(list === null){
@@ -2916,6 +2981,9 @@ function cycle_automap_offset(p,v){
 		if(p>0){
 			automap.offset_c++;
 			if(automap.offset_c > automap.offset_range_c) automap.offset_c = 0;
+		}else if(p<0){
+			automap.offset_c--;
+			if(automap.offset_c < 0) automap.offset_c = automap.offset_range_c;
 		}else{
 			automap.offset_c=0;
 			automap.mapped_c=-1;
@@ -3108,17 +3176,110 @@ function block_edit(parameter,value){
 	}
 }
 
-function automap_default(a,b){
+function quantise_and_hold_button(state){
+	patternpage.quantise_and_hold = state;
+}
+
+var capturetask, capturetask2;
+function capture_controller_loop_button(state,block){
+	//post("\ncapture controller loop, state:",state,"for block",block);
+	if(block == null){
+		capture.target = automap.available_c;
+	}else{
+		capture.target = block+1;
+	}
+	if(state != 0 ){
+		capture.controller = 1;
+		capturetask = new Task(capture_button, this, 0);
+		capturetask.schedule(400);
+	}else{
+		if(capture.controller){
+			capture.controller = 0;
+			capturetask.cancel();
+			capturetask.freepeer();
+			// post("\n[c] short press, send the message to the controller that it should loop the last bar");
+			note_poly.message("setvalue",capture.target,"loop_on");
+		}else{
+			// post("\n[c] it's already recording, stop it");
+			note_poly.message("setvalue",capture.target,"loop_end");
+		}
+	}
+	redraw_flag.flag |= 2;
+}
+
+function controller_looper_button(p,v){
+	capture_controller_loop_button(usermouse.left_button,automap.available_c-1);
+}
+function keyboard_looper_button(p,v){
+	capture_keyboard_loop_button(usermouse.left_button,automap.available_k-1);
+}
+
+function controller_stop_loop(p,v){
+	note_poly.message("setvalue",capture.target,"loop_stop");
+}
+function keyboard_stop_loop(p,v){
+	note_poly.message("setvalue",automap.available_k,"loop_stop");
+}
+
+function loopstatus(type,state){
+	if(type=="controller"){
+		if(automap.looping_c != state) redraw_flag.flag |= 2;
+		automap.looping_c = state;
+	}else if(type=="keyboard"){
+		if(automap.looping_k != state) redraw_flag.flag |= 2;
+		automap.looping_k = state;
+	}
+}
+function request_spawn_player(block,auto){
+	note_poly.message("setvalue",block,"spawn_player");
+}
+
+function controller_spawned_loop_targets(){
+	var targets = arrayfromargs(arguments);
+	automap.targetslist = targets.concat();
+	post("\nspawn mapping targets list received:",targets);
+}
+
+function capture_keyboard_loop_button(state){
+	if(state != 0 ){
+		capture.keyboard = 1;
+		capturetask2 = new Task(capture_button, this, 0);
+		capturetask2.schedule(200);
+	}else{
+		if(capture.keyboard){
+			capture.keyboard = 0;
+			capturetask2.cancel();
+			capturetask2.freepeer();
+			// post("\n[k] short press, send the message to the keyboard that it should loop the last bar");
+			note_poly.message("setvalue",automap.available_k, "loop_on");
+		}else{
+			// post("\n[k] it's already recording, stop it");
+			note_poly.message("setvalue",automap.available_k, "loop_end");
+		}
+	}
+}
+
+function capture_button(){
+	if(capture.controller){
+		capture.controller = 0;
+		// post("\n[c] start recording, from 200ms ago");
+		note_poly.message("setvalue",capture.target,"loop_start");
+	}else if(capture.keyboard){
+		capture.keyboard = 0;
+		// post("\n[k] start recording, from 200ms ago");
+		note_poly.message("setvalue",automap.available_k,"loop_start");
+	}
+}
+
+function automap_default(a){
 	if(sidebar.selected != -1){
 		if(a<0){
-			//post("\nI THINK THIS IS STATIC MOD RESET",a,b);
+			//post("\nTHIS IS STATIC MOD RESET",a,b);
 			parameter_static_mod.poke(1,-a,0);
-			note_poly.message("setvalue", b+1, "refresh");
-			//note_poly.message("setvalue", automap.available_c,"refresh");
+			note_poly.message("setvalue", automap.available_c,"refresh");
 		}else{
 			parameter_value_buffer.poke(1,a,param_defaults[sidebar.selected][a-MAX_PARAMETERS*sidebar.selected]);
-			note_poly.message("setvalue", b+1,"refresh");
-			//note_poly.message("setvalue", automap.available_c,"refresh");
+			note_poly.message("setvalue", automap.available_c,"refresh");
 		}
 	}
 }
@@ -3679,7 +3840,7 @@ function blocks_and(side){
 }
 
 function toggle_show_sidebar_para_mod(){
-	MODULATION_IN_PARAMETERS_VIEW = 1 - MODULATION_IN_PARAMETERS_VIEW;
+	MODULATION_IN_PARAMETERS_VIEW = (MODULATION_IN_PARAMETERS_VIEW+1)%4;
 	redraw_flag.flag |= 2;
 }
 
@@ -3702,7 +3863,7 @@ function selected_block_custom_mode(mode){
 }
 
 function custom_key_passthrough(key){
-	ui_poly.message("setvalue",  custom_block+1, "keydown", key);
+	ui_poly.message("setvalue",  custom_block+1, "keydown", key, usermouse.x, usermouse.y);
 }
 
 function qwertymidi(key,vel){
@@ -3799,6 +3960,13 @@ function conn_set_from_output(c,value){
 	sidebar.connection.show_from_outputs = 0;
 	new_connection = connections.get("connections["+c+"]");
 	new_connection.replace("from::output::number",o);
+	var otype = new_connection.get("from::output::type");
+	if(ty!=otype){//type change, sense check default offsets
+		if(ty=="midi"){
+			new_connection.replace("conversion::offset", 0.5);
+			new_connection.replace("conversion::offset2", 0.5);			
+		}	
+	}
 	new_connection.replace("from::output::type",ty);
 	remove_connection(c);
 	connections.replace("connections["+c+"]",new_connection);
@@ -3922,8 +4090,9 @@ function type_to_search(key){
 		var types = blocktypes.getkeys();
 		var results = [];
 		var found =0;
+		var showdep = config.contains("show_deprecated") && (config.get("show_deprecated")==1);
 		for(var i=0;i<menu.cubecount;i++){
-			if((blocktypes.contains(types[i]+"::deprecated") && blocktypes.get(types[i]+"::deprecated")==1)){
+			if(!showdep&&(blocktypes.contains(types[i]+"::deprecated") && blocktypes.get(types[i]+"::deprecated")==1)){
 			}else{
 				var str = types[i];
 				if(blocktypes.contains(types[i]+"::synonyms")) str = str + blocktypes.get(types[i]+"::synonyms");
@@ -3941,7 +4110,7 @@ function type_to_search(key){
 		}
 		
 		for(var i=0;i<menu.cubecount;i++){
-			if((blocktypes.contains(types[i]+"::deprecated") && blocktypes.get(types[i]+"::deprecated")==1)){
+			if(!showdep&&(blocktypes.contains(types[i]+"::deprecated") && blocktypes.get(types[i]+"::deprecated")==1)){
 			}else{
 				var str = types[i];
 				if(blocktypes.contains(types[i]+"::synonyms")) str = str + blocktypes.get(types[i]+"::synonyms");
@@ -4035,15 +4204,18 @@ function show_and_search_new_block_menu(key){
 		menu.search = "";
 		show_new_block_menu();
 		end_of_frame_fn = function(){type_to_search(key);};
-	}else if((sidebar.mode == "block")&&(key>=48)&&(key<58)&&(usermouse.caps==0)){ //numbers do direct entry on values.
-		if((usermouse.got_t>=2) && (usermouse.got_t<=4) && (usermouse.got_i) && (usermouse.x > sidebar.x)){
+	}else if((((key>=-42)&&(key<-32))||((key>=48)&&(key<58)))&&(usermouse.caps==0)){ //numbers do direct entry on values.	
+		if((sidebar.mode == "block")&&(usermouse.got_t>=2) && (usermouse.got_t<=4) && (usermouse.got_i) && (usermouse.x > sidebar.x)){
 			var pno = mouse_click_parameters[usermouse.got_i][0];
 			//0-3 coords, 456 colour, 8 is the block (we know that already) 9 is the param no
 			sidebar.mode = "param_number_entry";
+			if(((key>=-42)&&(key<-32))){
+				key = -key + 15;
+			}
 			sidebar.param_number_entry = String.fromCharCode(key);
 			sidebar.param_number = pno;
 			draw_number_entry(pno, sidebar.param_number_entry);
-		}
+		}//else (panels, custom, waves)
 	}else{post("\nkeycode",key);}
 }
 
@@ -4056,7 +4228,8 @@ function number_entry(key){
 		sidebar.param_number_entry = "";
 		sidebar.mode = "block";
 		redraw_flag.flag |= 2;
-	}else if(((key>=48)&&(key<58))||(key==46)){
+	}else if(((key>=48)&&(key<58))||(key==46)||((key>=-42)&&(key<-32))){
+		if(((key>=-42)&&(key<-32))) key = -key + 15;
 		sidebar.param_number_entry = sidebar.param_number_entry.concat(String.fromCharCode(key));
 		draw_number_entry(sidebar.param_number,sidebar.param_number_entry);
 	}else if((key==-6)||(key==-7)){
@@ -4105,11 +4278,16 @@ function block_search_typing(key){
 	}
 	redraw_flag.flag |=2;
 }
+function blocks_page_enter(){
+	clear_blocks_selection();
+	blocks_page.new_block_click_pos = screentoworld(usermouse.x,usermouse.y);
+	set_display_mode("block_menu");
+}
 
 function blocks_menu_enter(){
 	var count=0,sel=-1;
 	for(var i=0;i<menu.cubecount;i++){
-		if(blocks_menu[i].enable){
+		if((blocks_menu[i]!=undefined) && (blocks_menu[i].enable)){
 			count++;
 			sel=i;
 		}
@@ -4178,6 +4356,7 @@ function set_automap_lock(type,value){
 	}else if(type == "cue"){
 		automap.lock_q = value;
 	}
+	sidebar.mode = "redraw";
 	redraw_flag.flag |= 4;
 }
 
@@ -4555,7 +4734,7 @@ function pattern_click(b,p){
 	var param = blocks.get("blocks["+b[0]+"]::patterns::parameter");
 	// post("\nclicked block",b[0],"voice",b[1],"pattern",p,"param",param,p);
 	if(!Array.isArray(b[1])) b[1] = [b[1]];
-	if(usermouse.shift){
+	if(usermouse.shift || patternpage.quantise_and_hold){
 		queue_quantised_notification(pattern_click, b,p);
 		patternpage.held_pattern_fires[b[0]] = p;
 	}else{

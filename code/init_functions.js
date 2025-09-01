@@ -98,7 +98,12 @@ function systemtypeis(type){
 function initialise_reset(hardware_file){
 	post("\n\nreset stage 1 : resets\n------------------");
 	thispatcherstuff();
-	messnamed("getpath","bang");
+		var path = this.patcher.filepath;
+	projectpath = path.split("patchers/");
+	projectpath = projectpath[0];
+	post("\npath is",projectpath);
+
+//	messnamed("getpath","bang");
 	config.parse('{ }');
 	config.import_json("config.json");
 	userconfig.parse('{ }');
@@ -109,7 +114,7 @@ function initialise_reset(hardware_file){
 
 	matrix.message("clear"); //clears the audio matrix
 	
-	sigouts.message("setvalue", 0,0); // clear sigs
+	// sigouts.message("setvalue", 0,0); // clear sigs
 
 	//wipe all the buffers
 	messnamed("clear_all_buffers","bang");
@@ -148,56 +153,7 @@ function initialise_dictionaries(hardware_file){
 		note_names[i] = namelist[i%12]+(Math.floor(i/12)-2);
 	}
 	// get config first because a lot of things depend on it.
-	UPSAMPLING = config.get("UPSAMPLING");
-	RECYCLING = config.get("RECYCLING");
-	click_b_s = config.get("click_buffer_scaledown");
-	wire_dia = config.get("wire_dia");
-	glow_amount = config.get("glow");
-	messnamed("bloom_amt",glow_amount);
-	mainfont = config.get("mainfont");
-	monofont = config.get("monofont");
-	BLOCK_MENU_CLICK_ACTION = config.get("BLOCK_MENU_CLICK_ACTION");
-	MAX_BLOCKS = config.get("MAX_BLOCKS");
-	MAX_NOTE_VOICES = config.get("MAX_NOTE_VOICES");
-	MAX_AUDIO_VOICES = config.get("MAX_AUDIO_VOICES");
-	MAX_AUDIO_INPUTS = config.get("MAX_AUDIO_INPUTS");
-	MAX_AUDIO_OUTPUTS = config.get("MAX_AUDIO_OUTPUTS");
-	NO_IO_PER_BLOCK = config.get("NO_IO_PER_BLOCK");
-	MAX_BEZIER_SEGMENTS = config.get("MAX_BEZIER_SEGMENTS");//24; //must be a multiple of 4
-	BLOCKS_GRID = config.get("BLOCKS_GRID");
-	BLOCKS_GRID = [BLOCKS_GRID, 1/BLOCKS_GRID];
-	MAX_PARAMETERS = config.get("MAX_PARAMETERS");
-	MAX_CONNECTIONS_PER_OUTPUT = config.get("MAX_CONNECTIONS_PER_OUTPUT");
-	MAX_OUTPUTS_PER_VOICE = config.get("MAX_OUTPUTS_PER_VOICE");
-	MAX_DATA = config.get("MAX_DATA");
-	MAX_MOD_IDS = config.get("MAX_MOD_IDS");
-	MAX_WAVES_SLICES = config.get("MAX_WAVES_SLICES");
-	MAX_WAVES = config.get("MAX_WAVES");
-	draw_wave.length = MAX_WAVES;
-	MAX_HARDWARE_MIDI_OUTS = config.get("MAX_HARDWARE_MIDI_OUTS");
-	MAX_HARDWARE_BLOCKS = config.get("MAX_HARDWARE_BLOCKS");
-	MAX_STATES = config.get("MAX_STATES");
-	MERGE_PURGE = config.get("MERGE_PURGE");
-	MAX_PANEL_COLUMNS = config.get("MAX_PANEL_COLUMNS");
-	SELF_CONNECT_THRESHOLD = config.get("SELF_CONNECT_THRESHOLD"); //when dragging a block back onto itself
-	DOUBLE_CLICK_TIME = config.get("DOUBLE_CLICK_TIME");
-	LONG_PRESS_TIME = config.get("LONG_PRESS_TIME");
-	CTRL_VOICE_SEL_MOMENTARY = config.get("CTRL_VOICE_SEL_MOMENTARY");
-	SLIDER_CLICK_SET = config.get("SLIDER_CLICK_SET");
-	SCOPE_DEFAULT_ZOOM = config.get("SCOPE_DEFAULT_ZOOM");
-	waves_preloading = config.get("waves_preloading");
-	MODULATION_IN_PARAMETERS_VIEW = config.get("MODULATION_IN_PARAMETERS_VIEW");
-	AUTOZOOM_ON_SELECT = config.get("AUTOZOOM_ON_SELECT");
-	SHOW_STATES_ON_PANELS = config.get("SHOW_STATES_ON_PANELS");
-	TARGET_FPS = config.get("TARGET_FPS");
-	METER_TINT = config.get("METER_TINT");
-	SELECTED_BLOCK_Z_MOVE = config.get("SELECTED_BLOCK_Z_MOVE");
-	SELECTED_BLOCK_DEPENDENTS_Z_MOVE = config.get("SELECTED_BLOCK_DEPENDENTS_Z_MOVE");
-	sidebar.scopes.midinames= config.get("SIDEBAR_MIDI_SCOPE_NOTE_NAMES");
-	sidebar.show_help = config.get("SIDEBAR_ALWAYS_SHOW_HELP");
-	automap.mouse_follow = config.get("AUTOMAP_MOUSE_FOLLOW");
-	sidebar.scrollbar_width = config.get("sidebar_scrollbar_width");
-	sidebar.width_in_units = config.get("sidebar_width_in_units");
+	read_settings_from_config();
 	sidebar.width = fontheight*sidebar.width_in_units;
 	sidebar.x2 = mainwindow_width - sidebar.scrollbar_width;
 	sidebar.x = sidebar.x2 -sidebar.width;
@@ -287,7 +243,11 @@ function initialise_dictionaries(hardware_file){
 	send_audio_patcherlist();
 
 	scope_zoom(0,SCOPE_DEFAULT_ZOOM);
-
+	var seqdict = new Dict;
+	seqdict.name = "seq-piano-roll";
+	seqdict.parse('{}');
+	seqdict.name = "core-keyb-loop-xfer";
+	seqdict.parse('{}');
 	undo_stack.parse('{ "history" : [ {}, {} ] }');
 	redo_stack.parse('{ "history" : [ {}, {} ] }');
 	
@@ -295,6 +255,8 @@ function initialise_dictionaries(hardware_file){
 	if((projectpath!="")&&(SONGS_FOLDER.indexOf("/")==-1)){
 		SONGS_FOLDER = projectpath + SONGS_FOLDER;
 		post("\songs folder is ",SONGS_FOLDER);
+	}else{
+		post("\nsongs folder is ",SONGS_FOLDER, "project path is",projectpath,"and debug number is",SONGS_FOLDER.indexOf("/"));
 	}	
 	read_songs_folder("songs");
 	if(startup_loadfile=="autoload") read_songs_folder("templates");
@@ -308,6 +270,59 @@ function initialise_dictionaries(hardware_file){
 		post("\nall essential data loaded, please choose a hardware configuration and press start.");
 		messnamed("ready_to_start","bang");
 	}
+}
+
+function read_settings_from_config() {
+	UPSAMPLING = config.get("UPSAMPLING");
+	RECYCLING = config.get("RECYCLING");
+	click_b_s = config.get("click_buffer_scaledown");
+	wire_dia = config.get("wire_dia");
+	glow_amount = config.get("glow");
+	messnamed("bloom_amt", glow_amount);
+	mainfont = config.get("mainfont");
+	monofont = config.get("monofont");
+	MAX_BLOCKS = config.get("MAX_BLOCKS");
+	MAX_NOTE_VOICES = config.get("MAX_NOTE_VOICES");
+	MAX_AUDIO_VOICES = config.get("MAX_AUDIO_VOICES");
+	MAX_AUDIO_INPUTS = config.get("MAX_AUDIO_INPUTS");
+	MAX_AUDIO_OUTPUTS = config.get("MAX_AUDIO_OUTPUTS");
+	NO_IO_PER_BLOCK = config.get("NO_IO_PER_BLOCK");
+	MAX_BEZIER_SEGMENTS = config.get("MAX_BEZIER_SEGMENTS"); //24; //must be a multiple of 4
+	MAX_PARAMETERS = config.get("MAX_PARAMETERS");
+	MAX_CONNECTIONS_PER_OUTPUT = config.get("MAX_CONNECTIONS_PER_OUTPUT");
+	MAX_OUTPUTS_PER_VOICE = config.get("MAX_OUTPUTS_PER_VOICE");
+	MAX_DATA = config.get("MAX_DATA");
+	MAX_MOD_IDS = config.get("MAX_MOD_IDS");
+	MAX_WAVES_SLICES = config.get("MAX_WAVES_SLICES");
+	MAX_WAVES = config.get("MAX_WAVES");
+	draw_wave.length = MAX_WAVES;
+	MAX_HARDWARE_MIDI_OUTS = config.get("MAX_HARDWARE_MIDI_OUTS");
+	MAX_HARDWARE_BLOCKS = config.get("MAX_HARDWARE_BLOCKS");
+	MAX_STATES = config.get("MAX_STATES");
+	MERGE_PURGE = config.get("MERGE_PURGE");
+	STATE_FADE_DRAG_THRESHOLD = config.get("STATE_FADE_DRAG_THRESHOLD");
+	MAX_PANEL_COLUMNS = config.get("MAX_PANEL_COLUMNS");
+	SELF_CONNECT_THRESHOLD = config.get("SELF_CONNECT_THRESHOLD"); //when dragging a block back onto itself
+	SELF_CONNECT_REQUIRES_SHIFT = config.get("SELF_CONNECT_REQUIRES_SHIFT");
+	DOUBLE_CLICK_TIME = config.get("DOUBLE_CLICK_TIME");
+	LONG_PRESS_TIME = config.get("LONG_PRESS_TIME");
+	CTRL_VOICE_SEL_MOMENTARY = config.get("CTRL_VOICE_SEL_MOMENTARY");
+	SLIDER_CLICK_SET = config.get("SLIDER_CLICK_SET");
+	SCOPE_DEFAULT_ZOOM = config.get("SCOPE_DEFAULT_ZOOM");
+	waves_preloading = config.get("waves_preloading");
+	MODULATION_IN_PARAMETERS_VIEW = config.get("MODULATION_IN_PARAMETERS_VIEW");
+	AUTOZOOM_ON_SELECT = config.get("AUTOZOOM_ON_SELECT");
+	SHOW_STATES_ON_PANELS = config.get("SHOW_STATES_ON_PANELS");
+	SHOW_KEYBOARD_AUTOMAP_CONNECT_BUTTON = config.get("SHOW_KEYBOARD_AUTOMAP_CONNECT_BUTTON");
+	TARGET_FPS = config.get("TARGET_FPS");
+	METER_TINT = config.get("METER_TINT");
+	SELECTED_BLOCK_Z_MOVE = config.get("SELECTED_BLOCK_Z_MOVE");
+	SELECTED_BLOCK_DEPENDENTS_Z_MOVE = config.get("SELECTED_BLOCK_DEPENDENTS_Z_MOVE");
+	sidebar.scopes.midinames = config.get("SIDEBAR_MIDI_SCOPE_NOTE_NAMES");
+	sidebar.show_help = config.get("SIDEBAR_ALWAYS_SHOW_HELP");
+	automap.mouse_follow = config.get("AUTOMAP_MOUSE_FOLLOW");
+	sidebar.scrollbar_width = config.get("sidebar_scrollbar_width");
+	sidebar.width_in_units = config.get("sidebar_width_in_units");
 }
 
 function initialise_graphics() {
@@ -603,8 +618,6 @@ function import_hardware(v){
 	post("\nlast input:",MAX_USED_AUDIO_INPUTS,"last output:",MAX_USED_AUDIO_OUTPUTS);
 	if(output_blocks.length<MAX_AUDIO_OUTPUTS/2){
 		for(i=output_blocks.length;i<MAX_AUDIO_OUTPUTS/2;i++) output_blocks.push("clip_dither");
-	}else{
-		output_blocks.splice(MAX_AUDIO_OUTPUTS);
 	}
 	post("\nreading midi io config");
 	d = hardwareconfig.get("io");
@@ -653,8 +666,6 @@ function import_hardware(v){
 	}
 	//messnamed("to_ext_matrix","read_config");
 	transfer_input_lists();
-	post("\nsetting output blocks to:",output_blocks);
-	output_blocks_poly.patchername(output_blocks); 
 	post("\n\ninit stage 4 : start graphic and audio engines\n------------------------------------------");
 
 	initialise_graphics();
@@ -794,7 +805,12 @@ function import_hardware(v){
 	sigouts.chans(matrixouts);
 	this.patcher.getnamed("mc_separate").chans(MAX_AUDIO_VOICES,MAX_AUDIO_VOICES);
 	matrix.numouts(matrixouts);
-	output_blocks_poly.voices(((MAX_AUDIO_OUTPUTS+1)/2)|0);
+	var ol = ((MAX_AUDIO_OUTPUTS+1)/2)|0;
+	output_blocks.splice(ol);
+	output_blocks_poly.voices(ol);
+	post("\nsetting output blocks to:",output_blocks);
+	output_blocks_poly.patchername(output_blocks); 
+	
 	audio_to_data_poly.voices(MAX_AUDIO_INPUTS + MAX_AUDIO_OUTPUTS + NO_IO_PER_BLOCK * MAX_AUDIO_VOICES);
 	audio_to_data_poly.message("down",((+config.get("AUDIO_TO_DATA_DOWNSAMPLE"))|0));
 	post("\nset audio_to_data poly downsampling to ",config.get("AUDIO_TO_DATA_DOWNSAMPLE"));
@@ -1211,6 +1227,8 @@ function size(width,height,scale){
 			click_b_w++;
 		}
 		fontheight = (mainwindow_height-24) / 18;
+		config.replace("fontheight", fontheight);
+		config.replace("window",width,height);
 		fontsmall = fontheight / 3.2;
 		config.replace("fontsmall",fontsmall);
 		fo1 = fontheight * 0.1;

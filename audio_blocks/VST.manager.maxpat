@@ -2,43 +2,369 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 4,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 134.0, 134.0, 1852.0, 921.0 ],
-		"bglocked" : 0,
+		"rect" : [ 134.0, 134.0, 1221.0, 701.0 ],
 		"openinpresentation" : 1,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-181",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 658.0, 769.0, 150.0, 20.0 ],
+					"text" : "last changed : 12 0.14"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-117",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 658.0, 737.0, 150.0, 22.0 ],
+					"text" : "prepend set last changed :"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-66",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1461.0, 935.0, 122.0, 22.0 ],
+					"text" : "prepend compatibility"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 13.9,
+					"id" : "obj-65",
+					"linecount" : 15,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 660.0, 401.0, 179.0, 246.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 9,
+					"presentation_rect" : [ 390.0, 450.0, 302.0, 150.0 ],
+					"text" : "normally benny tries to let you adjust parameters in the vst window while they're being modulated by benny, but this causes issues with a few unusual vsts. in compatibility mode this is disabled and your vsts should work, BUT you should avoid adjusting things in the vst window while they're being modulated. adjusting parameters in the benny sidebar is always fine",
+					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 13.9,
+					"id" : "obj-60",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1621.0, 863.0, 174.0, 54.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 3,
+					"presentation_rect" : [ 390.0, 394.0, 209.0, 54.0 ],
+					"text" : "if you get vst parameters glitching etc, try enabling compatibility mode here.",
+					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 0,
+					"fontsize" : 13.9,
+					"id" : "obj-59",
+					"items" : [ "full mode", ",", "compatibility mode" ],
+					"maxclass" : "umenu",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1461.0, 903.356079000000136, 154.0, 24.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 601.0, 394.0, 91.0, 24.0 ],
+					"textcolor" : [ 1.0, 0.717647058823529, 0.0, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-34",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1461.0, 872.0, 70.0, 22.0 ],
+					"text" : "loadmess 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-17",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
+							"architecture" : "x64",
+							"modernui" : 1
+						}
+,
+						"classnamespace" : "box",
+						"rect" : [ 976.0, 347.0, 903.0, 650.0 ],
+						"gridsize" : [ 15.0, 15.0 ],
+						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 123.0, 106.5, 526.0, 22.0 ],
+									"text" : "\"THIS VST HAS TOO MANY PARAMETERS FOR THIS VERSION OF BENNY TO WORK WITH\""
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 123.0, 135.0, 93.0, 22.0 ],
+									"text" : "print WARNING"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 44.0, 250.0, 52.0, 22.0 ],
+									"text" : "gate 1 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"patching_rect" : [ 123.0, 78.0, 39.0, 22.0 ],
+									"text" : "> 255"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-11",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"patching_rect" : [ 122.0, 172.0, 29.5, 22.0 ],
+									"text" : "< 4"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-195",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 77.0, 215.75, 64.0, 22.0 ],
+									"text" : "pack 0 0 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-188",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"patching_rect" : [ 77.0, 154.75, 29.5, 22.0 ],
+									"text" : "/ 4"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-185",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 3,
+									"outlettype" : [ "bang", "bang", "int" ],
+									"patching_rect" : [ 50.0, 100.0, 46.0, 22.0 ],
+									"text" : "Uzi 1 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-12",
+									"index" : 1,
+									"maxclass" : "inlet",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 50.0, 40.0, 30.0, 30.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-14",
+									"index" : 2,
+									"maxclass" : "inlet",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"patching_rect" : [ 85.0, 40.0, 30.0, 30.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-16",
+									"index" : 1,
+									"maxclass" : "outlet",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 44.0, 291.0, 30.0, 30.0 ]
+								}
+
+							}
+ ],
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-185", 0 ],
+									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"order" : 0,
+									"source" : [ "obj-14", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-185", 1 ],
+									"order" : 1,
+									"source" : [ "obj-14", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-188", 0 ],
+									"order" : 1,
+									"source" : [ "obj-185", 2 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-195", 1 ],
+									"order" : 0,
+									"source" : [ "obj-185", 2 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"order" : 0,
+									"source" : [ "obj-188", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-195", 0 ],
+									"order" : 1,
+									"source" : [ "obj-188", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 1 ],
+									"source" : [ "obj-195", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-16", 0 ],
+									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-3", 0 ],
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+ ]
+					}
+,
+					"patching_rect" : [ 61.0, 803.0, 80.0, 22.0 ],
+					"text" : "p defaultrows"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-15",
 					"maxclass" : "newobj",
@@ -99,42 +425,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-181",
@@ -255,13 +555,6 @@
 					}
 ,
 					"patching_rect" : [ -1.0, 473.0, 101.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p get_amxd_path"
 				}
 
@@ -288,42 +581,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-1",
@@ -1036,13 +1303,6 @@
 					}
 ,
 					"patching_rect" : [ 545.5, 585.0, 97.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p get_amxd_info"
 				}
 
@@ -1280,42 +1540,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-66",
@@ -1462,13 +1696,6 @@
 					}
 ,
 					"patching_rect" : [ 763.0, 364.0, 88.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p format_types"
 				}
 
@@ -1477,7 +1704,7 @@
 				"box" : 				{
 					"fontsize" : 13.9,
 					"id" : "obj-216",
-					"items" : [ "vst", "Pressure464", ",", "vst", "TAL-Chorus-LX-64", ",", "vst", "ToTape664", ",", "vst3", "ValhallaDelay", ",", "vst3", "ValhallaRoom" ],
+					"items" : [ "vst", "DC1A2", ",", "vst", "DeRez264", ",", "vst", "Elation64", ",", "vst", "FabFilter Pro-C 2", ",", "vst", "Focus64", ",", "vst", "Mojo64", ",", "vst", "Pressure464", ",", "vst", "ToTape664", ",", "vst", "ValhallaFreqEcho_x64", ",", "vst", "ValhallaSupermassive_x64", ",", "vst3", "ValhallaDelay", ",", "vst3", "ValhallaPlate", ",", "vst3", "ValhallaRoom", ",", "vst3", "ValhallaSpaceModulator", ",", "vst3", "ValhallaUberMod", ",", "vst3", "ValhallaVintageVerb" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1523,42 +1750,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-1",
@@ -1750,13 +1951,6 @@
 					}
 ,
 					"patching_rect" : [ 863.0, 364.0, 88.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p format_types"
 				}
 
@@ -1807,42 +2001,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 84.0, 132.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-71",
@@ -1958,13 +2126,6 @@
 					}
 ,
 					"patching_rect" : [ 236.5, 625.0, 90.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p cleanup64etc"
 				}
 
@@ -2555,53 +2716,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-198",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 70.0, 773.0, 150.0, 20.0 ],
-					"text" : "default"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-195",
-					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 43.0, 823.0, 64.0, 22.0 ],
-					"text" : "pack 0 0 1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-188",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 43.0, 791.0, 87.0, 22.0 ],
-					"text" : "expr ($i1/4)%4"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-185",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 3,
-					"outlettype" : [ "bang", "bang", "int" ],
-					"patching_rect" : [ 16.0, 758.0, 46.0, 22.0 ],
-					"text" : "Uzi 1 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-51",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -2631,7 +2745,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "clear" ],
-					"patching_rect" : [ -59.0, 790.0, 51.0, 22.0 ],
+					"patching_rect" : [ 58.0, 759.0, 51.0, 22.0 ],
 					"text" : "t 1 clear"
 				}
 
@@ -2643,7 +2757,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ -59.0, 758.0, 61.0, 22.0 ],
+					"patching_rect" : [ 58.0, 727.0, 61.0, 22.0 ],
 					"text" : "savebang"
 				}
 
@@ -2808,7 +2922,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 64.0, 939.0, 29.5, 22.0 ],
+					"patching_rect" : [ 109.0, 939.0, 29.5, 22.0 ],
 					"text" : "t i i"
 				}
 
@@ -3228,7 +3342,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1221.5, 881.75, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 647.0, 99.0, 22.0 ],
+					"presentation_rect" : [ 451.0, 827.0, 99.0, 22.0 ],
 					"text" : "row height",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -3248,7 +3362,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1221.5, 903.356079000000022, 54.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 532.0, 646.0, 84.25, 24.0 ],
+					"presentation_rect" : [ 532.0, 826.0, 84.25, 24.0 ],
 					"textcolor" : [ 1.0, 0.717647058823529, 0.0, 1.0 ]
 				}
 
@@ -3262,7 +3376,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1149.0, 881.75, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 584.0, 99.0, 22.0 ],
+					"presentation_rect" : [ 451.0, 764.0, 99.0, 22.0 ],
 					"text" : "row height",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -3282,7 +3396,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1149.0, 903.356079000000022, 54.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 532.0, 583.0, 84.25, 24.0 ],
+					"presentation_rect" : [ 532.0, 763.0, 84.25, 24.0 ],
 					"textcolor" : [ 1.0, 0.717647058823529, 0.0, 1.0 ]
 				}
 
@@ -3296,7 +3410,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1073.5, 881.75, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 520.0, 99.0, 22.0 ],
+					"presentation_rect" : [ 451.0, 700.0, 99.0, 22.0 ],
 					"text" : "row height",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -3316,7 +3430,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1073.5, 903.356079000000022, 54.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 532.0, 519.0, 84.25, 24.0 ],
+					"presentation_rect" : [ 532.0, 699.0, 84.25, 24.0 ],
 					"textcolor" : [ 1.0, 0.717647058823529, 0.0, 1.0 ]
 				}
 
@@ -3331,42 +3445,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-219",
@@ -3685,13 +3773,6 @@
 					}
 ,
 					"patching_rect" : [ 1585.0, 790.356079000000022, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p colourhandler"
 				}
 
@@ -3706,7 +3787,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1607.5, 667.0, 182.0, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 476.0, 620.0, 226.0, 22.0 ],
+					"presentation_rect" : [ 476.0, 800.0, 226.0, 22.0 ],
 					"text" : "enable custom colour     R   G   B ",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -3723,7 +3804,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1580.5, 667.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 620.0, 24.0, 24.0 ]
+					"presentation_rect" : [ 451.0, 800.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -3738,7 +3819,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1585.0, 703.0, 141.0, 76.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 624.0, 620.0, 68.0, 48.0 ],
+					"presentation_rect" : [ 624.0, 800.0, 68.0, 48.0 ],
 					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 3,
@@ -3756,42 +3837,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-219",
@@ -4110,13 +4165,6 @@
 					}
 ,
 					"patching_rect" : [ 1386.0, 789.356079000000022, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p colourhandler"
 				}
 
@@ -4131,7 +4179,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1408.5, 666.0, 182.0, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 476.0, 558.0, 226.0, 22.0 ],
+					"presentation_rect" : [ 476.0, 738.0, 226.0, 22.0 ],
 					"text" : "enable custom colour     R   G   B ",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -4148,7 +4196,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1381.5, 666.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 557.0, 24.0, 24.0 ]
+					"presentation_rect" : [ 451.0, 737.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -4163,7 +4211,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1386.0, 702.0, 141.0, 76.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 624.0, 558.0, 68.0, 48.0 ],
+					"presentation_rect" : [ 624.0, 738.0, 68.0, 48.0 ],
 					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 3,
@@ -4181,42 +4229,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-219",
@@ -4535,13 +4557,6 @@
 					}
 ,
 					"patching_rect" : [ 1190.0, 788.356079000000022, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p colourhandler"
 				}
 
@@ -4556,7 +4571,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1212.5, 665.0, 182.0, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 476.0, 496.0, 226.0, 22.0 ],
+					"presentation_rect" : [ 476.0, 676.0, 226.0, 22.0 ],
 					"text" : "enable custom colour     R   G   B ",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -4573,7 +4588,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1185.5, 665.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 495.0, 24.0, 24.0 ]
+					"presentation_rect" : [ 451.0, 675.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -4588,7 +4603,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1190.0, 701.0, 141.0, 76.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 624.0, 496.0, 68.0, 48.0 ],
+					"presentation_rect" : [ 624.0, 676.0, 68.0, 48.0 ],
 					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 3,
@@ -4704,42 +4719,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 4,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-219",
@@ -5058,13 +5047,6 @@
 					}
 ,
 					"patching_rect" : [ 982.0, 788.356079000000022, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
 					"text" : "p colourhandler"
 				}
 
@@ -5107,7 +5089,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1004.5, 881.75, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 457.0, 99.0, 22.0 ],
+					"presentation_rect" : [ 451.0, 637.0, 99.0, 22.0 ],
 					"text" : "row height",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -5123,7 +5105,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1004.5, 665.0, 182.0, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 476.0, 432.0, 217.0, 22.0 ],
+					"presentation_rect" : [ 476.0, 612.0, 217.0, 22.0 ],
 					"text" : "enable custom colour     R   G   B ",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -5143,7 +5125,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1004.5, 903.356079000000022, 54.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 532.0, 456.0, 84.25, 24.0 ],
+					"presentation_rect" : [ 532.0, 636.0, 84.25, 24.0 ],
 					"textcolor" : [ 1.0, 0.717647058823529, 0.0, 1.0 ]
 				}
 
@@ -5159,7 +5141,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 977.5, 665.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 451.0, 431.0, 24.0, 24.0 ]
+					"presentation_rect" : [ 451.0, 611.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -5174,7 +5156,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 982.0, 701.0, 141.0, 76.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 624.0, 432.0, 68.0, 48.0 ],
+					"presentation_rect" : [ 624.0, 612.0, 68.0, 48.0 ],
 					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 3,
@@ -5346,7 +5328,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 1475.5, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 390.0, 620.0, 71.0, 22.0 ],
+					"presentation_rect" : [ 390.0, 800.0, 71.0, 22.0 ],
 					"text" : "row 4",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -5361,7 +5343,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 1444.5, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 390.0, 556.0, 71.0, 22.0 ],
+					"presentation_rect" : [ 390.0, 736.0, 71.0, 22.0 ],
 					"text" : "row 3",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -5376,7 +5358,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 1406.5, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 390.0, 492.0, 71.0, 22.0 ],
+					"presentation_rect" : [ 390.0, 672.0, 71.0, 22.0 ],
 					"text" : "row 2",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -5391,7 +5373,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 1377.5, 173.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 390.0, 432.0, 71.0, 22.0 ],
+					"presentation_rect" : [ 390.0, 612.0, 71.0, 22.0 ],
 					"text" : "row 1",
 					"textcolor" : [ 1.0, 0.752941176470588, 0.0, 1.0 ]
 				}
@@ -5417,7 +5399,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 909.0, 1444.5, 105.0, 22.0 ],
-					"text" : "8"
+					"text" : "-1"
 				}
 
 			}
@@ -5429,7 +5411,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 898.5, 1406.5, 105.0, 22.0 ],
-					"text" : "4 5 6 7"
+					"text" : "-1"
 				}
 
 			}
@@ -5441,7 +5423,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 888.0, 1377.5, 105.0, 22.0 ],
-					"text" : "0 1 2 3"
+					"text" : "-1"
 				}
 
 			}
@@ -5489,7 +5471,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 611.0, 1444.5, 280.0, 22.0 ],
-					"text" : "Bypass"
+					"text" : "-"
 				}
 
 			}
@@ -5501,7 +5483,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 600.5, 1406.5, 280.0, 22.0 ],
-					"text" : "HPF LPF AGC Oversampling"
+					"text" : "-"
 				}
 
 			}
@@ -5625,7 +5607,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 64.0, 902.5, 41.0, 22.0 ],
+					"patching_rect" : [ 109.0, 903.0, 41.0, 22.0 ],
 					"text" : "unjoin"
 				}
 
@@ -5637,7 +5619,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 64.0, 973.5, 81.0, 22.0 ],
+					"patching_rect" : [ 109.0, 974.0, 81.0, 22.0 ],
 					"text" : "getcolumn $1"
 				}
 
@@ -5650,7 +5632,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 592.0, 1377.5, 278.0, 22.0 ],
-					"text" : "Bypass Input Output Model"
+					"text" : "-"
 				}
 
 			}
@@ -5662,7 +5644,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ -27.0, 825.75, 175.0, 166.0 ],
+					"patching_rect" : [ -105.376348733901978, 967.0, 175.0, 166.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
 					"presentation_rect" : [ 13.0, 109.0, 679.0, 54.0 ],
@@ -5878,7 +5860,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 214.0, 870.0, 263.0, 4312.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 79.0, 182.0, 237.0, 2509.0 ],
+					"presentation_rect" : [ 79.0, 182.0, 237.0, 9999.0 ],
 					"readonly" : 1,
 					"tabmode" : 0,
 					"textcolor" : [ 1.0, 0.576470588235294, 0.0, 1.0 ]
@@ -5909,7 +5891,7 @@
 					"one/row" : 1,
 					"outlettype" : [ "list", "list" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 148.0, 839.0, 66.0, 18.0 ],
+					"patching_rect" : [ 148.0, 869.0, 66.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 13.0, 184.0, 66.0, 18.0 ],
 					"rows" : 1,
@@ -6021,6 +6003,7 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+					"drawoffcolor" : 1,
 					"elementcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 0.0 ],
 					"floatoutput" : 1,
 					"id" : "obj-67",
@@ -6104,14 +6087,16 @@
 						"subtype" : "Undefined",
 						"embed" : 1,
 						"snapshot" : 						{
-							"pluginname" : "PreBOX.vst3info",
-							"plugindisplayname" : "PreBOX",
-							"pluginsavedname" : "C74_VST3:/PreBOX",
-							"pluginsaveduniqueid" : 1371247375,
+							"pluginname" : "IL Harmor.vstinfo",
+							"plugindisplayname" : "IL Harmor",
+							"pluginsavedname" : "",
+							"pluginsaveduniqueid" : 1229483375,
 							"version" : 1,
 							"isbank" : 0,
 							"isbase64" : 1,
-							"blob" : "239.VMjLgXN....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCNt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKq7jKt3hKt3hKt3hKt3hKt3hKt3hK2rhKt3hKt3BOujzPu0Fbu4VYtQmO7jTQjkFcC8lazI2arwVYx4CLtvyKIUDYoQ2Pu4Fcx8FarUlb9vyKVMEUy.Ea0cVZtMEcgQWY9.."
+							"sliderorder" : [  ],
+							"slidervisibility" : [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+							"blob" : "85380.CMlaKA....fQPMDZ....AjDRs8F...P.....APTYlEVcrQG.............................AzDR5++++AP.....7....T.....L.........PF....A..............fY....D.........v+++++nA...P...............D.....QkYVX0wFc......................P.....jJ........P......H........v+++++EL...Pv...fAC...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++K.....P.........7+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++......A........v+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.....rhRA.v..LA.G....vDo...8A..............5C...............................D........f9....5C..............................nO...zG...f9....................8A...zG..............zG....P...v++++++++++C....v+++++A....D...........C....H....8A...PbB..D.....Dm...A.....2E........zG..............z8+++CKA..P.......B........8A........f9..............Pe....VB.............P.......B........8A........f9..............Pe....VB........f9....5C..............hS...zG...f6B........zG.........Dm........3t....A....zG...f9.........D....f9...................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................P.....B....L.....A....E....X....vA....H....j....fB....K...............nO........................P..........nO....x....A........9CA....R....vF...va....A........L.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....D.........................................zLyL+O........v+yyLybO....A.....ZlYl.P........f+C65QgO....A.....XlYl.P..........vxLyjO....A...........A....7++++u......B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................j+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................4+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D....................VUUE9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....B.........................................VUUU9O........v+C...vuG...+C..........++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................z+...................v+C........z+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................P+C...................+O........P+C...............v+++++++++++++++++++++C....L....f....................PZ7Rz+...................v+C...........46m3qA..v+.....7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....C.......................v+C................sWB8O..........vsv0qOG...A.....fIzd9O....................B.....v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....P........................9O...............HcpGm+.........+O...f+j...D.....Hchi6+...........LJbE+Z...7O....n8FGm+.........9O1iBe+l...7O.....+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................v+C...................+O....................B.....v+++++++++++++++++++++C....L....v.............................................f+C........7+.........f.........f+C...................f......7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................P+C...................+O........P+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....C.......................T+C...............V+Rn9O........v+C...3OI...A.....rBzd7O........l+C...3uI...+C....v+++++++++++++++++++++C....L....v........................0+...............f0uDp+C........7+....9SB..P......q.sG+C.......f4+....9aB..v+.....7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++C..........A..................7+B........+u.......................................SjB..zG..............nO...............................P.........5C...nO..............................f9...Pe....5C...................zG...Pe..............Pe.....A...++++++++++O.....+++++G....P...........L....f....zG....wI..P.....PbB..D.....bW........Pe..............P2+++OrD...A......H........zG.........5C..............8A...XI..............A......H........zG.........5C..............8A...XI.........5C...nO..............HNA..Pe....tK........Pe.........PbB.......f6B...D....Pe....5C........P.....5C...................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................A....H....v.....D....T....fA....G....f....PB....J....r...............f9.........................A.........f9....HC...D........3OD....HA....a....uA............v..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....P.........................................PyLy7+.........+OOyLy8....D.....nYlYB.A........9OrqGE9....D.....fYlYB.A..........KyLS9....D...........D....v+++++B.....H....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................P9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................j+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P....................XUUU3+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....H.........................................XUUU4+.........+O....+d...7O..........7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................P+C...................+O........P+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................8O...................7+.........8O................+++++++++++++++++++++O....v.....B....................owKQ+C...................+O...........juehuF...+C....v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....L........................+O................zdIz+...........2BWu9b...D......lP64+....................H......+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L.....A.......................3+...............fzodb9C........7+....9SB..P.....fzINt+C..........vnvU7qA..v+....f1abb9C........3+XOJ78aB..v+.....7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................+O...................7+....................H......+++++++++++++++++++++O....v.....C.............................................9O........v+C.........B.........9O....................B.....v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................8O...................7+.........8O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....L.......................P8O...............X8Kg5+.........+O...f+j...D.....vJP6w+........X9O...f+l...7O.....+++++++++++++++++++++O....v.....C.......................T+C...............V+Rn9O........v+C...3OI...A.....rBzd7O........l+C...3uI...+C....v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7++++++++++++++++++++O..........D..................v+K........7+B.......................................D....P.....A........................................Pe....5C...nO...D..........nO.........8A........f9.........1N.........2....bL.........J....jA...XX....GC...B....Pe..........H....v....B.....B....9+++O8A........H.....KA...PB....H....8A.............fFD........Pe....5C...nO...f9.........A....H....v.....D....T....................P.....vnB..rD....x..............P...........................P.AD..r.E.xAPY.LG.kA.c..B.tAPX.zF.kA.H.zB.f.PP.TG.zA.Z.7F.xAPC.jD.tAfY.7F.f..a.jF.tAPY..B.w.PC.jD.tAfY.7F.f..a.jF.tAPY..B.x.P."
 						}
 ,
 						"snapshotlist" : 						{
@@ -6121,27 +6106,29 @@
 									"version" : 2,
 									"minorversion" : 0,
 									"name" : "Dexed",
-									"origin" : "PreBOX.vst3info",
-									"type" : "VST3",
-									"subtype" : "AudioEffect",
+									"origin" : "IL Harmor.vstinfo",
+									"type" : "VST",
+									"subtype" : "Instrument",
 									"embed" : 1,
 									"snapshot" : 									{
-										"pluginname" : "PreBOX.vst3info",
-										"plugindisplayname" : "PreBOX",
-										"pluginsavedname" : "C74_VST3:/PreBOX",
-										"pluginsaveduniqueid" : 1371247375,
+										"pluginname" : "IL Harmor.vstinfo",
+										"plugindisplayname" : "IL Harmor",
+										"pluginsavedname" : "",
+										"pluginsaveduniqueid" : 1229483375,
 										"version" : 1,
 										"isbank" : 0,
 										"isbase64" : 1,
-										"blob" : "239.VMjLgXN....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCNt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKq7jKt3hKt3hKt3hKt3hKt3hKt3hK2rhKt3hKt3BOujzPu0Fbu4VYtQmO7jTQjkFcC8lazI2arwVYx4CLtvyKIUDYoQ2Pu4Fcx8FarUlb9vyKVMEUy.Ea0cVZtMEcgQWY9.."
+										"sliderorder" : [  ],
+										"slidervisibility" : [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+										"blob" : "85380.CMlaKA....fQPMDZ....AjDRs8F...P.....APTYlEVcrQG.............................AzDR5++++AP.....7....T.....L.........PF....A..............fY....D.........v+++++nA...P...............D.....QkYVX0wFc......................P.....jJ........P......H........v+++++EL...Pv...fAC...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++K.....P.........7+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++......A........v+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.....rhRA.v..LA.G....vDo...8A..............5C...............................D........f9....5C..............................nO...zG...f9....................8A...zG..............zG....P...v++++++++++C....v+++++A....D...........C....H....8A...PbB..D.....Dm...A.....2E........zG..............z8+++CKA..P.......B........8A........f9..............Pe....VB.............P.......B........8A........f9..............Pe....VB........f9....5C..............hS...zG...f6B........zG.........Dm........3t....A....zG...f9.........D....f9...................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................P.....B....L.....A....E....X....vA....H....j....fB....K...............nO........................P..........nO....x....A........9CA....R....vF...va....A........L.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....D.........................................zLyL+O........v+yyLybO....A.....ZlYl.P........f+C65QgO....A.....XlYl.P..........vxLyjO....A...........A....7++++u......B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................j+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................4+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D....................VUUE9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....B.........................................VUUU9O........v+C...vuG...+C..........++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................z+...................v+C........z+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................P+C...................+O........P+C...............v+++++++++++++++++++++C....L....f....................PZ7Rz+...................v+C...........46m3qA..v+.....7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....C.......................v+C................sWB8O..........vsv0qOG...A.....fIzd9O....................B.....v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....P........................9O...............HcpGm+.........+O...f+j...D.....Hchi6+...........LJbE+Z...7O....n8FGm+.........9O1iBe+l...7O.....+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................v+C...................+O....................B.....v+++++++++++++++++++++C....L....v.............................................f+C........7+.........f.........f+C...................f......7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................P+C...................+O........P+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....C.......................T+C...............V+Rn9O........v+C...3OI...A.....rBzd7O........l+C...3uI...+C....v+++++++++++++++++++++C....L....v........................0+...............f0uDp+C........7+....9SB..P......q.sG+C.......f4+....9aB..v+.....7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++C..........A..................7+B........+u.......................................SjB..zG..............nO...............................P.........5C...nO..............................f9...Pe....5C...................zG...Pe..............Pe.....A...++++++++++O.....+++++G....P...........L....f....zG....wI..P.....PbB..D.....bW........Pe..............P2+++OrD...A......H........zG.........5C..............8A...XI..............A......H........zG.........5C..............8A...XI.........5C...nO..............HNA..Pe....tK........Pe.........PbB.......f6B...D....Pe....5C........P.....5C...................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................A....H....v.....D....T....fA....G....f....PB....J....r...............f9.........................A.........f9....HC...D........3OD....HA....a....uA............v..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....P.........................................PyLy7+.........+OOyLy8....D.....nYlYB.A........9OrqGE9....D.....fYlYB.A..........KyLS9....D...........D....v+++++B.....H....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................P9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................j+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P....................XUUU3+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....H.........................................XUUU4+.........+O....+d...7O..........7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C.............3O...f+D....v.....A.......................f+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++..............9C...3OA....L....P........................3+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O........3O...f+....9S.....C....D........................+O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O.............f+....9S.....C....D........................9O.....................7+++++++++++++++CH....f..........H...f.....C....D.......................f9O.....................7+++++++++++++++K7m........................C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C........9C...3O...f+D....v.....A.......................v+C.....................++++++++++++++++.B....H..........B...H....v.....A.......................n+C.....................++++++++++++++++B+I.......................v.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++........f+....9C...3OA....L....P........................7+.....................v+++++++++++++++Of.....B.........f....B....L....P........................5+.....................v+++++++++++++++uveB.......................L....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................P+C...................+O........P+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................8O...................7+.........8O................+++++++++++++++++++++O....v.....B....................owKQ+C...................+O...........juehuF...+C....v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....L........................+O................zdIz+...........2BWu9b...D......lP64+....................H......+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L.....A.......................3+...............fzodb9C........7+....9SB..P.....fzINt+C..........vnvU7qA..v+....f1abb9C........3+XOJ78aB..v+.....7+++++++++++++++++++++.....C....H........................9O...................7+.........9O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................f+C...................+O........f+C...............v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................+O...................7+....................H......+++++++++++++++++++++O....v.....C.............................................9O........v+C.........B.........9O....................B.....v+++++++++++++++++++++C....L....f........................3+...................v+C........3+................7+++++++++++++++++++++.....C....H........................8O...................7+.........8O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....L.......................P8O...............X8Kg5+.........+O...f+j...D.....vJP6w+........X9O...f+l...7O.....+++++++++++++++++++++O....v.....C.......................T+C...............V+Rn9O........v+C...3OI...A.....rBzd7O........l+C...3uI...+C....v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7+++++++++++++++++++++.....C....H........................+O...................7+.........+O................+++++++++++++++++++++O....v.....B.......................v+C...................+O........v+C...............v+++++++++++++++++++++C....L....f........................7+...................v+C........7+................7++++++++++++++++++++O..........D..................v+K........7+B.......................................D....P.....A........................................Pe....5C...nO...D..........nO.........8A........f9.........1N.........2....bL.........J....jA...XX....GC...B....Pe..........H....v....B.....B....9+++O8A........H.....KA...PB....H....8A.............fFD........Pe....5C...nO...f9.........A....H....v.....D....T....................P.....vnB..rD....x..............P...........................P.AD..r.E.xAPY.LG.kA.c..B.tAPX.zF.kA.H.zB.f.PP.TG.zA.Z.7F.xAPC.jD.tAfY.7F.f..a.jF.tAPY..B.w.PC.jD.tAfY.7F.f..a.jF.tAPY..B.x.P."
 									}
 ,
 									"fileref" : 									{
 										"name" : "Dexed",
 										"filename" : "Dexed.maxsnap",
-										"filepath" : "~/Documents/james music/rhizome 5/data",
+										"filepath" : "~/Documents/GitHub/benny/data",
 										"filepos" : -1,
-										"snapshotfileid" : "b70194d14f32b3504a08b4730e0f928b"
+										"snapshotfileid" : "043faa841e1387906eccc94657d89db8"
 									}
 
 								}
@@ -6209,7 +6196,7 @@
 				"box" : 				{
 					"fontsize" : 13.9,
 					"id" : "obj-54",
-					"items" : [ "vst", "AR TG Mastering Live Mono", ",", "vst", "AR TG Mastering Live Stereo", ",", "vst", "AR TG Mastering Mono", ",", "vst", "AR TG Mastering Stereo", ",", "vst", "AR TG Meter Bridge Mono", ",", "vst", "AR TG Meter Bridge Stereo", ",", "vst", "CLA-2A Mono", ",", "vst", "CLA-2A Stereo", ",", "vst", "Console7Buss64", ",", "vst", "Console7Cascade64", ",", "vst", "Console7Channel64", ",", "vst", "CStrip64", ",", "vst", "FabFilter Pro-C 2", ",", "vst", "MaxxBass Mono", ",", "vst", "MaxxBass Stereo", ",", "vst", "Organ3 64", ",", "vst", "TB_ReelBus_v3", ",", "vst", "TENSjr", ",", "vst", "ToTape764", ",", "vst", "ValhallaDelay_x64", ",", "vst", "ValhallaRoom_x64", ",", "vst", "ValhallaShimmer_x64", ",", "vst", "ValhallaUberMod_x64", ",", "vst", "ValhallaVintageVerb_x64", ",", "vst3", "Ampeg SVTVR Classic", ",", "vst3", "AR TG Mastering Live Mono", ",", "vst3", "AR TG Mastering Live Stereo", ",", "vst3", "AR TG Mastering Mono", ",", "vst3", "AR TG Mastering Stereo", ",", "vst3", "AR TG Meter Bridge Mono", ",", "vst3", "AR TG Meter Bridge Stereo", ",", "vst3", "Black Box Analog Design HG-2", ",", "vst3", "bx_cleansweep V2", ",", "vst3", "bx_console Focusrite SC", ",", "vst3", "bx_masterdesk", ",", "vst3", "bx_oberhausen", ",", "vst3", "bx_rockrack V3 Player", ",", "vst3", "bx_solo", ",", "vst3", "CHOWTapeModel", ",", "vst3", "CLA-2A Mono", ",", "vst3", "CLA-2A Stereo", ",", "vst3", "Diva", ",", "vst3", "elysia niveau filter", ",", "vst3", "FabFilter Pro-C 2", ",", "vst3", "MAXBAX", ",", "vst3", "MaxxBass Mono", ",", "vst3", "MaxxBass Stereo", ",", "vst3", "PreBOX", ",", "vst3", "Pro-Q 3", ",", "vst3", "Shadow Hills Mastering Compressor", ",", "vst3", "SmartPedal", ",", "vst3", "SPL Free Ranger", ",", "vst3", "Surge", ",", "vst3", "SurgeEffectsBank", ",", "vst3", "TAL-NoiseMaker", ",", "vst3", "TENSjr", ",", "vst3", "ValhallaSupermassive", ",", "vst3", "ValhallaVintageVerb", ",", "vst3", "Wires" ],
+					"items" : [ "vst", "Acceleration264", ",", "vst", "Acceleration64", ",", "vst", "ADClip764", ",", "vst", "ADClip864", ",", "vst", "ADT64", ",", "vst", "Air264", ",", "vst", "Air364", ",", "vst", "Air64", ",", "vst", "Apicolypse64", ",", "vst", "AQuickVoiceClip64", ",", "vst", "AtmosphereBuss64", ",", "vst", "AtmosphereChannel64", ",", "vst", "Aura64", ",", "vst", "AutoPan64", ",", "vst", "Average64", ",", "vst", "AverMatrix64", ",", "vst", "Balanced64", ",", "vst", "BassAmp64", ",", "vst", "BassDrive64", ",", "vst", "BassKit64", ",", "vst", "Baxandall264", ",", "vst", "Baxandall64", ",", "vst", "Beam64", ",", "vst", "BigAmp64", ",", "vst", "Biquad264", ",", "vst", "Biquad64", ",", "vst", "BiquadDouble64", ",", "vst", "BiquadNonLin64", ",", "vst", "BiquadOneHalf64", ",", "vst", "BiquadPlus64", ",", "vst", "BiquadStack64", ",", "vst", "BiquadTriple64", ",", "vst", "Bite64", ",", "vst", "BitGlitter64", ",", "vst", "BitShiftGain64", ",", "vst", "BitShiftPan64", ",", "vst", "BlockParty64", ",", "vst", "BrassRider64", ",", "vst", "BrightAmbience264", ",", "vst", "BrightAmbience364", ",", "vst", "BrightAmbience64", ",", "vst", "BuildATPDF64", ",", "vst", "BussColors464", ",", "vst", "ButterComp264", ",", "vst", "ButterComp64", ",", "vst", "C5RawBuss64", ",", "vst", "C5RawChannel64", ",", "vst", "Cabs64", ",", "vst", "Calibre64", ",", "vst", "Capacitor264", ",", "vst", "Capacitor64", ",", "vst", "Chamber264", ",", "vst", "Chamber64", ",", "vst", "Channel464", ",", "vst", "Channel564", ",", "vst", "Channel664", ",", "vst", "Channel764", ",", "vst", "Channel864", ",", "vst", "Channel964", ",", "vst", "Chorus64", ",", "vst", "ChorusEnsemble64", ",", "vst", "ChromeOxide64", ",", "vst", "Cider64", ",", "vst", "ClearCoat64", ",", "vst", "ClipOnly264", ",", "vst", "ClipOnly64", ",", "vst", "ClipSoftly64", ",", "vst", "CloudCoat64", ",", "vst", "Coils264", ",", "vst", "Coils64", ",", "vst", "Cojones64", ",", "vst", "Compresaturator64", ",", "vst", "Console0Buss64", ",", "vst", "Console0Channel64", ",", "vst", "Console4Buss64", ",", "vst", "Console4Channel64", ",", "vst", "Console5Buss64", ",", "vst", "Console5Channel64", ",", "vst", "Console5DarkCh64", ",", "vst", "Console6Buss64", ",", "vst", "Console6Channel64", ",", "vst", "Console7Buss64", ",", "vst", "Console7Cascade64", ",", "vst", "Console7Channel64", ",", "vst", "Console7Crunch64", ",", "vst", "Console8BussHype64", ",", "vst", "Console8BussIn64", ",", "vst", "Console8BussOut64", ",", "vst", "Console8ChannelHype64", ",", "vst", "Console8ChannelIn64", ",", "vst", "Console8ChannelOut64", ",", "vst", "Console8LiteBuss64", ",", "vst", "Console8LiteChannel64", ",", "vst", "Console8SubHype64", ",", "vst", "Console8SubIn64", ",", "vst", "Console8SubOut64", ",", "vst", "ConsoleLABuss64", ",", "vst", "ConsoleLAChannel64", ",", "vst", "ConsoleMCBuss64", ",", "vst", "ConsoleMCChannel64", ",", "vst", "ConsoleMDBuss64", ",", "vst", "ConsoleMDChannel64", ",", "vst", "ContentHideD64", ",", "vst", "CreamCoat64", ",", "vst", "Creature64", ",", "vst", "CrickBass64", ",", "vst", "CrunchCoat64", ",", "vst", "CrunchyGrooveWear64", ",", "vst", "Crystal64", ",", "vst", "CStrip264", ",", "vst", "CStrip64", ",", "vst", "curve64", ",", "vst", "Dark64", ",", "vst", "DarkNoise64", ",", "vst", "DCVoltage64", ",", "vst", "DeBess64", ",", "vst", "Deckwrecka64", ",", "vst", "DeEss64", ",", "vst", "DeHiss64", ",", "vst", "Density264", ",", "vst", "Density64", ",", "vst", "DeRez364", ",", "vst", "DeRez64", ",", "vst", "Desk464", ",", "vst", "Desk64", ",", "vst", "DigitalBlack64", ",", "vst", "Dirt64", ",", "vst", "Discontinuity64", ",", "vst", "Distance264", ",", "vst", "Distance364", ",", "vst", "Distance64", ",", "vst", "Distortion64", ",", "vst", "Ditherbox64", ",", "vst", "DitherFloat64", ",", "vst", "DitherMeDiskers64", ",", "vst", "DitherMeTimbers64", ",", "vst", "Doublelay64", ",", "vst", "DoublePaul64", ",", "vst", "Drive64", ",", "vst", "DrumSlam64", ",", "vst", "DubCenter64", ",", "vst", "Dubly264", ",", "vst", "Dubly64", ",", "vst", "DubSub264", ",", "vst", "DubSub64", ",", "vst", "DustBunny64", ",", "vst", "Dynamics64", ",", "vst", "Dyno64", ",", "vst", "Edge64", ",", "vst", "EdIsDim64", ",", "vst", "ElectroHat64", ",", "vst", "Energy264", ",", "vst", "Energy64", ",", "vst", "Ensemble64", ",", "vst", "EQ64", ",", "vst", "EveryConsole64", ",", "vst", "EverySlew64", ",", "vst", "EveryTrim64", ",", "vst", "Exciter64", ",", "vst", "FabFilter Pro-C 2 (Mono)", ",", "vst", "FabFilter Pro-Q 3", ",", "vst", "Facet64", ",", "vst", "FathomFive64", ",", "vst", "FinalClip64", ",", "vst", "FireAmp64", ",", "vst", "Flipity64", ",", "vst", "Floor64", ",", "vst", "Flutter264", ",", "vst", "Flutter64", ",", "vst", "Fracture264", ",", "vst", "Fracture64", ",", "vst", "FromTape64", ",", "vst", "Galactic264", ",", "vst", "Galactic64", ",", "vst", "GalacticVibe64", ",", "vst", "Gatelope64", ",", "vst", "GlitchShifter64", ",", "vst", "GoldenSlew64", ",", "vst", "Golem64", ",", "vst", "GrindAmp64", ",", "vst", "Gringer64", ",", "vst", "GrooveWear64", ",", "vst", "GuitarConditioner64", ",", "vst", "HardVacuum64", ",", "vst", "Hermepass64", ",", "vst", "HermeTrim64", ",", "vst", "HighGlossDither64", ",", "vst", "HighImpact64", ",", "vst", "Highpass264", ",", "vst", "Highpass64", ",", "vst", "Holt264", ",", "vst", "Holt64", ",", "vst", "Hombre64", ",", "vst", "Huge64", ",", "vst", "Hull264", ",", "vst", "Hull64", ",", "vst", "Hype64", ",", "vst", "Hypersonic64", ",", "vst", "HypersonX64", ",", "vst", "IL Harmor", ",", "vst", "Infinity264", ",", "vst", "Infinity64", ",", "vst", "Inflamer64", ",", "vst", "Infrasonic64", ",", "vst", "Interstage64", ",", "vst", "IronOxide564", ",", "vst", "IronOxideClassic264", ",", "vst", "IronOxideClassic64", ",", "vst", "Isolator264", ",", "vst", "Isolator364", ",", "vst", "Isolator64", ",", "vst", "Kalman64", ",", "vst", "kCathedral264", ",", "vst", "kCathedral364", ",", "vst", "kCathedral64", ",", "vst", "kChamberAR64", ",", "vst", "kPlateA64", ",", "vst", "kPlateB64", ",", "vst", "kPlateC64", ",", "vst", "kPlateD64", ",", "vst", "LeadAmp64", ",", "vst", "LeftoMono64", ",", "vst", "LilAmp64", ",", "vst", "Logical464", ",", "vst", "Loud64", ",", "vst", "Lowpass264", ",", "vst", "Lowpass64", ",", "vst", "LRFlipTimer64", ",", "vst", "Luxor64", ",", "vst", "MackEQ64", ",", "vst", "Mackity64", ",", "vst", "MatrixVerb64", ",", "vst", "Melt64", ",", "vst", "MidAmp64", ",", "vst", "MidSide64", ",", "vst", "Monitoring264", ",", "vst", "Monitoring364", ",", "vst", "Monitoring64", ",", "vst", "MoNoam64", ",", "vst", "MSFlipTimer64", ",", "vst", "MultiBandDistortion64", ",", "vst", "MV264", ",", "vst", "MV64", ",", "vst", "NaturalizeDither64", ",", "vst", "NC-1764", ",", "vst", "Neverland64", ",", "vst", "Nikola64", ",", "vst", "NodeDither64", ",", "vst", "Noise64", ",", "vst", "NonlinearSpace64", ",", "vst", "NotJustAnotherCD64", ",", "vst", "NotJustAnotherDither64", ",", "vst", "OneCornerClip64", ",", "vst", "OrbitKick64", ",", "vst", "Overheads64", ",", "vst", "Pafnuty264", ",", "vst", "Pafnuty64", ",", "vst", "Parametric64", ",", "vst", "PaulDither64", ",", "vst", "PaulWide64", ",", "vst", "PDBuss64", ",", "vst", "PDChannel64", ",", "vst", "PeaksOnly64", ",", "vst", "Pear264", ",", "vst", "Pear64", ",", "vst", "PhaseNudge64", ",", "vst", "PitchDelay64", ",", "vst", "PitchNasty64", ",", "vst", "PlatinumSlew64", ",", "vst", "PocketVerbs64", ",", "vst", "Pockey264", ",", "vst", "Pockey64", ",", "vst", "Podcast64", ",", "vst", "PodcastDeluxe64", ",", "vst", "Point64", ",", "vst", "Pop264", ",", "vst", "Pop64", ",", "vst", "PowerSag264", ",", "vst", "PowerSag64", ",", "vst", "Precious64", ",", "vst", "Preponderant64", ",", "vst", "Pressure564", ",", "vst", "PurestAir64", ",", "vst", "PurestConsole2Buss64", ",", "vst", "PurestConsole2Channel64", ",", "vst", "PurestConsole3Buss64", ",", "vst", "PurestConsole3Channel64", ",", "vst", "PurestConsoleBuss64", ",", "vst", "PurestConsoleChannel64", ",", "vst", "PurestDrive64", ",", "vst", "PurestEcho64", ",", "vst", "PurestFade64", ",", "vst", "PurestGain64", ",", "vst", "PurestSquish64", ",", "vst", "PurestWarm264", ",", "vst", "PurestWarm64", ",", "vst", "Pyewacket64", ",", "vst", "RawGlitters64", ",", "vst", "RawTimbers64", ",", "vst", "Recurve64", ",", "vst", "Remap64", ",", "vst", "ResEQ264", ",", "vst", "ResEQ64", ",", "vst", "Reverb64", ",", "vst", "Righteous464", ",", "vst", "RightoMono64", ",", "vst", "SampleDelay64", ",", "vst", "Shape64", ",", "vst", "ShortBuss64", ",", "vst", "SideDull64", ",", "vst", "Sidepass64", ",", "vst", "Silhouette64", ",", "vst", "Sinew64", ",", "vst", "SingleEndedTriode64", ",", "vst", "Slew264", ",", "vst", "Slew364", ",", "vst", "Slew64", ",", "vst", "SlewOnly64", ",", "vst", "SlewSonic64", ",", "vst", "Smooth64", ",", "vst", "SoftGate64", ",", "vst", "SpatializeDither64", ",", "vst", "Spiral264", ",", "vst", "Spiral64", ",", "vst", "Srsly264", ",", "vst", "Srsly64", ",", "vst", "StarChild264", ",", "vst", "StarChild64", ",", "vst", "StereoChorus64", ",", "vst", "StereoDoubler64", ",", "vst", "StereoEnsemble64", ",", "vst", "StereoFX64", ",", "vst", "Stonefire64", ",", "vst", "StudioTan64", ",", "vst", "SubsOnly64", ",", "vst", "SubTight64", ",", "vst", "Surge64", ",", "vst", "SurgeTide64", ",", "vst", "Sweeten64", ",", "vst", "Swell64", ",", "vst", "Tape64", ",", "vst", "TapeBias64", ",", "vst", "TapeDelay264", ",", "vst", "TapeDelay64", ",", "vst", "TapeDither64", ",", "vst", "TapeDust64", ",", "vst", "TapeFat64", ",", "vst", "TDR Nova", ",", "vst", "Texturize64", ",", "vst", "TexturizeMS64", ",", "vst", "Thunder64", ",", "vst", "ToneSlant64", ",", "vst", "ToTape564", ",", "vst", "ToTape764", ",", "vst", "ToVinyl464", ",", "vst", "TPDFDither64", ",", "vst", "TPDFWide64", ",", "vst", "TransDesk64", ",", "vst", "Tremolo64", ",", "vst", "TremoSquare64", ",", "vst", "Trianglizer64", ",", "vst", "TripleSpread64", ",", "vst", "Tube264", ",", "vst", "Tube64", ",", "vst", "TubeDesk64", ",", "vst", "uLawDecode64", ",", "vst", "uLawEncode64", ",", "vst", "Ultrasonic64", ",", "vst", "UltrasonicLite64", ",", "vst", "UltrasonicMed64", ",", "vst", "UltrasonX64", ",", "vst", "UnBox64", ",", "vst", "ValhallaDelay_x64", ",", "vst", "ValhallaPlate_x64", ",", "vst", "ValhallaRoom_x64", ",", "vst", "ValhallaSpaceModulator_x64", ",", "vst", "ValhallaUberMod_x64", ",", "vst", "ValhallaVintageVerb_x64", ",", "vst", "VariMu64", ",", "vst", "Verbity264", ",", "vst", "Verbity64", ",", "vst", "Vibrato64", ",", "vst", "VinylDither64", ",", "vst", "VoiceOfTheStarship64", ",", "vst", "VoiceTrick64", ",", "vst", "Weight64", ",", "vst", "Wider64", ",", "vst", "Wolfbot64", ",", "vst", "XBandpass64", ",", "vst", "XHighpass64", ",", "vst", "XLowpass64", ",", "vst", "XNotch64", ",", "vst", "XRegion64", ",", "vst", "YBandpass64", ",", "vst", "YHighpass64", ",", "vst", "YLowpass64", ",", "vst", "YNotBandpass64", ",", "vst", "YNotch64", ",", "vst", "YNotHighpass64", ",", "vst", "YNotLowpass64", ",", "vst", "YNotNotch64", ",", "vst", "ZBandpass264", ",", "vst", "ZBandpass64", ",", "vst", "ZHighpass264", ",", "vst", "ZHighpass64", ",", "vst", "ZLowpass264", ",", "vst", "ZLowpass64", ",", "vst", "ZNotch264", ",", "vst", "ZNotch64", ",", "vst", "ZOutputStage64", ",", "vst", "ZRegion264", ",", "vst", "ZRegion64", ",", "vst3", "ValhallaFreqEcho", ",", "vst3", "ValhallaSupermassive" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -6442,6 +6429,18 @@
 				}
 
 			}
+, 			{
+				"box" : 				{
+					"id" : "obj-72",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 421.0, 617.0, 35.0, 22.0 ],
+					"text" : "open"
+				}
+
+			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -6622,6 +6621,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-181", 0 ],
+					"source" : [ "obj-117", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-211", 0 ],
 					"source" : [ "obj-118", 0 ]
 				}
@@ -6640,13 +6646,6 @@
 					"destination" : [ "obj-162", 1 ],
 					"order" : 1,
 					"source" : [ "obj-122", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-135", 0 ],
-					"source" : [ "obj-123", 1 ]
 				}
 
 			}
@@ -7117,6 +7116,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-88", 0 ],
+					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
 					"source" : [ "obj-170", 0 ]
 				}
@@ -7324,31 +7330,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-188", 0 ],
-					"order" : 1,
-					"source" : [ "obj-185", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-195", 1 ],
-					"order" : 0,
-					"source" : [ "obj-185", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-184", 0 ],
 					"source" : [ "obj-186", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-195", 0 ],
-					"source" : [ "obj-188", 0 ]
 				}
 
 			}
@@ -7393,13 +7376,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-196", 0 ],
 					"source" : [ "obj-194", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-88", 0 ],
-					"source" : [ "obj-195", 0 ]
 				}
 
 			}
@@ -8350,6 +8326,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-59", 0 ],
+					"source" : [ "obj-34", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-228", 1 ],
 					"source" : [ "obj-37", 0 ]
 				}
@@ -8457,14 +8440,14 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-185", 1 ],
+					"destination" : [ "obj-17", 1 ],
 					"source" : [ "obj-51", 1 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-185", 0 ],
+					"destination" : [ "obj-17", 0 ],
 					"source" : [ "obj-51", 0 ]
 				}
 
@@ -8568,6 +8551,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-186", 0 ],
 					"source" : [ "obj-58", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-66", 0 ],
+					"source" : [ "obj-59", 0 ]
 				}
 
 			}
@@ -8710,6 +8700,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-211", 0 ],
+					"source" : [ "obj-66", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-75", 0 ],
 					"source" : [ "obj-68", 0 ]
 				}
@@ -8738,7 +8735,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-117", 0 ],
+					"order" : 0,
+					"source" : [ "obj-70", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-175", 0 ],
+					"order" : 1,
 					"source" : [ "obj-70", 3 ]
 				}
 
@@ -8747,6 +8753,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-234", 0 ],
 					"source" : [ "obj-70", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-70", 0 ],
+					"source" : [ "obj-72", 0 ]
 				}
 
 			}
@@ -9029,6 +9042,13 @@
 		}
 ,
 		"dependency_cache" : [ 			{
+				"name" : "Dexed.maxsnap",
+				"bootpath" : "~/Documents/GitHub/benny/data",
+				"patcherrelativepath" : "../data",
+				"type" : "mx@s",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "VST.manager.js",
 				"bootpath" : "~/Documents/GitHub/benny/audio_blocks",
 				"patcherrelativepath" : ".",

@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 5,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -791,7 +791,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 5,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -800,6 +800,18 @@
 						"rect" : [ 59.0, 107.0, 640.0, 480.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 300.0, 50.0, 36.0, 22.0 ],
+									"text" : "defer"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-2",
 									"maxclass" : "newobj",
@@ -953,7 +965,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 96.0, 68.0, 119.0, 22.0 ],
+									"patching_rect" : [ 96.0, 72.0, 119.0, 22.0 ],
 									"text" : "sprintf get blocks[%i]"
 								}
 
@@ -986,7 +998,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 96.0, 13.0, 30.0, 30.0 ]
+									"patching_rect" : [ 300.0, 20.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -1068,6 +1080,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-64", 0 ],
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-31", 0 ],
 									"source" : [ "obj-50", 1 ]
 								}
@@ -1103,13 +1122,12 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-64", 0 ],
+									"destination" : [ "obj-5", 0 ],
 									"source" : [ "obj-73", 0 ]
 								}
 
 							}
- ],
-						"originid" : "pat-3980"
+ ]
 					}
 ,
 					"patching_rect" : [ 441.5, 73.0, 128.0, 22.0 ],
@@ -1179,6 +1197,7 @@
 			}
 , 			{
 				"box" : 				{
+					"autosave" : 1,
 					"bgmode" : 0,
 					"border" : 0,
 					"clickthrough" : 0,
@@ -1190,10 +1209,77 @@
 					"outlettype" : [ "signal", "signal", "", "list", "int", "", "", "" ],
 					"patching_rect" : [ 580.0, 362.0, 92.5, 22.0 ],
 					"save" : [ "#N", "vst~", "loaduniqueid", 0, ";" ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_invisible" : 1,
+							"parameter_longname" : "vst~",
+							"parameter_modmode" : 0,
+							"parameter_shortname" : "vst~",
+							"parameter_type" : 3
+						}
+
+					}
+,
 					"saved_object_attributes" : 					{
 						"floateditorwindow" : 1,
 						"parameter_enable" : 1,
 						"parameter_mappable" : 0
+					}
+,
+					"snapshot" : 					{
+						"filetype" : "C74Snapshot",
+						"version" : 2,
+						"minorversion" : 0,
+						"name" : "snapshotlist",
+						"origin" : "vst~",
+						"type" : "list",
+						"subtype" : "Undefined",
+						"embed" : 1,
+						"snapshot" : 						{
+							"pluginname" : "ValhallaVintageVerb.vst3info",
+							"plugindisplayname" : "ValhallaVintageVerb",
+							"pluginsavedname" : "",
+							"pluginsaveduniqueid" : 526997559,
+							"version" : 1,
+							"isbank" : 0,
+							"isbase64" : 1,
+							"blob" : "1131.VMjLgHFA...O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9biMz3hUMczXWEjKt3hYt3hKt.kKt3hKt3BS5gEcyQjKtfjKzXTR5AkaA4hKtfjYisVUwvjKP4hKE4hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKBYmZUMTRSgzQH4hKtXWdOMCLFElYXcUV30zUZUGMV8DZDk1R1gjPHsFMwfUcQYkVzMlUOgFUEUkQvHjSncSZOYlcoU0Y2YjVmcmQgcVVUoEcQcEVsUEaUsVRsgkYtbTXvLlUZQWVUkEdMckV0QiUOgFTosjcyHUSn4hPhgWUwH1ZQ01TmAiUYgCRBE0ZYYEVvbmQiglKRM0amc0SnQTZKYGRBgDTIcUVDUkQgc1ZW8DZtj1R3QUZHYFTTkUZEYEY3fjPLQGTowjcPMjS1wzTLYmZSwTLpMDS1gUZHYFSUoUMUY0SnQTZKYGRBgTPQczXm0TLZgCRBwDcTkFRlgDUXkWSWMEL2YzX3fjPLQGVowTdtjGSyHVZMMiXo0zLLMES1QUZHYFRTgUdMcjU0k0UYgGLogjcyfGSyPzPLECTS4DLDMTS2o1PNkmK4wDZtHjTuMlQZM0YVkkbYY0Sn4RZKYGRBgDRqESVtkkZhsVQW8DZtj1RvfjPHUTQrIlbqcTTukEaYASSWoUczX0SnQTZKYGRBgDSEYzXqEEUZwVVVMVdqESXzASZHc2LBwDZtH0T0EEaTcVTWkENHIDSzgzPMACTS0jdTkVS5g0TNYGUC4DMpkFRlomdgoVTTkkcQcjV3fjPLQGS40DMpMkSzn1TNACR4wzcXkFSy.UZHYlYToUamECTvD0UOglKosDLpMDSvvzPNMCUS4TdXkWS4I1PLECRBgDS3DyXCU0QigCRBwDctjFRlwjdgIGNrIVS3XTVqASZHY2L3wTdLkGS4wTdLoGSowTLhMTS54xPNglKnQ0ZYcUV3kjUSUWTVkENHIDSz4xPMcGVo0TLXkVSxn1PLMCT4wjcDkFRlomUZMyc5EVZyY0Sn4RZHYFUWo0UqYTV5clUOglZ4wDLHIDRvrlQRs1ZwjkaQc0SnAUdLACR3sTNt3hKt3hKt3hKt3hKtQUUCUEQTg2ZrM1YQcUVDUjQicVPP4RPHQEY1UTLhkWPP4RPL4hKi4hKt3hKt3hKtXlTU0DUQAURWoULEYzXqEEUXoWQFwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+						}
+,
+						"snapshotlist" : 						{
+							"current_snapshot" : 0,
+							"entries" : [ 								{
+									"filetype" : "C74Snapshot",
+									"version" : 2,
+									"minorversion" : 0,
+									"name" : "ValhallaVintageVerb",
+									"origin" : "ValhallaVintageVerb.vst3info",
+									"type" : "VST3",
+									"subtype" : "AudioEffect",
+									"embed" : 1,
+									"snapshot" : 									{
+										"pluginname" : "ValhallaVintageVerb.vst3info",
+										"plugindisplayname" : "ValhallaVintageVerb",
+										"pluginsavedname" : "",
+										"pluginsaveduniqueid" : 526997559,
+										"version" : 1,
+										"isbank" : 0,
+										"isbase64" : 1,
+										"blob" : "1131.VMjLgHFA...O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9biMz3hUMczXWEjKt3hYt3hKt.kKt3hKt3BS5gEcyQjKtfjKzXTR5AkaA4hKtfjYisVUwvjKP4hKE4hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKBYmZUMTRSgzQH4hKtXWdOMCLFElYXcUV30zUZUGMV8DZDk1R1gjPHsFMwfUcQYkVzMlUOgFUEUkQvHjSncSZOYlcoU0Y2YjVmcmQgcVVUoEcQcEVsUEaUsVRsgkYtbTXvLlUZQWVUkEdMckV0QiUOgFTosjcyHUSn4hPhgWUwH1ZQ01TmAiUYgCRBE0ZYYEVvbmQiglKRM0amc0SnQTZKYGRBgDTIcUVDUkQgc1ZW8DZtj1R3QUZHYFTTkUZEYEY3fjPLQGTowjcPMjS1wzTLYmZSwTLpMDS1gUZHYFSUoUMUY0SnQTZKYGRBgTPQczXm0TLZgCRBwDcTkFRlgDUXkWSWMEL2YzX3fjPLQGVowTdtjGSyHVZMMiXo0zLLMES1QUZHYFRTgUdMcjU0k0UYgGLogjcyfGSyPzPLECTS4DLDMTS2o1PNkmK4wDZtHjTuMlQZM0YVkkbYY0Sn4RZKYGRBgDRqESVtkkZhsVQW8DZtj1RvfjPHUTQrIlbqcTTukEaYASSWoUczX0SnQTZKYGRBgDSEYzXqEEUZwVVVMVdqESXzASZHc2LBwDZtH0T0EEaTcVTWkENHIDSzgzPMACTS0jdTkVS5g0TNYGUC4DMpkFRlomdgoVTTkkcQcjV3fjPLQGS40DMpMkSzn1TNACR4wzcXkFSy.UZHYlYToUamECTvD0UOglKosDLpMDSvvzPNMCUS4TdXkWS4I1PLECRBgDS3DyXCU0QigCRBwDctjFRlwjdgIGNrIVS3XTVqASZHY2L3wTdLkGS4wTdLoGSowTLhMTS54xPNglKnQ0ZYcUV3kjUSUWTVkENHIDSz4xPMcGVo0TLXkVSxn1PLMCT4wjcDkFRlomUZMyc5EVZyY0Sn4RZHYFUWo0UqYTV5clUOglZ4wDLHIDRvrlQRs1ZwjkaQc0SnAUdLACR3sTNt3hKt3hKt3hKt3hKtQUUCUEQTg2ZrM1YQcUVDUjQicVPP4RPHQEY1UTLhkWPP4RPL4hKi4hKt3hKt3hKtXlTU0DUQAURWoULEYzXqEEUXoWQFwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+									}
+,
+									"fileref" : 									{
+										"name" : "ValhallaVintageVerb",
+										"filename" : "ValhallaVintageVerb.maxsnap",
+										"filepath" : "~/Documents/GitHub/benny/data",
+										"filepos" : -1,
+										"snapshotfileid" : "ba61d2bec0c18028c5674272f79c95cd"
+									}
+
+								}
+ ]
+						}
+
 					}
 ,
 					"text" : "vst~",
@@ -2235,8 +2321,7 @@
 				}
 
 			}
- ],
-		"originid" : "pat-3972"
+ ]
 	}
 
 }

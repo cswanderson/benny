@@ -1,3 +1,66 @@
+17/8/25:
+- new **midi.logic** and **utility.audio.logic** are blocks that perform all the classic logic functions: OR, AND, XOR, NAND.
+- **utility.spray** is a block that routes incoming notes to different outlets indexed by either note or velocity. useful for example, for turning a sequencer/clock progress counter into events at particular steps.
+
+2/8/25:
+- **seq.values** now lets you type lists of values in directly. hover your mouse over the lane you want to type into, then type, separating values by commas. eg c4,c#4,36,37,,,,2,3,127 followed by enter.
+
+10/7/25:
+- two new utilities for splitting signals so you can process parts of them differently: **utility.band.split** is a classic crossover for splitting a signal into frequency bands. you can stack them up for more bands. **utility.transient.split** splits a signal into 'transient' and 'body' portions. you can use this for simple transient enhancement as well as for applying different processing to the two parts.
+
+9/7/25:
+- two new blocks from Luke Abbott - **fx.multiband.drive** is a 3 band transfer-curve based saturator and **source.auto.drummer** is a super-simple preset beatbox - intended as a songwriting aid - based around dr110 samples. waltz! polka! rock.
+- a change to dragging behaviour. now, to connect a block to itself you need to hold shift. you can switch back to the old behaviour in preferences if you prefer.
+
+2/7/25:
+- **utility.sacred.channel** - is a synth channel minus the oscillators: a SEM-like 12dB morphing filter and a saturating VCA driven by an ADSR envelope. a VCA floor parameter allows you to let a drone through.
+
+28/6/25:
+- big overhaul to how modulation and parameters get distributed to voices which has reduced cpu usage dramatically.
+
+18/6/25:
+- removed invisible layout grid, feels smoother
+- **fx.thermal.eq** is a new eq block based on multi-level impulses taken from a british tube eq i have. it has a highpass and a single band of boost which pushes into the saturation nicely. a bite control lets transients through the drive a little.
+- mixer.mono.thermal & mixer.stereo.thermal are a pair of mixer channels based on the same code. the mono one has a sidechain compressor input where the compression reduces transient detail as well as ducking the signal. the stereo one has a mid-side option with separate controls for the side channel.
+
+15/6/25:
+- in the sidebar parameters view, the modulation amount sliders for connected mod sources now (optionally) display the offset as well as the amount for that modulation.
+- the ui prefs editor now updates preferences instantly, without a restart of benny.
+
+13/6/25:
+- **source.sacred.waves.osc** is a new dual+sub oscillator core by Luke Abbott based on wavetables sampled from a few synths at my studio (sacred walls) - a prophet 600 and a mono/poly. it gets the essential tone of those two surprisingly nicely and adds a versatile set of modulation options.
+- you can now drag a block onto a wire while holding ctrl-shift (cmd-shift) to insert it into that wire. thanks to user 'gullygully'
+
+11/6/25:
+- improved scales handling - every block that uses scales (like midi.scale.quantise or fx.retune or fx.pitch.gate or midi.note.select or...) now has a much nicer scale selector. you can see the selected scale, and edit it with the mouse. the scales are still stored in a core.scales.shapes block but this gets loaded automatically for you if you load a block that needs it.
+- lots of workflow improvements, macos compatibility improvements and bugfixes, many thanks to everyone trying benny out and contributing feedback and fixes!
+- midi.lfo **breaking change** the maximum rate has been increased slightly. when loading old songs using this block you may need to make a small adjustment to the rate slider. 
+
+8/6/25:
+- **fx.metal.box** - hardware preamp/circuit colour replication, based on multi-level impulses sampled from recording equipment in my studio. works great on the end of an instrument's signal chain to gently glue it together, push up the level and round off the edges. the whole development of this was inspired by the process of helping my friend christopher duffin (xam duo) mix some tunes, and noticing that a lot of his parts (from things like a dx7 or juno or a rhodes recorded hot) didn't need much mix processing because the pushy, squared off output stages of all the gear involved had done half the job for us.
+- **fx.convolve** - general purpose efficient convolution processor. you need to install the HISStools package in max package manager then you can convolve incoming audio with impulses stored in the waves page of benny. (also works well with samples that aren't reverb impulses).
+
+3/6/25:
+- **utility.spectrum** block added - outputs a test tone, shows the spectrum of its input in a pop up window.
+
+28/5/25:
+- important: **breaking change** if you already had a launch control xl, or midi fighter twister configured you should remove it from your hardware profile(s) and re-add. this will make it use the new midi controller drivers written specially for these controllers.
+- hardware manager now supports readymade configurations for common controllers. if benny recognises a controller when you add it in hardware manager the settings will be autofilled and you'll be notified. 
+- monome arc support, including displaying both the type of the control (eg unipolar, bipolar, stepped menu item) and the individual voice parameter values for polyphonic blocks.
+- improved controller ui, colour assignments and storing initial values are easier with the new edit mode
+- end zone forces : for controllers with encoders or motorised controls, you can specify zones at either end of the range that either attract or repel. this is useful for example when mapping to delay feedback controls, which are nice to turn up for a moment but bad if you forget and leave them there too long.
+- smart jumpless soft pickup implemented for controllers with potentiometer outputs. you can disable this in the preferences. smart soft pickup remaps the fader curve to take into account differences between the controller position and the actual value. this means there are no jumps, no dead zones, and increasing the fader value always increases the output value (and the converse).
+- controller looper. there's a button in the ui marked loop, or you can assign a midi button. while held, it captures all controller moves, when released it loops them - the loop length is set by the duration of the press. if you just tap the button it loops the preceding bar. moving any of the looped controls again stops the loop. once you have something looped you can click the 'grab' button to turn that loop into a permanent copy in a new piano roll player block. thanks to j preiksa for the suggestion!
+- the keyboard looper has been improved to match the controller one, though the short-tap default loop is 8 bars, and you can adjust the loop capture range in the keyboard block before spawning a piano roll block if you want. both loopers copy a bit of performance prior to the loop into the piano roll when you spawn it, in case the previous take was better.
+- improved piano roll ui - you can click to open / fold lanes, and the automatic focus only expands used lanes.
+- on the panels page, if a block has patterns and the pattern selector is assigned to its panel then it displays pattern trigger buttons - one button per available non-empty pattern.
+
+04/05/25:
+- on windows, when using MME drivers, if an audio device (eg bluetooth headphones) disconnects then the max scheduler stops and as a result benny's ui stops too. this is a max/windows issue that i can't fix, but as a workaround if it happens you can scroll down on the launcher window and there's now an emergency save button which will save the contents of your song even if the ui and/or max scheduler have stopped.
+
+28/4/25:
+- improved the feel of the state fade sliders - you can make them pop up by dragging the state buttons in the left bar.
+
 18/04/25:
 - new **recall** page. shows a grid of all stored states (per block) and all available patterns. beta, in progress still, i'm up for hearing feedback in the github discussions page or discord.
 - hold shift when clicking a state button (in the left sidebar or on the recall page), or a pattern (on the recall page) to quantise firing it to the next bar. if shift is still held when the bar comes around it waits for the next one, etc. ctrl-clicking the column labels mutes blocks.

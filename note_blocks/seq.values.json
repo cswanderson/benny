@@ -7,6 +7,7 @@
 		"max_polyphony" : 0,
 		"ui_in_sidebar_height" : 4,
 		"ui_in_sidebar_expands" : 1,
+		"ui_in_sidebar_gets_keypresses" : 1,
 		"default_polymode" : 	{
 				"stack_mode" : "unison all",
 				"choose_mode" : "blind cycle",
@@ -28,7 +29,7 @@
 		},
 		"groups" : [
 			{ 
-				"contains" : [],
+				"contains" : [7],
 				"patterncontrols" : 1
 			},
 			{ 
@@ -65,6 +66,9 @@
 			"playhead_offset" : 0,
 			"pattern_size" : 128,
 			"pattern_start" : 1
+		},
+		"panel" : {
+			"parameters" : [7]
 		},
 		"voice_data" : {
 			"defaults" : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]

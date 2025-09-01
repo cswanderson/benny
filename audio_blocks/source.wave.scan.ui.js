@@ -3,6 +3,7 @@ var MAX_PARAMETERS = 256;
 var MAX_WAVES = 16;
 var voice_parameter_buffer = new Buffer("voice_parameter_buffer"); 
 var parameter_value_buffer = new Buffer("parameter_value_buffer");
+var changed_flags = new Buffer("changed_flags");
 outlets = 3;
 var config = new Dict;
 config.name = "config";
@@ -20,7 +21,7 @@ var blockcolour = [64,64,64];
 var o_hl=new Array(100);
 var o_w=-1;
 
-function setup(x1,y1,x2,y2,sw){ //has screen width too so it can plot a little fx/waveform hint window bottom right
+function setup(x1,y1,x2,y2,sw,mode){ //has screen width too so it can plot a little fx/waveform hint window bottom right
 //	post("drawing sequencers");
 	MAX_PARAMETERS = config.get("MAX_PARAMETERS");
 	MAX_WAVES = config.get("MAX_WAVES");
@@ -50,7 +51,7 @@ function draw(){
 }
 
 function mouse(x,y,l,s,a,c,scr){
-	post("\nmouse",x,y,l,s,a,c,scr);
+	//post("\nmouse",x,y,l,s,a,c,scr);
 	if((x>=x_pos)&&(x<=x_pos+width)){
 		if((y>=y_pos)&&(y<=y_pos+height)){
 			var tx=x-x_pos;
@@ -62,6 +63,7 @@ function mouse(x,y,l,s,a,c,scr){
 			if(rx!=0) post("\ncurrent diff is:",rx,"you want",tx,"so i'll set it to",tx-rx);
 			parameter_value_buffer.poke(1, MAX_PARAMETERS*block+7,Math.min(1,Math.max(0,tx-rx)));
 			voice_parameter_buffer.poke(1, MAX_PARAMETERS*v_list[0]+7,tx);
+			changed_flags.poke(1, v_list[0], 1);
 		}
 	}
 }
