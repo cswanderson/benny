@@ -1,0 +1,1839 @@
+{
+	"vst.Access.Virus.Editor" : 	{
+		"patcher" : "vst.loader",
+		"type" : "audio",
+		"help_text" : "Access Virus Editor",
+		"block_ui_patcher" : "blank.ui",
+		"max_polyphony" : 0,
+		"plugin_name" : "Access Virus Editor",
+		"plugin_type" : "au",
+		"pitchbend_range" : 2,
+		"upsample" : 1,
+		"subvoices" : 2,
+		"connections" : 		{
+			"in" : 			{
+				"audio" : [ "audio in" ],
+				"midi" : [ "notes in", "pitchbend", "modulation", "aftertouch", "sustain" ]
+			}
+,
+			"out" : 			{
+				"audio" : [ "audio out" ],
+				"midi" : [ "notes out" ],
+				"parameters" : [ "pitchbend", "modulation", "aftertouch", "sustain" ]
+			}
+
+		}
+,
+		"parameters" : [ 			{
+				"name" : "[1] Mod Wheel",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Breath Control",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 3",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Foot Controller",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Portamento",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Data Slider",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Channel Volume",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Balance",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 9",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Panorama",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Expression",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 12",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 13",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 14",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 15",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Contr 16",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 1 Shape",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 Shape",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 1 Key Follow",
+				"default" : 0.755905508995056,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 Key Follow",
+				"default" : 0.755905508995056,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 1 Wave",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 Wave",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Waveform",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Waveform",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Density",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Wave Index",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Local Detune",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Wave PWM",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Density",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Wave Index",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Local Detune",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Pulse Width",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 Detune",
+				"default" : 0.251968502998352,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc X-Sync Freq",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 1 / 2 Balance",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Sub Oscillator Level",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Sub Oscillator Wave",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Noise Level",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Ring Mod Level",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Cutoff",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Cutoff",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Resonance",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Carrier Q-Factor",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Resonance",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Modulator Q-Factor",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 1 Pulse Width",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 Pulse Width",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 1 Semitone",
+				"default" : 0.5,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 Semitone",
+				"default" : 0.5,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator Volume",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Key Follow",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Key Follow",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Sustain Slope",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Amp Sustain Slope",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Env Follower Gain",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Contour",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Contour",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Unison LFO Phase",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Noise Color",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay Color",
+				"default" : 0.496062994003296,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Reverb Color",
+				"default" : 0.496062994003296,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Transpose",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Envelope -> Pitch",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Envelope -> FM",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Center Freq",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Modulator Offset",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Carrier Spread",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Modulator Spread",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Osc 1 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Osc 2 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 PW 1+2 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Reso 1+2 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Filter Gain Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Shape 1+2 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 FM amount Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Filter 1 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Filter 2 Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Pan Depth",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Chorus Feedback",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] RSPKR Low / High Bal",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Reverb Feedback",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay Feedback",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Reverb Damping",
+				"default" : 0.15748031437397,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay Modulation Depth",
+				"default" : 0.094488188624382,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Chorus Mix",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Chorus Mix",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Chorus Depth",
+				"default" : 0.125984251499176,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 FM Amount",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Keyfollow",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Keyfollow",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Amp Env Sustain",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Env Sustain",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Unison Pan Spread",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Envelope Amount",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Envelope Amount",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator Sync 2>1",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Env Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Env Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 / 2 Balance",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Source Balance",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Saturation",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Ring Mod Level",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Type",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Type",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Routing",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Env Attack",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Env Follower Attack",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Carrier Attack",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Env Decay",
+				"default" : 0.354330718517303,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Carrier Release",
+				"default" : 0.354330718517303,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Spectral Balance",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Env Release",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Env Follower Release",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Voc Bands",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Amp Env Attack",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Amp Env Decay",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Amp Env Release",
+				"default" : 0.031496062874794,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Rate",
+				"default" : 0.377952754497528,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Waveform",
+				"default" : 0.01492537278682,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Waveform",
+				"default" : 0.01492537278682,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Trigger Phase",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Rate",
+				"default" : 0.377952754497528,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Trigger Phase",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Patch Volume",
+				"default" : 0.787401556968689,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Key Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Unison Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Unison Detune",
+				"default" : 0.377952754497528,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Input Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Input Select",
+				"default" : 0.125,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Chorus Mode",
+				"default" : 0.16666667163372,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Chorus Rate",
+				"default" : 0.543307065963745,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Rotator Speed",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] RSPKR Distance",
+				"default" : 0.125984251499176,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Chorus Delay",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Chorus Amount",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] RSPKR Mic Angle",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay Waveform",
+				"default" : 0.200000002980232,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Chorus LFO Shape",
+				"default" : 0.200000002980232,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Chorus X-Over",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay / Reverb Type",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Delay Type",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Effect Send",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay Time",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Reverb Predelay",
+				"default" : 0.010869565419853,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Delay Rate",
+				"default" : 0.125984251499176,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Reverb Decay",
+				"default" : 0.535433053970337,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Reverb Type",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Delay Modulation",
+				"default" : 0.125984251499176,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Delay Frequency",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Formant Shift",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Formant Shift",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 3 Semitone",
+				"default" : 0.5,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Unison LFO Phase",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 3 Sus.Slope",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 4 Sus.Slope",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 1 amount 1",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 1 amount 2",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 1 amount 3",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 2 amount 1",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 2 amount 2",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 2 amount 3",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 3 amount 1",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 3 amount 2",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 3 amount 3",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 4 amount 1",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 4 amount 2",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 4 amount 3",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 5 amount 1",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 5 amount 2",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 5 amount 3",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 6 amount 1",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 6 amount 2",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 6 amount 3",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Rvb Color",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] F.Bank Freq",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] F.Bank St Phase",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] F.Bank Shape L",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] F.Bank Shape R",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Assign Amount",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Assign Amount",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Reso Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Env Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Reso Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Env Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Osc 1 Shape to Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Osc 2 Shape to Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Pulse Width to Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] FM amount to Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Patch Level to Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Panorama to Velocity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Phaser Feedback",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Dist Tone",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Punch Intensity",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Key Follow",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Assign Amount",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Character Intensity",
+				"default" : 0.31496062874794,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Distortion Intensity",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Dist Mix",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Dist Treble Boost",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Dist High Cut",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Dist Quality",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Rvb Feedback",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Rvb Damping",
+				"default" : 0.15748031437397,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 3 Sustain",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 4 Sustain",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Phaser Mix",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Phaser Mod Depth",
+				"default" : 0.881889760494232,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Unison Pan Spread",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] F.Bank Mix",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter Keyfollow Base",
+				"default" : 0.283464580774307,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Filter Keyfollow Base",
+				"default" : 0.283464580774307,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Arp Oct Range",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Interpolation",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Local Detune",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 1 Formant Spread",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Interpolation",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 FM Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Local Detune",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Osc 2 Formant Spread",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 2 FM Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 3 Waveform",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Unison Detune",
+				"default" : 0.377952754497528,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 3 Detune",
+				"default" : 0.31496062874794,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillator 3 Volume",
+				"default" : 0.503937005996704,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Oscillators Phase",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 1 Envelope Polarity",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Filter 2 Envelope Polarity",
+				"default" : 1.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 3 Attack",
+				"default" : 0.15748031437397,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 3 Decay",
+				"default" : 0.551181077957153,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 3 Release",
+				"default" : 0.551181077957153,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 4 Attack",
+				"default" : 0.15748031437397,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 4 Decay",
+				"default" : 0.551181077957153,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Envelope 4 Release",
+				"default" : 0.551181077957153,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Oscillator 1 Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Oscillator 2 Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] [TI] Unison Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Fade In",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Waveform",
+				"default" : 0.01492537278682,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Mode",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Clock",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Clock",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Clock",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Rate",
+				"default" : 0.74015748500824,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 1 Source",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 2 Source",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 3 Source",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 4 Source",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 5 Source",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 6 Source",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 1 Assign Destination",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 2 Assign Destination",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Lfo 3 Assign Destination",
+				"default" : 0.16666667163372,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 1 Destination 1",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+, 			{
+				"name" : "[1] Assign 2 Destination 1",
+				"default" : 0.0,
+				"type" : "float",
+				"wrap" : 0,
+				"values" : [ "uni", 0, 1, "lin" ]
+			}
+ ],
+		"groups" : [ 			{
+				"height" : 1,
+				"contains" : [ 0, 1, 2, 3, 16, 17, 18, 19, 32, 33, 34, 35, 48, 49, 50, 51, 64, 65, 66, 67, 80, 81, 82, 83, 96, 97, 98, 99, 112, 113, 114, 115, 128, 129, 130, 131, 144, 145, 146, 147, 160, 161, 162, 163, 176, 177, 178, 179, 192, 193, 194, 195, 208, 209, 210, 211, 224, 225, 226, 227, 240, 241, 242, 243 ]
+			}
+, 			{
+				"height" : 1,
+				"contains" : [ 4, 5, 6, 7, 20, 21, 22, 23, 36, 37, 38, 39, 52, 53, 54, 55, 68, 69, 70, 71, 84, 85, 86, 87, 100, 101, 102, 103, 116, 117, 118, 119, 132, 133, 134, 135, 148, 149, 150, 151, 164, 165, 166, 167, 180, 181, 182, 183, 196, 197, 198, 199, 212, 213, 214, 215, 228, 229, 230, 231, 244, 245, 246, 247 ]
+			}
+, 			{
+				"height" : 1,
+				"contains" : [ 8, 9, 10, 11, 24, 25, 26, 27, 40, 41, 42, 43, 56, 57, 58, 59, 72, 73, 74, 75, 88, 89, 90, 91, 104, 105, 106, 107, 120, 121, 122, 123, 136, 137, 138, 139, 152, 153, 154, 155, 168, 169, 170, 171, 184, 185, 186, 187, 200, 201, 202, 203, 216, 217, 218, 219, 232, 233, 234, 235, 248, 249, 250, 251 ]
+			}
+, 			{
+				"height" : 1,
+				"contains" : [ 12, 13, 14, 15, 28, 29, 30, 31, 44, 45, 46, 47, 60, 61, 62, 63, 76, 77, 78, 79, 92, 93, 94, 95, 108, 109, 110, 111, 124, 125, 126, 127, 140, 141, 142, 143, 156, 157, 158, 159, 172, 173, 174, 175, 188, 189, 190, 191, 204, 205, 206, 207, 220, 221, 222, 223, 236, 237, 238, 239, 252, 253, 254, 255 ]
+			}
+ ]
+	}
+
+}
