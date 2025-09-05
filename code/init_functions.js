@@ -16,6 +16,7 @@ function loadbang(){
 	projectpath = path.split("patchers/");
 	projectpath = projectpath[0];
 	post("\npath is",projectpath);
+	messnamed("filepath","set",projectpath,1);
 	post("\nlooking for userconfig:",projectpath+"userconfig.json");
 	var userconfigfile = new File(projectpath+"userconfig.json");
 	if(userconfigfile.isopen){
@@ -104,6 +105,7 @@ function initialise_reset(hardware_file){
 	post("\npath is",projectpath);
 
 //	messnamed("getpath","bang");
+	messnamed("clear_all_buffers","bang");
 	config.parse('{ }');
 	config.import_json("config.json");
 	userconfig.parse('{ }');
@@ -117,7 +119,6 @@ function initialise_reset(hardware_file){
 	// sigouts.message("setvalue", 0,0); // clear sigs
 
 	//wipe all the buffers
-	messnamed("clear_all_buffers","bang");
 	//waves_polybuffer.clear();
 	note_poly.message("setvalue", 0,"enabled",0);
 	audio_poly.message("setvalue", 0,"enabled",0);
@@ -141,7 +142,10 @@ function initialise_reset(hardware_file){
 	potential_connection.replace("from::voice",0);
 	
 	messnamed("update_midi_routemap","bang");
-
+	for(i=0;i<128;i++){
+		quantpool.poke(1, i, i);
+		indexpool.poke(1, i, i);
+	}
 	initialise_dictionaries(hardware_file);
 }
 
