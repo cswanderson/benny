@@ -57,6 +57,8 @@ var mainfont;
 // - delay (in ms?)
 // - probability (0=blank, 100%, positive = ratchet, negative = probability)
 // - grouping (if 0 step is ungrouped. if negative then this step + that number = the first step of the group, where the current loop counter is stored as a positive number - 1=1st step.)
+
+
 function setup(x1,y1,x2,y2,sw,mode){ 
 	MAX_DATA = config.get("MAX_DATA");
 	UNIVERSAL_COLUMNS = config.get("UNIVERSAL_COLUMNS");
@@ -1011,7 +1013,7 @@ function voice_is(v){
 		for(var i=0;i<3;i++)blockcolour[i] = Math.min(255,2*blockcolour[i]);
 	}
 	outlet(2,v);
-//	post("seq.grid.ui loaded, block is",block);
+	post("seq.grid.ui loaded, block is",block);
 }
 function voice_offset(){}
 function loadbang(){

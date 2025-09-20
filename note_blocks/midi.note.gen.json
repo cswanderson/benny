@@ -1,0 +1,19 @@
+{
+	"midi.note.gen" : {
+		"patcher" : "cand.midi.gen",
+		"synonyms" : ["generator"],
+		"type" : "note",
+		"block_ui_patcher" : "blank.ui",
+		"help_text" : "Generates MIDI sequences.",
+		"max_polyphony" : 1,
+		"connections" : {
+			"in" : {
+				"midi" : [ "clock","reset in" ],
+				"automap_poly" : 0
+			},
+			"out" : {
+				"midi" : [ "notes out" ]
+			}
+		}
+	}
+}
