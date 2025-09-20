@@ -2420,7 +2420,7 @@ function build_new_connection_menu(from, to, fromv,tov){
 	new_connection.replace("from::output::type", "potential");
 	new_connection.replace("to::input::type","potential");
 
-	new_connection.replace("conversion::mute" , 0);
+	new_connection.replace("conversion::mute" , usermouse.ctrl);
 	new_connection.replace("conversion::scale", 1);
 	new_connection.replace("conversion::vector", 0);	
 	new_connection.replace("conversion::offset", 0);	
@@ -2620,7 +2620,8 @@ function build_new_connection_menu(from, to, fromv,tov){
 			make_connection(wires_potential_connection,0);
 		}
 		new_connection.clear();
-		sidebar_select_connection(wires_potential_connection);
+		clear_blocks_selection();
+		selected.wire[wires_potential_connection]=1; //^^this already flags a redraw
 		if(sidebar.mode=="none")set_sidebar_mode("connection");
 		wires_potential_connection = -1;
 	}else{
@@ -3871,7 +3872,7 @@ function spawn_player(keyblock,auto){
 								var to = (connections.get("connections["+c+"]::to::number"));
 								var tx = blocks.get("blocks["+to+"]::space::x");
 								var ty = blocks.get("blocks["+to+"]::space::y")+0.5;
-								make_space(tx,ty,1.2);
+								make_fisheye_space(tx,ty,0.8);
 								var playerblock = new_block("seq.piano.roll",tx,ty);
 								if(!blocks.contains("blocks["+playerblock+"]::patterns::names")){
 									var pn = [];
@@ -3971,7 +3972,7 @@ function spawn_player(keyblock,auto){
 		
 		var tx = blocks.get("blocks["+to+"]::space::x");
 		var ty = blocks.get("blocks["+to+"]::space::y")+0.5;
-		make_space(tx,ty,1.2);
+		make_fisheye_space(tx,ty,0.8);
 		clear_blocks_selection();
 		var playerblock = new_block("seq.piano.roll",tx,ty);
 		if(!blocks.contains("blocks["+playerblock+"]::patterns::names")){

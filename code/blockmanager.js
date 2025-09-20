@@ -447,6 +447,8 @@ var panels = {
 
 var blocks_page = {
 	new_block_click_pos : [0,0],
+	was_selected : null,
+	was_selected_voice : null,
 	leftmost : 0,
 	rightmost : 0,
 	highest :0,
@@ -918,6 +920,12 @@ function outputfx(type, number, value){
 		output_looper_active = (value>0);
 		output_looper_block = number;
 	}
+}
+
+var screenDimensions = { x : 1200, y: 800 };
+function screensize(x,y){
+	screenDimensions.x = x;
+	screenDimensions.y = y;
 }
 
 function send_globals(){

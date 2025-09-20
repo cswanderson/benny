@@ -750,7 +750,7 @@ function insert_menu_button(cno){
 	}else{
 		blocks_page.new_block_click_pos = [0.5*(fr[0]+tt[0]),0.5*(fr[1]+tt[1])];
 		if((fr[1]-tt[1])<2){
-			make_space(blocks_page.new_block_click_pos[0],blocks_page.new_block_click_pos[1],1.5);
+			make_fisheye_space(blocks_page.new_block_click_pos[0],blocks_page.new_block_click_pos[1],1.1);
 		}
 	}
 	set_display_mode("block_menu");
@@ -911,6 +911,7 @@ function select_voice(parameter,value){
 }
 
 function sidebar_select_connection(num,val){
+	post("\nSSC");
 	if(usermouse.ctrl){
 		if(!connections.contains("connections["+num+"]::conversion")) post("\n?????",num);
 		var m = !connections.get("connections["+num+"]::conversion::mute");
@@ -926,6 +927,16 @@ function show_new_block_menu(){
 	}else{
 		store_back([sidebar.mode,sidebar.selected, sidebar.selected_voice,sidebar.scroll.position]);
 	}
+	blocks_page.was_selected = null;
+	if(selected.block.indexOf(1)>-1){
+		post("\nsomething was selected, you can hold shift to connect to/from it");
+		blocks_page.was_selected = selected.block.indexOf(1);
+		if(sidebar.selected_voice>-1){
+			blocks_page.was_selected_voice = sidebar.selected_voice;
+		} else {
+			blocks_page.was_selected_voice = null;
+		}
+	} 
 	clear_blocks_selection();
 	blocks_page.new_block_click_pos = screentoworld(usermouse.x,usermouse.y);
 	usermouse.clicked3d=-1;
@@ -1294,6 +1305,9 @@ function send_button_message(parameter, value){
 	}else if(value[0] == "voices"){
 		var vl=voicemap.get(parameter);
 		if(!Array.isArray(vl)) vl=[vl];
+		if(sidebar.selected == parameter && sidebar.selected_voice>-1){
+			vl = [vl[sidebar.selected_voice]];
+		}
 		for(var t=vl.length;t--;){
 			if(vl[t]<MAX_NOTE_VOICES){
 				note_poly.message("setvalue", vl[t]+1,value[1]);
@@ -4295,24 +4309,32 @@ function blocks_menu_enter(){
 	if(count==1){
 		var types = blocktypes.getkeys();
 		if(menu.mode == 0){
-			post("\nnew block",sel,types[sel]);
+			// post("\nnew block",sel,types[sel]);
 			set_display_mode("blocks");
 			end_of_frame_fn = function(){
 				var r = new_block(types[sel], Math.round(blocks_page.new_block_click_pos[0]), Math.round(blocks_page.new_block_click_pos[1]));
-				draw_block(r);
+				selected.block[r] = 1;
+				sidebar.scopes.voice = -1;
+				sidebar.selected_voice = -1;
+				var t = draw_block(r);
+				if(blocks_page.was_selected!=null && (usermouse.shift || config.get("ALWAYS_AUTOCONNECT_IF_YOU_CAN"))){
+					getWiresPotentialConnection();
+					if(blocks_page.new_block_click_pos[1] > blocks.get("blocks["+blocks_page.was_selected+"]::space::y")){
+						build_new_connection_menu(r,blocks_page.was_selected,-1,(blocks_page.was_selected_voice!=null) ? blocks_page.was_selected_voice : -1);
+					}else{
+						build_new_connection_menu(blocks_page.was_selected,r,(blocks_page.was_selected_voice!=null) ? blocks_page.was_selected_voice : -1, -1);
+					}
+				} 
+				blocks_page.was_selected = null;
+				block_cubes++;
+				voice_cubes+=t[0];
+				write_blocks_matrix();
 				var bpw = (blocks_page.rightmost - blocks_page.leftmost);
 				var d = ((blocks_page.new_block_click_pos[0]-blocks_page.leftmost)/bpw)-(sidebar.x/mainwindow_width);
 				if(d > 0){
 					camera_position[0] += 1.5*d*bpw;
 					camera();
 				}
-				write_block_matrix(r);
-				messnamed("voices_matrices","bang");
-				messnamed("blocks_matrices","bang");	
-				redraw_flag.matrices &= 253;
-				selected.block[r] = 1;
-				sidebar.scopes.voice = -1;
-				sidebar.selected_voice = -1;
 				redraw_flag.flag |= 8;
 			}
 		}else if(menu.mode == 1){
@@ -4482,6 +4504,38 @@ function make_space(x,y,r){
 	}
 	redraw_flag.flag |= 4;
 }
+
+function make_fisheye_space(x,y,r){
+	//move all blocks a distance r along a line from their x,y to the specified x,y.
+	var usz=undo_stack.getsize("history")|0;
+	if(undo_stack.contains("history["+(usz-1)+"]::actions::make_space")){
+		usz=-1;
+	}else{
+		undo_stack.append("history","{}");
+		undo_stack.setparse("history["+usz+"]", '{ "actions" : { "make_space" : {} } }');
+	}
+	for(var b=0;b<MAX_BLOCKS;b++){
+		if(blocks.contains("blocks["+b+"]::space")){
+			var bx = blocks.get("blocks["+b+"]::space::x");
+			var by = blocks.get("blocks["+b+"]::space::y");
+			if(usz!=-1) undo_stack.setparse("history["+usz+"]::actions::make_space::"+b, '{ "x" : '+bx+', "y" : '+by+'}');	
+			var dx = bx-x;
+			var dy = by-y;
+			var dd = Math.sqrt(dx*dx+dy*dy);
+			if((dd>1.4)||(r>0)){
+				dd = r/dd;
+				dx *= dd;
+				dy *= dd; //now normalised to a r-long vector.
+				bx += dx; 
+				by += dy;
+				blocks.replace("blocks["+b+"]::space::x",bx);
+				blocks.replace("blocks["+b+"]::space::y",by);
+			}
+		}
+	}
+	redraw_flag.flag |= 4;
+}
+
 
 function reify_automap_k(){
 	// makes new connection out of automap k connection, turns off automap_k
