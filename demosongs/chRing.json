@@ -68,6 +68,96 @@
 	"connections" : [ 		{
 
 		}
+, 		{
+			"from" : 			{
+				"number" : 0,
+				"output" : 				{
+					"type" : "midi",
+					"number" : 0
+				}
+,
+				"voice" : 1
+			}
+,
+			"to" : 			{
+				"number" : 4,
+				"input" : 				{
+					"type" : "midi",
+					"number" : 1
+				}
+,
+				"voice" : "all"
+			}
+,
+			"conversion" : 			{
+				"mute" : 0,
+				"scale" : 1,
+				"vector" : 0,
+				"offset" : 0.5,
+				"offset2" : 0.5
+			}
+
+		}
+, 		{
+			"from" : 			{
+				"number" : 4,
+				"output" : 				{
+					"type" : "midi",
+					"number" : 0
+				}
+,
+				"voice" : "all"
+			}
+,
+			"to" : 			{
+				"number" : 6,
+				"input" : 				{
+					"type" : "midi",
+					"number" : 0
+				}
+,
+				"voice" : "all"
+			}
+,
+			"conversion" : 			{
+				"mute" : 0,
+				"scale" : 1,
+				"vector" : 0,
+				"offset" : 0.5,
+				"offset2" : 0.5
+			}
+
+		}
+, 		{
+			"from" : 			{
+				"number" : 6,
+				"output" : 				{
+					"type" : "audio",
+					"number" : 0
+				}
+,
+				"voice" : "all"
+			}
+,
+			"to" : 			{
+				"number" : 3,
+				"input" : 				{
+					"type" : "hardware",
+					"number" : 0
+				}
+,
+				"voice" : "all"
+			}
+,
+			"conversion" : 			{
+				"mute" : 0,
+				"scale" : 1,
+				"vector" : 0,
+				"offset" : 0,
+				"offset2" : 0.5
+			}
+
+		}
  ],
 	"blocks" : [ 		{
 			"patcher" : "core.clock",
@@ -104,8 +194,8 @@
 			}
 ,
 			"space" : 			{
-				"x" : -9.25,
-				"y" : 3.25,
+				"x" : -9.051754782141785,
+				"y" : 3.205250648783093,
 				"colour" : [ 131, 30, 0 ]
 			}
 ,
@@ -113,89 +203,10 @@
 			"automap_to" : 0
 		}
 , 		{
-			"patcher" : "core.input.control.auto",
-			"name" : "core.input.control.auto",
-			"label" : "core.input.control.auto",
-			"type" : "note",
-			"poly" : 			{
-				"stack_mode" : "1x",
-				"choose_mode" : "cycle free",
-				"steal_mode" : "oldest",
-				"latching_mode" : 0,
-				"voices" : 1
-			}
-,
-			"panel" : 			{
-				"enable" : 1
-			}
-,
-			"error" : 			{
-				"spread" : 0,
-				"drift" : 0,
-				"lockup" : 0
-			}
-,
-			"flock" : 			{
-				"weight" : 0.2,
-				"tension" : 0.2,
-				"friction" : 0.4,
-				"bounce" : 0.7,
-				"attrep" : 0.5,
-				"align" : 0.5,
-				"twist" : 0.5,
-				"brownian" : 0
-			}
-,
-			"space" : 			{
-				"x" : -7,
-				"y" : 3.25,
-				"colour" : [ 155, 74, 45 ]
-			}
-,
-			"mute" : 0,
-			"selected_controller" : "Midi Fighter Twister"
+
 		}
 , 		{
-			"patcher" : "core.input.keyboard",
-			"name" : "core.input.keyboard",
-			"label" : "core.input.keyboard",
-			"type" : "note",
-			"poly" : 			{
-				"stack_mode" : "1x",
-				"choose_mode" : "cycle free",
-				"steal_mode" : "oldest",
-				"latching_mode" : 0,
-				"voices" : 1
-			}
-,
-			"panel" : 			{
-				"enable" : 0
-			}
-,
-			"error" : 			{
-				"spread" : 0,
-				"drift" : 0,
-				"lockup" : 0
-			}
-,
-			"flock" : 			{
-				"weight" : 0.2,
-				"tension" : 0.2,
-				"friction" : 0.4,
-				"bounce" : 0.7,
-				"attrep" : 0.5,
-				"align" : 0.5,
-				"twist" : 0.5,
-				"brownian" : 0
-			}
-,
-			"space" : 			{
-				"x" : -4.75,
-				"y" : 3.25,
-				"colour" : [ 136, 49, 0 ]
-			}
-,
-			"mute" : 0
+
 		}
 , 		{
 			"name" : "hardware.out.1+2",
@@ -238,13 +249,151 @@
 
 		}
 , 		{
+			"patcher" : "universal.step.sequence",
+			"name" : "seq.note.step",
+			"label" : "seq.note.step",
+			"type" : "note",
+			"poly" : 			{
+				"stack_mode" : "1x",
+				"choose_mode" : "blind cycle",
+				"steal_mode" : "cyclic",
+				"return_mode" : 1,
+				"voices" : 2
+			}
+,
+			"panel" : 			{
+				"parameters" : [ 9 ],
+				"enable" : 1
+			}
+,
+			"patterns" : 			{
+				"parameter" : 9,
+				"pattern_storage" : "data",
+				"playhead_offset" : 0,
+				"pattern_size" : 1020,
+				"pattern_start" : 1,
+				"names" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+			}
+,
+			"error" : 			{
+				"spread" : 0,
+				"drift" : 0,
+				"lockup" : 0
+			}
+,
+			"flock" : 			{
+				"weight" : 0.2,
+				"tension" : 0.2,
+				"friction" : 0.4,
+				"bounce" : 0.7,
+				"attrep" : 0.5,
+				"align" : 0.5,
+				"twist" : 0.5,
+				"brownian" : 0
+			}
+,
+			"space" : 			{
+				"x" : -9,
+				"y" : 1,
+				"colour" : [ 136, 49, 0 ]
+			}
+,
+			"automap_to" : 0,
+			"voice_data" : 			{
+				"0" : [ "<undefined>" ]
+			}
 
 		}
 , 		{
-
+			"patcher" : "cand.midi.gen",
+			"name" : "midi.note.gen",
+			"label" : "midi.note.gen",
+			"type" : "note",
+			"poly" : 			{
+				"stack_mode" : "1x",
+				"choose_mode" : "cycle free",
+				"steal_mode" : "oldest",
+				"return_mode" : 1,
+				"latching_mode" : 0,
+				"voices" : 1
+			}
+,
+			"panel" : 			{
+				"enable" : 0
+			}
+,
+			"error" : 			{
+				"spread" : 0,
+				"drift" : 0,
+				"lockup" : 0
+			}
+,
+			"flock" : 			{
+				"weight" : 0.2,
+				"tension" : 0.2,
+				"friction" : 0.4,
+				"bounce" : 0.7,
+				"attrep" : 0.5,
+				"align" : 0.5,
+				"twist" : 0.5,
+				"brownian" : 0
+			}
+,
+			"space" : 			{
+				"x" : -6,
+				"y" : 1,
+				"colour" : [ 137, 60, 0 ]
+			}
+,
+			"automap_to" : 0
 		}
 , 		{
-
+			"patcher" : "voice.rings",
+			"name" : "voice.rings",
+			"label" : "voice.rings",
+			"type" : "audio",
+			"poly" : 			{
+				"stack_mode" : "1x",
+				"choose_mode" : "cycle free",
+				"steal_mode" : "oldest",
+				"return_mode" : 1,
+				"latching_mode" : 0,
+				"voices" : 2
+			}
+,
+			"panel" : 			{
+				"parameters" : [ 1, 2, 3 ],
+				"enable" : 1
+			}
+,
+			"error" : 			{
+				"spread" : 0,
+				"drift" : 0,
+				"lockup" : 0
+			}
+,
+			"flock" : 			{
+				"weight" : 0.2,
+				"tension" : 0.2,
+				"friction" : 0.4,
+				"bounce" : 0.7,
+				"attrep" : 0.5,
+				"align" : 0.5,
+				"twist" : 0.5,
+				"brownian" : 0
+			}
+,
+			"space" : 			{
+				"x" : -9,
+				"y" : -1,
+				"colour" : [ 32, 122, 50 ]
+			}
+,
+			"upsample" : 1,
+			"subvoices" : 1,
+			"from_subvoices" : 2,
+			"to_subvoices" : 1,
+			"automap_to" : 0
 		}
 , 		{
 
@@ -611,6 +760,13 @@
 		}
  ],
 	"states" : 	{
+		"current" : 		{
+			"0" : [ 0, 0.5, 0.0, 0.0, 0.090000003576279, 0.409999996423721, 0.029999999329448, 0.025000000372529, 0.0, 0.600000023841858, 0.5, 0.25, 0.5, 0.5, 0.5, 0.5, 0.0, 0.0 ],
+			"3" : [ 0, 0.059999998658895, 0.949999988079071, 0.0, 0.75, 0.0, 0.0, 0.021466879174113, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+			"4" : [ 0, 0.0, 0.0, 0.03125, 0.600000023841858, 0.5, 0.200000002980232, 0.159999996423721, 0.0, 0.0, 0.03125, 0.800000011920929, 0.782000005245209, 0.0, 0.0, 0.0 ],
+			"5" : [ 0 ],
+			"6" : [ 0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 0.100000001490116, 0.100000001490116, 0.75, 0.25 ]
+		}
 
 	}
 
