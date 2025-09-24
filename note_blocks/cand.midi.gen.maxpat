@@ -10,9 +10,36 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 546.0, 77.0, 435.0, 675.0 ],
+		"rect" : [ 352.0, 90.0, 604.0, 675.0 ],
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"linecount" : 3,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 668.0, 241.0, 243.0, 49.0 ],
+					"presentation_linecount" : 3,
+					"text" : ";\rto_blockmanager clear_voice_pattern block voicenumber pattern"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-7",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 668.0, 184.0, 235.0, 35.0 ],
+					"text" : ";\rto_blockmanager clear_block_patterns 4 0"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-6",
 					"linecount" : 2,
@@ -925,7 +952,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 490.0, 151.0, 50.0, 22.0 ],
-					"text" : "7 70"
+					"text" : "7 53"
 				}
 
 			}
@@ -1196,7 +1223,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 731.5, 221.0, 116.0, 20.0 ],
+					"patching_rect" : [ 510.5, 283.0, 116.0, 20.0 ],
 					"text" : "Get Clear command"
 				}
 
@@ -1237,7 +1264,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 191.0, 546.0, 51.0, 35.0 ],
-					"text" : "114731 70"
+					"text" : "49195 53"
 				}
 
 			}
