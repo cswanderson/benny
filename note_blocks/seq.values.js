@@ -2,6 +2,7 @@ var MAX_DATA = 16384;
 var MAX_PARAMETERS = 256;
 var voice_data_buffer = new Buffer("voice_data_buffer"); 
 var voice_parameter_buffer = new Buffer("voice_parameter_buffer");
+var parameter_value_buffer = new Buffer("parameter_value_buffer");
 outlets = 3;
 var config = new Dict;
 config.name = "config";
@@ -9,6 +10,10 @@ var width, height,x_pos,y_pos,unit,sx,rh,cw,maxl=-1;
 var block = -1;
 var blocks = new Dict;
 blocks.name = "blocks"
+var connections = new Dict;
+connections.name = "connections";
+var blocktypes = new Dict;
+blocktypes.name = "blocktypes";
 var voicemap = new Dict;
 voicemap.name =  "voicemap";
 var mini = 0;
@@ -26,6 +31,7 @@ var cursors = []; //holds last drawn position of playheads (per row)
 var notelist = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 var menucolour,menudark,block_colour=[0,255,0];
 var change;
+var target_block = [];
 
 function setup(x1,y1,x2,y2,sw,mode){
 //	post("drawing sequencers");
@@ -45,6 +51,7 @@ function setup(x1,y1,x2,y2,sw,mode){
 		block_colour = blocks.get("blocks["+block+"]::space::colour");
 		v_list = voicemap.get(block);
 		if(typeof v_list=="number") v_list = [v_list];
+		if(!mini) get_connections();
 		draw();
 	} 
 }
@@ -67,7 +74,7 @@ function draw(){
 
 function fulldraw(){
 	var i,c,r,ph;
-	var nonempty=[];
+	var nonempty=[], found = 0;
 	cw = (width)/(maxl - 0.1);
 	i = Math.max(2 - mini,v_list.length);
 	rh = height / (i-0.1);
@@ -80,7 +87,10 @@ function fulldraw(){
 			var shade = (c==ph) ? 3 : (0.4+0.6*((c>=s[r])&&(c<s[r]+l[r])));	
 			outlet(0,"custom_ui_element","data_v_scroll", sx+c*cw+x_pos,r*rh+y_pos,sx+(0.9+c)*cw+x_pos,(r+0.9)*rh+y_pos,shade * col[0],shade * col[1],shade * col[2],MAX_DATA*v_list[r]+128*p[r]+1+c,1);
 			var val = voice_data_buffer.peek(1, MAX_DATA*v_list[r]+128*p[r]+1+c);
-			if(val!=0) nonempty[r]=1;
+			if(val!=0){
+				nonempty[r]=1;
+				found = 1;
+			}
 			if(!mini){
 				outlet(1,"moveto",sx+c*cw+x_pos+0.1*unit,r*rh+y_pos+unit*0.4);
 				outlet(1,"write",c);
@@ -92,12 +102,38 @@ function fulldraw(){
 					outlet(1,"write",i);
 					outlet(1,"moveto", sx + c * cw + x_pos + 0.1 * unit, r * rh + y_pos + unit*1.2);
 					outlet(1,"write", notelist[i % 12] + "-" + Math.floor(i/12));
+					if(target_block[r]){
+						var yy = 1.8;
+						// post("\nconn found for lane",r,JSON.stringify(target_block[r]));
+						for(var dn=0;dn<target_block[r].length;dn++){
+							if(c == 0){
+								outlet(1,"frgb", shade * col[0],shade * col[1],shade * col[2]);
+								outlet(1,"moveto", sx + c * cw + x_pos + 0.1 * unit, r * rh + y_pos + unit*yy);
+								outlet(1,"write", "to:" + target_block[r][dn].destname + ":"+target_block[r][dn].paramlabel); 
+							}
+							yy += 0.4;
+							outlet(1,"moveto", sx + c * cw + x_pos + 0.1 * unit, r * rh + y_pos + unit*yy);
+							// apply offset and scale
+							var tval = ((val - 1/128) * target_block[r][dn].scale) + 2*(target_block[r][dn].offset- 0.5);
+							// add to base target param value and wrap 
+							tval += parameter_value_buffer.peek(1, target_block[r][dn].paramaddress);
+							if(target_block[r][dn].wrap){
+								tval %= 1;
+							}else{
+								tval = Math.max(0,Math.min(1,tval));
+							}
+							tval = get_parameter_label(target_block[r][dn].ptype, target_block[r][dn].wrap, tval, target_block[r][dn].pvalues);
+							outlet(1,"frgb",menucolour);
+							outlet(1,"write", tval); 							
+							yy += 0.6;
+						}
+					}
 				}
 			}
 		}
 	}
 	change = 0;
-	if(nonempty.indexOf(1)>-1){
+	if(found){
 		var n = blocks.get("blocks["+block+"]::patterns::names");
 		if(n!=null){
 			for(r=0;r<v_list.length;r++){
@@ -240,7 +276,7 @@ function keydown(key,x,y){
 			}
 			typedMessage = typedMessage.concat(s);
 		}else{
-			outlet(0,"keydown_not_needed_by_panel",key);
+			// outlet(0,"keydown_not_needed_by_panel",key);
 		}
 	}
 	fulldraw();
@@ -286,3 +322,209 @@ function parseMidiNote(note) {
 }
 
 function enabled(){}
+
+//currently only bothers with param-param ones
+function get_connections(){
+	target_block = [];
+	for(var i=connections.getsize("connections")-1; i>=0; i--){
+		if(connections.contains("connections["+i+"]::from")
+			 && connections.get("connections["+i+"]::from::number") == block
+			 && connections.get("connections["+i+"]::from::output::type") == "parameters"
+			 && connections.get("connections["+i+"]::to::input::type") == "parameters"){
+			var source = connections.get("connections["+i+"]::from::voice");
+			var details = { };
+			var number = connections.get("connections["+i+"]::to::input::number");
+			details.toblock = connections.get("connections["+i+"]::to::number");
+			if(blocks.contains("blocks["+details.toblock+"]::label")){
+				details.destname = blocks.get("blocks["+details.toblock+"]::label");
+			}else{
+				details.destname = blocks.get("blocks["+details.toblock+"]::name");
+			}
+			details.destvoice = connections.get("connections["+i+"]::to::voice");
+			if(details.destvoice == "all"){
+				details.destvoice = voicemap.get(details.toblock);
+				if(Array.isArray(details.destvoice)) details.destvoice = details.destvoice[0];
+			}
+			details.paramaddress = MAX_PARAMETERS * details.toblock + number;
+			details.paramlabel = blocktypes.get(blocks.get("blocks["+details.toblock+"]::name")+"::parameters["+number+"]::name");
+			details.pvalues = blocktypes.get(blocks.get("blocks["+details.toblock+"]::name")+"::parameters["+number+"]::values");
+			details.ptype = blocktypes.get(blocks.get("blocks["+details.toblock+"]::name")+"::parameters["+number+"]::type");
+			details.wrap = blocktypes.get(blocks.get("blocks["+details.toblock+"]::name")+"::parameters["+number+"]::wrap");
+			details.scale = connections.get("connections["+i+"]::conversion::scale");
+			details.offset = connections.get("connections["+i+"]::conversion::offset");
+			var srclist;
+			if(source == "all"){
+				srclist = voicemap.get(block);
+				if(!Array.isArray(srclist)) srclist = [srclist];
+				for(var ii = 0; ii<srclist.length;ii++) srclist[ii]=ii;
+			}else{
+				srclist = [source - 1];
+			}
+			// post("\nnumber",i,"srclist",srclist,"details",JSON.stringify(details));
+			for(var ii=0;ii<srclist.length;ii++){
+				if(target_block[srclist[ii]]==null)target_block[srclist[ii]] = [];
+				target_block[srclist[ii]].push(details);
+			}
+		}
+	}
+	// post("\ncollected connections,\n",JSON.stringify(target_block));
+}
+
+
+function get_parameter_label(p_type,wrap,pv,p_values){
+	var pvp="";
+	if(p_type == "menu_f"){
+		var pv2;
+		if(wrap){
+			pv *= (p_values.length-0.0001);
+			pv = Math.floor(pv);
+			pv2 = (pv+1) % (p_values.length);
+			pv = pv % (p_values.length);											
+		}else{
+			pv *= (p_values.length-1);
+			pv = Math.floor(pv);
+			pv2 = Math.min(pv+1,p_values.length-1);
+			pv = Math.min(pv,p_values.length-1);											
+		}
+		if(pv==pv2){
+			pvp = p_values[pv];	
+		}else{
+			pvp = p_values[pv]+ "-"+ p_values[pv2];
+		}	
+	}else if((p_type == "menu_i")||(p_type == "menu_b")||(p_type=="menu_l")||(p_type=="menu_d")||(p_type=="scale")){
+		pv *= (p_values.length-0.0001);
+		pv = Math.min(Math.floor(pv),p_values.length-1);
+		pvp = p_values[pv];
+	}else if((p_type == "wave")){
+		pv *= (MAX_WAVES-0.0001);
+		pv = Math.floor(pv+1);
+		var wnam = "-";
+		if(waves_dict.contains("waves["+pv+"]::name")) wnam = waves_dict.get("waves["+pv+"]::name");
+		pvp = pv+" "+wnam;
+	}else if((p_type == "float") || (p_type == "int") || (p_type=="float4") || (p_type=="note")){
+		if(p_values[3] == "exp"){
+			if(p_values[0] == "uni"){
+				pv = Math.pow(2, pv) - 1;
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = Math.pow(2, pv) - 1;
+				}else{
+					pv = -(Math.pow(2, -pv) - 1);
+				}
+				pv += 1;
+				pv *= 0.5;
+			}
+		}else if(p_values[3] == "exp10"){
+			if(p_values[0] == "uni"){
+				pv = (Math.pow(10, pv) - 1)*0.11111111111111111111111111111111;
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = (Math.pow(10, pv) - 1)*0.11111111111111111111111111111111;
+				}else{
+					pv = -0.11111111111111111111111111111111*(Math.pow(10, -pv) - 1);
+				}
+				pv += 1;
+				pv /= 2;
+			}
+		}else if(p_values[3] == "exp100"){
+			if(p_values[0] == "uni"){
+				pv = (Math.pow(100, pv) - 1)*0.01010101010101010101010101010101;
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = (Math.pow(100, pv) - 1)*0.01010101010101010101010101010101;
+				}else{
+					pv = -0.01010101010101010101010101010101*(Math.pow(100, -pv) - 1);
+				}
+				pv += 1;
+				pv /= 2;
+			}
+		}else if(p_values[3] == "exp1000"){
+			if(p_values[0] == "uni"){
+				pv = (Math.pow(1000, pv) - 1)*0.001001001001001001001001001001;
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = (Math.pow(1000, pv) - 1)*0.001001001001001001001001001001;
+				}else{
+					pv = -0.001001001001001001001001001001*(Math.pow(1000, -pv) - 1);
+				}
+				pv += 1;
+				pv /= 2;
+			}
+		}else if(p_values[3] == "exp.1"){
+			if(p_values[0] == "uni"){
+				pv = -1.1111111111111111111111111111111*(Math.pow(.1, pv) - 1);
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = -1.1111111111111111111111111111111*(Math.pow(0.1, pv) - 1);
+				}else{
+					pv = 1.1111111111111111111111111111111*(Math.pow(0.1, -pv) - 1);
+				}
+				pv += 1;
+				pv /= 2;
+			}
+		}else if(p_values[3] == "exp.01"){
+			if(p_values[0] == "uni"){
+				pv = -1.010101010101010101010101010101*(Math.pow(0.01, pv) - 1);
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = -1.010101010101010101010101010101*(Math.pow(0.01, pv) - 1);
+				}else{
+					pv = 1.010101010101010101010101010101*(Math.pow(0.01, -pv) - 1);
+				}
+				pv += 1;
+				pv /= 2;
+			}
+		}else if(p_values[3] == "exp.001"){
+			if(p_values[0] == "uni"){
+				pv = -1.001001001001001001001001001001*(Math.pow(0.001, pv) - 1);
+			}else{
+				pv -=0.5;
+				pv *=2;
+				if(pv>=0){
+					pv = -1.001001001001001001001001001001*(Math.pow(0.001, pv) - 1);
+				}else{
+					pv = 1.001001001001001001001001001001*(Math.pow(0.001, -pv) - 1);
+				}
+				pv += 1;
+				pv /= 2;
+			}
+		}else if(p_values[3] == "s"){
+			if(p_values[0] == "uni"){
+				pv = 0.5 - 0.5 * Math.cos(pv*PI);
+			}else{
+				pv -=0.5;
+				pv *=2;
+				pv = 0.5 - 0.5 * Math.cos(pv*PI);
+				pv += 1;
+				pv /= 2;
+			}
+		}
+		pvp = p_values[1] + (p_values[2]-p_values[1]-0.0001)*pv;
+		if(p_type == "int"){
+			pvp = Math.floor(p_values[1] + (0.99+p_values[2]-p_values[1])*pv);
+		}else if(p_type == "note"){
+			pvp = note_names[Math.floor(pvp)];
+		}else if(p_type == "float4"){
+			pv = p_values[1] + (p_values[2]-p_values[1])*pv;
+			var pre = 4+Math.floor(Math.log(Math.abs(pv*10)+0.1)/Math.log(10));
+			pvp = pv.toPrecision(pre);
+		}else{
+			pv = p_values[1] + (p_values[2]-p_values[1])*pv;
+			var pre = 2+Math.floor(Math.log(Math.abs(pv*10)+0.1)/Math.log(10));
+			pvp = pv.toPrecision(pre);
+		}
+	}
+	return pvp;
+}

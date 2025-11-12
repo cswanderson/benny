@@ -579,6 +579,11 @@ function import_song(){
 			loading.xoffset = current_x_max + 4 - new_x_min;
 		}
 		sidebar.notification = null;
+		if(songs.contains(loading.songname+"::version")){
+			bennyversion = songs.get(loading.songname+"::version");
+		}else{
+			bennyversion = 0;
+		}
 		if(songs.contains(loading.songname+"::notepad")){ 
 			sidebar.notification = songs.get(loading.songname+"::notepad");
 			set_sidebar_mode("notification");
@@ -1321,7 +1326,10 @@ function save_song(selectedonly, saveas){ //saveas == 1 -> prompt for name
 			if(blocks.contains("blocks["+b+"]::mute")) store[b][0] = blocks.get("blocks["+b+"]::mute");
 		}
 	}
-	songs.replace(loading.songname+"::MAX_WAVES",MAX_WAVES);
+	var songsettings = new Dict;
+	songsettings.name = "songsettings";
+	songsettings.parse('{ "MAX_WAVES": '+MAX_WAVES+', "version":'+bennyversion+'}');
+	post("\nstored version : ",'{ "MAX_WAVES": '+MAX_WAVES+', "version":'+bennyversion+'}');
 	for(b=0;b<MAX_BLOCKS;b++){
 		if(store[b].length) states.replace("states::current::"+b,store[b]);
 		//if(per_v[b].length) states.replace("states::current::static_mod::"+b,per_v[b]);
@@ -1497,6 +1505,10 @@ function file_written(fname){//called when max reports successfully saving the c
 	if((fname.indexOf("/")<0)){ // the max dict object reports full filename & path for a save as, but if the file exists it just reports the name.. this is workaround for that 
 		//don't update loading.object_target, it's just a save not a saveas
 		loading.object_target = loading.songpath+fname;
+		if(loading.songname != fname){
+			post("\nnew filename:",fname);
+			loading.songname = fname;
+		}
 		// post("\nobj target is still",loading.object_target);
 	}else{
 		loading.object_target = fname;

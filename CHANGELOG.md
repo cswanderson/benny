@@ -1,7 +1,27 @@
-20/09/25:
+12/11/25:
+- **abl.drumbuss** added - a wrapper for the ableton drum buss plugin
+- in the sidebar you can hover over a slider and type a value to set it. now additionally you can hover over a slider and type a comma separated list of values (eg `3,4,,,,5,1,23,,1`) and benny will automatically create a seq.values block attached to that slider ready to create that modulation pattern. additionally, if you end your list with / and a time value then a clock will be created and connected for the new seq.values. eg `3,4,,,,6/4n`
+- the fullscreen view of seq.values now tries to work out the result of each step's output on all the things its connected to. so for example if you're modulating a filter cutoff using seq.values you'll see the resulting frequencies listed above the steps in seq.values.
+
+12/10/25:
+- **core.scales.shapes** now has easier ways to select common scales - via sliders or midi input.
+
+8/10/25:
+- **version 0.555**
+- breaking change: the spread/rotate formula has been tweaked - spread works properly on stereo destinations and the polyphonic gain autocompensation is much less aggressive. old songfiles will use the old formula, any songs you start in this version will use the new one. if you've made a custom 'autoload.json' file you'll need to make it again from the one bundled with this version. 
+- the spread rotate ui has also been improved, hopefully it now explains what's happening better.
+- you can use arrow keys to move through the new block menu
+
+1/10/25:
+- new block **utility.env.ping** is an envelope inspired by the 4ms PEG. the overall envelope time (attack+decay) is set by tap tempo, a 'time division' slider and a 'mult' slider then that time is split between attack and release by another slider. very fun envelope and mod source with a lot of surprising possibilities. thanks to [El Chico Fuendre](https://elchicofuendre.bandcamp.com/album/ragas-for-city-dwellers) for coding this one.  
+
+24/9/25:
+- big update to **midi.lfo**, including tap tempo input, midi input to set phase, buttons for quantised time periods, extended range, new visualisation
+
+20/9/25:
 - **voice.filter.env** the voice basic osc and env with the sm devices 2pole filter (with its own env) added. lots of modulation options including self-modulation.
 
-19/09/25:
+19/9/25:
 - **utility.midi.to_cv** (fka utility.self.tuner) has been fixed and updated. to improve the slope calibration to match your interface/oscilators you can press the 'calibrate slope' button and then send it a low note and then a high note a second or more apart. the slope will be stored. it assumes a linear relationship between voltage and pitch, so only works with well behaved v/oct oscillators (at the moment).
 
 10/9/25:

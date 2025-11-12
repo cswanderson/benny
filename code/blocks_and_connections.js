@@ -581,17 +581,17 @@ function poly_loaded(type,number){
 	var t = still_checking_polys>0;
 	//post("poly loaded voice successfully",type,number,"\n");
 	if(type=="audio"){
-		changed_flags.poke(1,number+MAX_NOTE_VOICES,1);
 		if(still_checking_polys&2){ send_audio_patcherlist(); }
+		changed_flags.poke(1,number+MAX_NOTE_VOICES,1);
 	}else if(type=="note"){
-		changed_flags.poke(1,number,1);
 		if(still_checking_polys&1){ send_note_patcherlist(); }
-		//	send_note_patcherlist();
+		changed_flags.poke(1,number,1);
 	}else if(type=="ui"){
 		if(still_checking_polys&4){ send_ui_patcherlist(); }	
-		//	send_ui_patcherlist();
 	}
-	if(t&&(!still_checking_polys)) update_all_voices_mutestatus();
+	if(t&&(!still_checking_polys)){
+		update_all_voices_mutestatus();
+	}
 }
 
 function find_audio_voice_to_recycle(pa,up){ //ideally needs to match up upsampling values as well as patchers when recycling, but it doesnt at the moment
@@ -1280,7 +1280,7 @@ function remove_connection(connection_number){
 						var use_max_matrix = 1;
 						if((SOUNDCARD_HAS_MATRIX == 1) && (f_type=="hardware")&&(t_type=="hardware")){
 							//use soundcard 
-							post("\nCONNECTION VIA SOUNDCARD MATRIX MIXER");
+							// post("\nCONNECTION VIA SOUNDCARD MATRIX MIXER");
 							outmsg[0] = audioiolists[0][f_voice - 1 - MAX_AUDIO_VOICES * NO_IO_PER_BLOCK]-1;
 							outmsg[1] = audioiolists[1][t_voice - 1 - MAX_AUDIO_VOICES * NO_IO_PER_BLOCK]-1;
 							outmsg[2] = 0;
@@ -1940,12 +1940,15 @@ function make_connection(cno,existing){
 							var outmsg=[];
 							if((SOUNDCARD_HAS_MATRIX == 1) && (f_type=="hardware")&&(t_type=="hardware")){
 								//use soundcard 
-								post("\nCONNECTION VIA SOUNDCARD MATRIX MIXER");
+								// post("\nCONNECTION VIA SOUNDCARD MATRIX MIXER");
 								outmsg[0] = audioiolists[0][f_voice - 1 - MAX_AUDIO_VOICES * NO_IO_PER_BLOCK]-1;
 								outmsg[1] = audioiolists[1][t_voice - 1 - MAX_AUDIO_VOICES * NO_IO_PER_BLOCK]-1;
-								var spread_l = spread_level(i, v, conversion.get("offset"),conversion.get("vector"),f_voices.length, t_voices.length);
-								outmsg[2] = conversion.get("scale") * (1-(hw_mute || conversion.get("mute"))) * spread_l;
-								post(">>  "+outmsg[0]+" "+outmsg[1]+" "+outmsg[2]);
+								outmsg[2] = conversion.get("scale") * (1-(hw_mute || conversion.get("mute")));
+								if(outmsg[2]!=0){
+									var spread_l = spread_level(i, v, conversion.get("offset"),conversion.get("vector"),f_voices.length, t_voices.length);
+									outmsg[2] *= spread_l;
+								}
+								//post(">>  "+outmsg[0]+" "+outmsg[1]+" "+outmsg[2]);
 								messnamed("drivers_poly","setvalue",2,"set",outmsg);
 								connections.replace("connections["+cno+"]::conversion::soundcard", 1);
 								use_max_matrix = 0;
@@ -1973,10 +1976,13 @@ function make_connection(cno,existing){
 									//if(a==0) post("\nskipped a connection in force unity:",outmsg);
 									//if(a!=0) post("\noutmsg was,",outmsg);
 								}else{
-									var spread_l = spread_level(i, v, conversion.get("offset"),conversion.get("vector"),f_voices.length, t_voices.length);
-									outmsg[2] = conversion.get("scale") * (1-(hw_mute || conversion.get("mute"))) * spread_l;
+									outmsg[2] = conversion.get("scale") * (1-(hw_mute || conversion.get("mute")));
+									if(outmsg[2]!=0){
+										var spread_l = spread_level(i, v, conversion.get("offset"),conversion.get("vector"),f_voices.length, t_voices.length);
+										outmsg[2] *= spread_l;
+									}
 								}
-								//post("\nmatrix "+outmsg[0]+" "+outmsg[1]+" "+outmsg[2]);
+								// post("\nmatrix "+outmsg[0]+" "+outmsg[1]+" "+outmsg[2]);
 								if(loading.progress!=0){
 									deferred_matrix.push(outmsg);
 								}else{
